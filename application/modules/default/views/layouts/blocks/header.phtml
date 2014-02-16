@@ -1,0 +1,53 @@
+<header>
+    <div class="wrapper">
+        <a class="logo" href=""><img src="/static/default/images/logo.png"></a>
+        <div class="top-info">
+            <a href="#">
+                <img src="/static/default/images/content/topinfo.png" alt="">
+            </a>
+        </div>
+        <div class="clear"></div>
+        <div class="searchBox">
+            <form action="">
+                <div id="selectOne" class="selectBox">
+                    <a href="#">– Выберите город –</a>
+                    <div class="select-option-box">
+                        <input id="kiev" type="radio" size="" value="" name="city" />
+                        <label for="kiev">Киев</label>
+                        <input id="odessa" type="radio" size="" value="" name="city" />
+                        <label for="odessa">Одесса</label>
+                        <input id="kharkiv" type="radio" size="" value="" name="city" />
+                        <label for="kharkiv">Харьков</label>
+                        <input id="donetsk" type="radio" size="" value="" name="city" />
+                        <label for="donetsk">Донецк</label>
+                        <input id="lviv" type="radio" size="" value="" name="city" />
+                        <label for="lviv">Львов</label>
+                    </div>
+                </div>
+                <div id="selectTwo" class="selectBox">
+                    <a href="#">– Сначала выберите город –</a>
+                    <div class="select-option-box">
+                        <input id="kiev2" type="radio" size="" value="" name="city2" />
+                        <label for="kiev2">Киев</label>
+                        <input id="odessa2" type="radio" size="" value="" name="city2" />
+                        <label for="odessa2">Одесса</label>
+                        <input id="kharkiv2" type="radio" size="" value="" name="city2" />
+                        <label for="kharkiv2">Харьков</label>
+                        <input id="donetsk2" type="radio" size="" value="" name="city2" />
+                        <label for="donetsk2">Донецк</label>
+                        <input id="lviv2" type="radio" size="" value="" name="city2" />
+                        <label for="lviv2">Львов</label>
+                    </div>
+                </div>
+                <input type="text" name="" size="" value="Поиск по названию салона" onblur="if (this.value == '') {this.value = 'Поиск по названию салона';}" onfocus="if (this.value == 'Поиск по названию салона') {this.value = '';}"/>
+                <div class="clear"></div>
+                <input type="submit" name="" size="" value="Показать салоны" />
+                <!--
+                <input type="button" name="" size="" value="Показать салоны" />
+                <button>Показать салоны</button>
+                -->
+                <div class="clear"></div>
+            </form>
+        </div>
+    </div>
+</header>

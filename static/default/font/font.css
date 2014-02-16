@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'RexLight';
+    src: url("RexLight.eot");
+    src: url("RexLight.eot?#iefix") format("eot"), url("RexLight.ttf") format("truetype"), url("RexLight.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RexBold';
+    src: url("RexBold.eot");
+    src: url("RexBold.eot?#iefix") format("eot"), url("RexBold.ttf") format("truetype"), url("RexBold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}

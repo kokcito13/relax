@@ -1,0 +1,43 @@
+<?= $this->partial('blocks/menus/top.phtml'); ?>
+<table class="zebra" id="projectsTable">
+    <thead>
+    <tr>
+        <td style="width: 5%;"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </thead>
+    <?php if (count($this->cities)): ?>
+        <?php $class = ''; ?>
+        <tbody>
+        <? $i = 0; ?>
+        <? foreach ($this->cities as $item): ?>
+            <? $content = $item->getContent()->getFields(); ?>
+            <? $i++; ?>
+            <? ($class === 'grey') ? $class = '' : $class = 'grey'; ?>
+            <tr id="<?= $item->getId() ?>" class="<?= $class; ?> id_<?= $item->getId() ?>">
+                <td>
+                    <a href="<?= $this->url(array ('id' => $item->getId()), 'admin-city-edit'); ?>" class="edit"
+                       title="Редактировать">
+                        <img src="/static/admin/images/edit.png" alt="Edit" width="16" height="16"/>
+                    </a>
+                </td>
+                <td style="padding-left:10px;">
+                    <?=$content['contentName']->getFieldText();?> : <?=$item->getUrl();?>
+                </td>
+                <td style="text-align: right;"></td>
+                <td style="text-align: left;">
+                    <a href="<?= $this->url(array ('city_id' => $item->getId()), 'admin-area-index'); ?>" class="edit"
+                       title="Районы">Районы</a>
+                </td>
+                <td style="text-align: left;">
+                    <a href="#" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt=""
+                                                                    width="9" height="8"/></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    <?php endif; ?>
+</table>

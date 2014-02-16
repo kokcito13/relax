@@ -1,0 +1,13 @@
+<?php //echo $this->contentPage['content']->getFieldText();?>
+
+<? $this->headScript()->captureStart() ?>
+    $(function() {
+        common.setIdCat(<? echo $this->page->getIdCat(); ?>);
+    });
+<? $this->headScript()->captureEnd() ?>
+
+<? $this->mainCategory = $this->page;?>
+<? $this->mainCategoryContent = $this->contentPage;?>
+
+<? echo $this->ListItems($this->publicList->data); ?>
+<?php echo $this->paginationControl($this->publicList->paginator, 'Sliding', 'block/paginator.phtml')?>

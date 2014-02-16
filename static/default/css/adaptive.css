@@ -1,0 +1,144 @@
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+	body {min-width: 768px;}
+	.wrapper {width: 758px;}
+	.logo {margin-left: 218px;}
+	.top-info {width: 758px;text-align: center;padding: 0 0 10px 0;}
+	.searchBox .selectBox {width: 236px;margin-right: 11px;}
+	.searchBox input[type="text"] {width: 178px;background-position: 202px -35px;}
+	.subscribeBox {padding-bottom: 10px;}
+	.subscribeText {width: 100%;text-align: center;}
+	.subscribeBox form {margin: 6px 182px 0 0;}
+	
+	.salonItem {padding-left: 181px;}
+	.salonModelBox {width: 563px; padding-top: 7px;}
+	.salonInfo {width: 181px;}
+	.salonModelItem {width: 180px;height: 226px; margin-left: 8px;}
+	.salonModelItem img {max-width: 100%;height: auto;}
+	.salonModelItem h4 {width: 164px; padding: 0 8px; margin-bottom: 0px;background: #0091BB;
+	-webkit-transition: all 0s ease;-moz-transition: all 0s ease;-o-transition: all 0s ease;}
+	.salonModelItem h4:before {left: 6px;top: 0;}
+	.salonModelItem h4:after {right: 8px;top: 7px;}
+	.salonModelItem:hover h4 {background: #00B9EE;}
+	.salonModelItem:before {height: 180px;}
+	.content-info img {max-width: 100%;}
+
+	.salonContentRight {width: 518px;}
+	.singleSalonModelItem .caroufredsel_wrapper {width: 518px!important;}
+	.salonHeader {height: 218px;}
+	.map-wrap iframe {width: 758px;}
+
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	body {min-width: 480px;}
+	.wrapper {width: 480px;}
+	.logo {margin-left: 79px;}
+	.top-info {display: none;}
+	.searchBox input[type="text"] {display: none;}
+	.searchBox .selectBox {width: 452px;margin: 0 0 14px 0;}
+	.searchBox input[type="submit"], .searchBox input[type="button"], .searchBox button {display: block;width: 176px;height: 41px;line-height: 41px;border: 0;border-radius: 0;padding: 0;margin: 0 0 0 138px; background: url(../images/sprite.png) no-repeat 0 -130px;  
+	color: #fff;font-size: 15px;font-weight: bold;font-family: arial;text-shadow: 0px -1px 1px rgba(0, 0, 0, 1);}
+	.searchBox input[type="submit"]:hover, .searchBox input[type="button"]:hover, .searchBox button:hover {opacity: 0.8;}
+	.searchBox a {border: 1px solid #620200;height: 36px;line-height: 36px;font-size: 15px;font-style: normal;
+	-webkit-box-shadow: inset 0 1px 2px #620000, 0 0px 1px #cf2421; -moz-box-shadow: inset 0 1px 2px #620000, 0 0px 1px #cf2421; box-shadow: inset 0 1px 2px #620000, 0 0px 1px #cf2421;}
+	.searchBox a:before {top: 4px; width: 28px;height: 28px;background-position: -190px -70px;}
+	.subscribeBox, .salonModelBox {display: none;}
+	.salonItem {padding: 0 36px 10px 36px;min-height: 180px;}
+	.salonInfo {position: relative;width: 100%; padding-top: 30px; text-align: left;}
+	.salonLogo {display: block;margin-bottom: 0;}
+	.salonLogo img {float: left;margin-right: 16px;}
+	.salonInfo h3 {padding: 10px 0 0;color: #fff;font-size: 20px;position: relative;}
+	.salonInfo h3:before {position: absolute;left: 86px;bottom: -12px;width: 320px;height: 2px;background: #444d58;content: "";}
+	.commentValueBox {padding-left: 86px;}
+	.location {margin-left: 86px;margin-top: -50px;}
+	.location, .commentValueBox a {color: #30abce;}
+	.salonInfo em {float: right;display: block;width: 320px;padding-left: 86px;}
+	.salonInfo br {display: none;}
+	.content-info {display: none;}
+	.pagination {padding: 12px 0;}
+	/* Single salon */
+	.salonPhone {top: 219px;right: -1px;width: 400px;background-color: #A42E29;}
+	.salonHeader {height: 190px;border: 1px solid #676E76;margin-bottom: 99px;}
+	.salonMetaBox {padding-top: 10px;}
+	.salonMenu {display: none;}
+	.mobileMenu {display: block;}
+	.callToSalon {display: block;margin: 6px 0; line-height: 60px;background: #a42e29;color: #fff;font-size: 20px;font-family: arial; text-align: center;}
+	.salonSidebar, .salonFooter {display: none;}
+	.salonContentRight {width: 480px;}
+	.salonContentRight h3 {display: none;}
+	.singleSalonModelItem .caroufredsel_wrapper {width: auto!important;}
+	.salonModelCarouselWrap img {display: block;margin-right: 0;}
+	.singleSalonModelItem p {text-align: center;font-style: italic;}
+	.singleSalonModelItem p span {font-weight: bold;font-style: normal;}
+	.singleSalonModelItem .caroufredsel_wrapper:before {display: none;}
+	.commentsContent h2 {display: none;}
+	.commentAuthor {display: block;width: 100%;margin-bottom: 10px;}
+	.commentText {display: block;}
+	.commentsContent #add-comment {margin-left: 12px;}
+	.map-wrap {height: auto; padding: 0 10px;}
+	.map-wrap iframe {width: 460px;height: 460px;}
+
+	.addCommentModal .fancybox-skin {padding: 30px 30px 32px 30px!important;}
+	.addCommentModal #addCommentForm {width: 400px;}
+	.addCommentModal #addCommentForm textarea, .addCommentModal #addCommentForm input[type="text"] {width: 376px;}
+}
+@media only screen and (max-width: 479px) {
+	body {min-width: 320px;}
+	.wrapper {width: 320px;}
+	.logo {margin-left: 60px;width: 200px;}
+	.logo img {max-width: 100%;}
+	.top-info {display: none;}
+	.searchBox {padding: 8px 10px;}
+	.searchBox input[type="text"] {display: none;}
+	.searchBox .selectBox {width: 300px;margin: 0 0 14px 0;}
+	.searchBox input[type="submit"], .searchBox input[type="button"], .searchBox button {display: block;width: 176px;height: 41px;line-height: 41px;border: 0;border-radius: 0;padding: 0;margin: 0 0 0 62px; background: url(../images/sprite.png) no-repeat 0 -130px;  
+	color: #fff;font-size: 15px;font-weight: bold;font-family: arial;text-shadow: 0px -1px 1px rgba(0, 0, 0, 1);}
+	.searchBox input[type="submit"]:hover, .searchBox input[type="button"]:hover, .searchBox button:hover {opacity: 0.8;}
+	.searchBox a {border: 1px solid #620200;height: 36px;line-height: 36px;font-size: 15px;font-style: normal;
+	-webkit-box-shadow: inset 0 1px 2px #620000, 0 0px 1px #cf2421; -moz-box-shadow: inset 0 1px 2px #620000, 0 0px 1px #cf2421; box-shadow: inset 0 1px 2px #620000, 0 0px 1px #cf2421;}
+	.searchBox a:before {top: 4px; width: 28px;height: 28px;background-position: -190px -70px;}
+	.breadcrumbs span {line-height: 16px;}
+
+	.subscribeBox, .salonModelBox {display: none;}
+	.salonItem {padding: 0 16px 10px 36px;min-height: 180px;}
+	.salonInfo {position: relative;width: 100%; padding-top: 30px; text-align: left;}
+	.salonLogo {display: block;margin-bottom: 0;}
+	.salonLogo img {float: left;margin-right: 16px;}
+	.salonInfo h3 {padding: 0px 0 0;line-height: 20px; color: #fff;font-size: 20px;position: relative;}
+	.salonInfo h3:before {position: absolute;left: 86px;bottom: -12px;width: 180px;height: 2px;background: #444d58;content: "";}
+	.commentValueBox {padding-left: 86px;}
+	.location {margin-left: 86px;margin-top: -50px;}
+	.location, .commentValueBox a {color: #30abce;}
+	.salonInfo em {float: right;display: block;width: 180px;padding-left: 86px;}
+	.salonInfo br {display: none;}
+	.content-info {display: none;}
+	.pagination {padding: 12px 0;}
+	/* Single salon */
+	.salonPhone {top: 219px;right: -1px;width: 240px;background-color: #A42E29;}
+	.salonHeader {height: 190px;border: 1px solid #676E76;margin-bottom: 99px;}
+	.salonMetaBox {padding: 10px 13px 13px 13px;}
+	.salonMenu {display: none;}
+	.mobileMenu {display: block;}
+	.callToSalon {display: block;margin: 6px 0; line-height: 30px;padding: 6px 0; background: #a42e29;color: #fff;font-size: 20px;font-family: arial; text-align: center;}
+	.callToSalon strong {display: block;}
+	.salonSidebar, .salonFooter {display: none;}
+	.salonContentRight {width: 320px;}
+	.salonContentRight h3 {display: none;}
+	.singleSalonModelItem .caroufredsel_wrapper {width: auto!important;}
+	.salonModelCarouselWrap img {display: block;margin-right: 0;max-width: 320px;height: auto;}
+	.singleSalonModelItem p {text-align: center;font-style: italic;}
+	.singleSalonModelItem p span {font-weight: bold;font-style: normal;}
+	.singleSalonModelItem .caroufredsel_wrapper:before {display: none;}
+	article table td.price {width: 100px;}
+	.commentsContent h2 {display: none;}
+	.commentAuthor {display: block;width: 100%;margin-bottom: 10px;}
+	.commentText {display: block;}
+	.commentsContent #add-comment {margin-left: 12px;}
+	.map-wrap {height: auto; padding: 0 5px;}
+	.map-wrap iframe {width: 310px;height: 310px;}
+
+	.addCommentModal .fancybox-skin {padding: 20px 10px 16px 10px!important;}
+	.addCommentModal #addCommentForm {width: 290px;}
+	.addCommentModal #addCommentForm textarea, .addCommentModal #addCommentForm input[type="text"] {width: 266px;}
+	.submitBox {padding-top: 16px;}
+	.addCommentModal #addCommentForm p {margin-top: 16px;}
+}
