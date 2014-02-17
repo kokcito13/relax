@@ -1,0 +1,22 @@
+<div class="salonMenu">
+    <ul>
+        <li>
+            <a <? if($this->current == 'girls'): ?>class="current"<? endif; ?> href="<?=$this->salon->getRoute()->getUrl();?>">Девушки салона</a>
+        </li>
+        <li>
+            <a <? if($this->current == 'vidy-massage'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-vidy-massage');?>">Виды массажа и цены</a>
+        </li>
+        <li>
+            <a <? if($this->current == 'review'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>">Отзывы (15)</a>
+        </li>
+        <li>
+            <a <? if($this->current == 'map'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-map');?>">Показать на карте</a>
+        </li>
+        <li>
+            <a <? if($this->current == 'akciy'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-akciy');?>">Акции салона</a>
+        </li>
+        <li>
+            <a <? if($this->current == 'about'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-about');?>">О салоне</a>
+        </li>
+    </ul>
+</div>

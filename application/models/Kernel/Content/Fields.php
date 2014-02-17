@@ -15,7 +15,7 @@ class Application_Model_Kernel_Content_Fields {
 	private $fieldName;
 	private $fieldText;
 	
-	const ERROR_NO_FILDS_CONTENT = 'Not filds in this content';
+	const ERROR_NO_FILDS_CONTENT = 'Not fields in this content';
 	
 	public function __construct($idField, $idContent, $fieldName, $fieldText) {
 		$this->idField = $idField;

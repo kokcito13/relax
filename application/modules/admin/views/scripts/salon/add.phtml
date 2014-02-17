@@ -97,8 +97,8 @@ else
             <td width="193" class="first">URL:</td>
             <td>
                 <input name="realName" type="text" class="field" style="background-color: #F2F2F2; width:10px;" disabled="disabled" value="/" />
-                <input name="url" style="width:155px" type="text" class="field" value="<?= (isset($_POST['url'])) ? $_POST['url'] : '' ?>" disabled="disabled" />
-                <input name="realName" type="text" class="field" style="background-color: #F2F2F2; width:30px;" disabled="disabled" value=".html" />
+                <input name="url" style="width:255px" type="text" class="field" value="<?= (isset($_POST['url'])) ? $_POST['url'] : '' ?>" disabled="disabled" />
+                <input name="realNamehtml" type="text" class="field" style="background-color: #F2F2F2; width:30px;" disabled="disabled" value=".html" />
             </td>
         </tr>
         <tr class="">
@@ -108,20 +108,32 @@ else
                     <option value="0">Все города</option>
                 <?php foreach( $this->cities as $city ):?>
                     <? $cityContent = $city->getContent()->getFields();?>
-                        <option value="<?=$city->getId();?>"><?=$cityContent['contentName']->getFieldText();?></option>
+                        <option value="<?=$city->getId();?>"
+                            <? if (isset($_POST['city_id']) && $_POST['city_id'] == $city->getId()): ?>
+                                selected="selected"
+                            <? endif;?>
+                            ><?=$cityContent['contentName']->getFieldText();?></option>
                 <?php endforeach; ?>
                 </select>
             </td>
         </tr>
         <?php foreach( $this->cities as $city ):?>
-            <tr class="hide cities city_<?=$city->getId();?>" >
+            <tr class="hide cities city_<?=$city->getId();?>"
+                <? if (isset($_POST['city_id']) && $_POST['city_id'] == $city->getId()): ?>
+                    style="display: table-row;"
+                <? endif;?>
+                >
                 <td width="193" class="first">Район:</td>
                 <td>
                     <select name="area_id[<?=$city->getId(); ?>]">
                     <?php foreach( $this->areas as $area ):?>
                         <? if ($area->getCityId() != $city->getId()) continue;?>
                         <? $areaContent = $area->getContent()->getFields();?>
-                        <option value="<?=$area->getId();?>" class=""><?=$areaContent['contentName']->getFieldText();?></option>
+                        <option value="<?=$area->getId();?>"
+                            <? if (isset($_POST['area_id']) && $_POST['area_id'] == $area->getId()): ?>
+                                selected="selected"
+                            <? endif;?>
+                            ><?=$areaContent['contentName']->getFieldText();?></option>
                     <?php endforeach; ?>
                 </td>
             </tr>
@@ -169,20 +181,25 @@ else
         <tr class="grey">
             <td width="193" class="first">Телефон:</td>
             <td>
-                <input name="price" style="width:255px" type="text" class="field" value="<?= (isset($_POST['price'])) ? $_POST['price'] : '' ?>" />
+                <input name="phone" style="width:255px" type="text" class="field" value="<?= (isset($_POST['phone'])) ? $_POST['phone'] : '' ?>" />
             </td>
         </tr>
-
+        <tr class="grey">
+            <td width="193" class="first">Цена звонка:</td>
+            <td>
+                <input name="call_price" style="width:255px" type="text" class="field" value="<?= (isset($_POST['call_price'])) ? $_POST['call_price'] : '' ?>" />
+            </td>
+        </tr>
         <tr class="grey">
             <td width="193" class="first">Lat:</td>
             <td>
-                <input name="idAmazon" style="width:255px" type="text" class="field" value="<?= (isset($_POST['idAmazon'])) ? $_POST['idAmazon'] : '' ?>" />
+                <input name="lat" style="width:255px" type="text" class="field" value="<?= (isset($_POST['lat'])) ? $_POST['lat'] : '' ?>" />
             </td>
         </tr>
         <tr class="grey">
             <td width="193" class="first">Lng:</td>
             <td>
-                <input name="sameProducts" style="width:255px" type="text" class="field" value="<?= (isset($_POST['sameProducts'])) ? $_POST['sameProducts'] : '' ?>" />
+                <input name="lng" style="width:255px" type="text" class="field" value="<?= (isset($_POST['lng'])) ? $_POST['lng'] : '' ?>" />
             </td>
         </tr>
 
@@ -200,7 +217,7 @@ else
 				<table class="zebra edit">
 					<tr class="grey">
 						<td width="193" class="first">Название:</td>
-						<td><input name="content[<?=$lang->getId()?>][contentName]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['contentName'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['contentName']) : ''?>" /></td>
+						<td><input name="content[<?=$lang->getId()?>][name]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['name'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['name']) : ''?>" /></td>
 					</tr>
 					<tr class="">
 						<td width="193" class="first">Титл:</td>
@@ -226,10 +243,10 @@ else
 <!--                            <textarea  rows='10' class='content' cols='40' name="content[--><?//=$lang->getId()?><!--][shpora]" tabindex='2' >--><?//=(isset($_POST['content'][$lang->getId()]['shpora'])) ? $_POST['content'][$lang->getId()]['shpora'] : ''?><!--</textarea>-->
 <!--                        </td>-->
 <!--                    </tr>-->
-<!--                    <tr class="grey">-->
-<!--                        <td width="193" class="first">Альтег для картинки:</td>-->
-<!--                        <td><input name="content[--><?//=$lang->getId()?><!--][img_alt]" type="text" class="field" value="--><?//=(isset($_POST['content'][$lang->getId()]['img_alt'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['img_alt']) : ''?><!--" /></td>-->
-<!--                    </tr>-->
+                    <tr class="grey">
+                        <td width="193" class="first">Адресс:</td>
+                        <td><input name="content[<?=$lang->getId()?>][adress]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['adress'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['adress']) : ''?>" /></td>
+                    </tr>
 				</table>
 			</div> 
 		<?php endforeach ?>

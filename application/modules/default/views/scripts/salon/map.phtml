@@ -1,0 +1,80 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<div class="breadcrumbs">
+				<span class="backToList">
+					<a href="#">Назад к списку</a>
+				</span>
+</div>
+<div class="singleSalonBox">
+    <?=$this->ShowSalonHeader($this->salon);?>
+    <?=$this->ShowSalonMenu($this->salon, 'map');?>
+
+    <div class="mobileMenu">
+        <ul>
+            <li><a href="#">Девушки</a></li>
+            <li><a class="current" href="#">Цены</a></li>
+            <li><a href="#">Отзывы</a></li>
+            <li><a href="#">Карта</a></li>
+        </ul>
+    </div>
+    <div class="salonContent">
+        <div class="full-width map">
+            <h2>Салон на карте</h2>
+            <article>
+                <p>В нашем прейскуранте вы сможете найти наиболее полную информацию касающуюся эротический массаж Киев цена. Разобраться в нем довольно просто напротив названия вида массажа находится его с указанием времени проведения услуги.</p>
+                <p>Чуть ниже находится описание самого массажа а также те опции которые входят в услугу. Цены на индивидуальные программы нужно согласовывать с нашим администратором отдельно.</p>
+            </article>
+            <div class="map-wrap" id="map-wrap"></div>
+        </div>
+    </div>
+    <div class="salonFooter" style="background: url(images/content/salonCover3.png) no-repeat center center;">
+    </div>
+    <?=$this->ShowSalonMenu($this->salon, 'map');?>
+
+</div>
+<div class="descText">
+    <article>
+        <p></p>
+        <?=$this->contentPage['content']->getFieldText();?>
+        <p></p>
+    </article>
+</div>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=ru"></script>
+<script>
+    var map;
+    var openedWindow = false;
+    function setMap()
+    {
+        var mapOptions = {
+            center:new google.maps.LatLng(<?=$this->salon->getLat()?>, <?=$this->salon->getLng()?>),
+            zoom:13,
+            mapTypeId:google.maps.MapTypeId.ROADMAP,
+            scrollwheel:false
+        };
+        var map = new google.maps.Map(document.getElementById("map-wrap"),
+            mapOptions)
+
+        var marker = new google.maps.Marker({
+            map:map,
+            position:map.getCenter()
+        });
+
+        var infowindow = new google.maps.InfoWindow(
+            {
+                content: '<b><?=$this->contentPage['name']->getFieldText();?></b>'
+            });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            if (openedWindow)
+                openedWindow.close();
+            openedWindow = infowindow;
+            infowindow.open(map, marker);
+            map.setCenter(marker.getPosition());
+        });
+
+        return false;
+    }
+    $(document).ready(function(){
+        setMap();
+    });
+</script>

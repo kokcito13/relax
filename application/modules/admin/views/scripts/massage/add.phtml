@@ -1,0 +1,50 @@
+<?=$this->partial('blocks/menus/blog.phtml');?>
+<form action="<?=$this->url(array())?>" method="post" id="PageForm">
+    <table class="zebra edit">
+        <tbody>
+            <tr class="grey">
+                <td width="193" class="first">Цена:</td>
+                <td>
+                    <input name="price" style="width:255px" type="text" class="field" value="<?= (isset($_POST['price'])) ? $_POST['price'] : '' ?>" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="tabs">
+        <?php if (sizeof($this->langs) > 1): ?>
+            <ul>
+                <?php foreach ($this->langs as $lang): ?>
+                    <li><a href="#<?=$lang->getId()?>"><?=$lang->getFullName()?></a></li>
+                <?php endforeach ?>
+            </ul>
+        <?php endif ?>
+        <?php foreach ($this->langs as $lang): ?>
+            <div id="<?=$lang->getId()?>">
+                <table class="zebra edit">
+                    <tr class="">
+                        <td width="193" class="first">Название:</td>
+                        <td><input name="content[<?=$lang->getId()?>][name]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['name'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['name']) : ''?>" /></td>
+                    </tr>
+                    <tr class="grey">
+                        <td width="193" class="first">Описание:</td>
+                        <td><input name="content[<?=$lang->getId()?>][content]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['content'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['content']) : ''?>" /></td>
+                    </tr>
+                </table>
+            </div>
+        <?php endforeach ?>
+    </div>
+    <table class="zebra edit">
+        <tbody>
+            <tr class="">
+                <td>&nbsp;</td>
+                <td>
+                    <div class="m10 center">
+                        <a href="javascript:SubmitPageFrom();" class="button_blue">Сохранить</a>
+                        <a href="<?=$this->url(array('salon_id'=>$this->salon_id),'admin-girl-index')?>" class="button_grey">Отменить</a>
+                    </div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</form>

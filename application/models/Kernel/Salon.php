@@ -22,16 +22,20 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     private $city_id;
     private $area_id;
 
+    private $call_price = 0;
+    private $url_key;
+
     const ITEM_ON_PAGE = 16;
 
     public function __construct(
-        $id, $idPhoto1, $idPhoto2, $idPhoto3, $idPhoto4, $idPage,
-        $idRoute, $idContentPack, $pageEditDate,
-        $pageStatus, $position, $phone,
-        $lat, $lng, $city_id, $area_id
+        $id,
+        $idPhoto1, $idPhoto2, $idPhoto3, $idPhoto4,
+        $idPage, $idRoute, $idContentPack,
+        $pageEditDate, $pageStatus, $position,
+        $phone, $lat, $lng, $city_id, $area_id, $call_price, $url_key = ''
     )
     {
-        parent::__construct($idPage, $idRoute, $idContentPack, $pageEditDate, $pageStatus, self::TYPE_PROJECT, $position);
+        parent::__construct($idPage, $idRoute, $idContentPack, $pageEditDate, $pageStatus, self::TYPE_SALON, $position);
         $this->id = $id;
 
         $this->idPhoto1 = $idPhoto1;
@@ -44,12 +48,64 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $this->lng = $lng;
         $this->city_id = $city_id;
         $this->area_id = $area_id;
+        $this->call_price = $call_price;
+        $this->url_key = $url_key;
     }
 
     public function getId()
     {
         return $this->id;
     }
+
+    public function setPhone($item)
+    {
+        $this->phone = $item;
+
+        return $this;
+    }
+
+    public function setLat($item)
+    {
+        $this->lat = $item;
+
+        return $this;
+    }
+
+    public function setLng($item)
+    {
+        $this->lng = $item;
+
+        return $this;
+    }
+
+    public function setCityId($item)
+    {
+        $this->city_id = $item;
+
+        return $this;
+    }
+
+    public function setAreaId($item)
+    {
+        $this->area_id = $item;
+
+        return $this;
+    }
+
+    public function setCallPrice($item)
+    {
+        $this->call_price = $item;
+
+        return $this;
+    }
+
+    public function setUrlKey($item)
+    {
+        $this->url_key = $item;
+
+        return $this;
+    }
+
 
     public function save()
     {
@@ -61,14 +117,19 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
             $this->savePageData(); //сохраняем даные страницы
             $data = array(
                 'idPage'   => $this->getIdPage(),
-                'idPhoto1' => $this->idPhoto1,
-                'price' => $this->price,
 
-                'idAmazon' =>$this->idAmazon,
-                'sameProducts' =>$this->sameProducts,
-                'productUrl' =>$this->productUrl,
-                'productStatus' => $this->productStatus,
-                'productStatusPopular' => $this->productStatusPopular
+                'idPhoto1' => $this->idPhoto1,
+                'idPhoto2' => $this->idPhoto2,
+                'idPhoto3' => $this->idPhoto3,
+                'idPhoto4' => $this->idPhoto4,
+
+                'phone' => $this->phone,
+                'lat' => $this->lat,
+                'lng' => $this->lng,
+                'city_id' => $this->city_id,
+                'area_id' => $this->area_id,
+                'call_price' => $this->call_price,
+                'url_key' => $this->url_key
             );
             if ($insert) {
                 $db->insert('salons', $data);
@@ -104,13 +165,13 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $this->validatePageData($e);
 
         if ($data != false) {
-            $data->url = trim($data->url);
+            $data->url = trim($this->getRoute()->getUrl());
             if (empty($data->url))
                 throw new Exception(' Пустой URL ');
             $langs = Kernel_Language::getAll();
             foreach ($langs as $lang) {
-                if (empty($data->content[$lang->getId()]['contentName']))
-                    throw new Exception(' Пустой поле "Название" ' . $lang->getFullName());
+                if (empty($data->content[$lang->getId()]['name']))
+                    throw new Exception(' Пустое поле "Название" ' . $lang->getFullName());
             }
         }
 
@@ -120,12 +181,12 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
 
     private static function getSelf(stdClass &$data)
     {
-        return new self($data->id, $data->idPhoto1,
+        return new self($data->id,
+                        $data->idPhoto1, $data->idPhoto2, $data->idPhoto3, $data->idPhoto4,
                         $data->idPage, $data->idRoute, $data->idContentPack,
                         $data->pageEditDate, $data->pageStatus, $data->position,
-                        $data->price,
-                        $data->idAmazon, $data->sameProducts, $data->productUrl,
-                        $data->productStatus, $data->productStatusPopular
+                        $data->phone, $data->lat, $data->lng, $data->city_id,
+                        $data->area_id, $data->call_price, $data->url_key
                         );
     }
 
@@ -158,6 +219,20 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
             throw new Exception(self::ERROR_INVALID_ID);
         }
 //		}
+    }
+
+    public static function getByUrlKey($url)
+    {
+        $db = Zend_Registry::get('db');
+        $select = $db->select()->from('salons');
+        $select->join('pages', 'salons.idPage = pages.idPage');
+        $select->where('url_key = ?', $url);
+        $select->limit(1);
+        if (($data = $db->fetchRow($select)) !== false) {
+            return self::getSelf($data);
+        } else {
+            throw new Exception(self::ERROR_INVALID_ID);
+        }
     }
 
     public static function getByIdPage($idPage)
@@ -209,7 +284,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
                 $select->where('content.contentName = ?', $searchName);
             }
         }
-        $select->where('pages.pageType = ?', self::TYPE_PROJECT);
+        $select->where('pages.pageType = ?', self::TYPE_SALON);
         if ($wher) {
             $select->where($wher);
         }
@@ -395,5 +470,59 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     public function setIdPhoto4($idPhoto4)
     {
         $this->idPhoto4 = $idPhoto4;
+    }
+
+    public function setPath($data)
+    {
+        $path = Application_Model_Kernel_TextRedactor::makeTranslit($data->content[1]["name"]);
+        $this->getRoute()->setUrl('/'.$path.'.html');
+    }
+
+    public function updatePath()
+    {
+        $path = $this->getRoute()->getUrl();
+        $path = substr($path, 0, -5);
+
+        $this->getRoute()->setUrl($path.'_'.(int)$this->id.'.html');
+        $this->getRoute()->save();
+
+        $this->setUrlKey(mb_substr($path, 1).'_'.(int)$this->id);
+        $this->save();
+    }
+
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    public function getCityId()
+    {
+        return $this->city_id;
+    }
+
+    public function getAreaId()
+    {
+        return $this->area_id;
+    }
+
+    public function getCallPrice()
+    {
+        return $this->call_price;
+    }
+
+    public function getUrlKey()
+    {
+        return $this->url_key;
     }
 }

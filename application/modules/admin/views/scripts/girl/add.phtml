@@ -1,0 +1,46 @@
+<?=$this->partial('blocks/menus/blog.phtml');?>
+<form action="<?=$this->url(array())?>" method="post" id="PageForm">
+    <table class="zebra edit">
+        <tbody>
+            <tr class="grey">
+                <td width="193" class="first">Возвраст:</td>
+                <td>
+                    <input name="age" style="width:255px" type="text" class="field" value="<?= (isset($_POST['age'])) ? $_POST['age'] : '' ?>" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="tabs">
+        <?php if (sizeof($this->langs) > 1): ?>
+            <ul>
+                <?php foreach ($this->langs as $lang): ?>
+                    <li><a href="#<?=$lang->getId()?>"><?=$lang->getFullName()?></a></li>
+                <?php endforeach ?>
+            </ul>
+        <?php endif ?>
+        <?php foreach ($this->langs as $lang): ?>
+            <div id="<?=$lang->getId()?>">
+                <table class="zebra edit">
+                    <tr class="grey">
+                        <td width="193" class="first">Имя:</td>
+                        <td><input name="content[<?=$lang->getId()?>][contentName]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['contentName'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['contentName']) : ''?>" /></td>
+                    </tr>
+                </table>
+            </div>
+        <?php endforeach ?>
+    </div>
+    <table class="zebra edit">
+        <tbody>
+            <tr class="grey">
+                <td>&nbsp;</td>
+                <td>
+                    <div class="m10 center">
+                        <a href="javascript:SubmitPageFrom();" class="button_blue">Сохранить</a>
+                        <a href="<?=$this->url(array('salon_id'=>$this->salon_id),'admin-girl-index')?>" class="button_grey">Отменить</a>
+                    </div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</form>

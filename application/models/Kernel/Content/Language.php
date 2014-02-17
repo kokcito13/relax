@@ -17,7 +17,7 @@ class Application_Model_Kernel_Content_Language {
 	
 	const ERROR_INVALID_CONTENT_NAME = 'Entered incorrect name';
 	const ERROR_CONTENT_NOT_EXISTS = 'Such content not exsit';
-	const ERROR_NO_FILDS_CONTENT = 'Not filds in this content';
+	const ERROR_NO_FILDS_CONTENT = 'Not fields in this content';
 	
 	public function __construct($idContent, $idLang, $idContentPack) {
 		$this->_idContent = $idContent;
