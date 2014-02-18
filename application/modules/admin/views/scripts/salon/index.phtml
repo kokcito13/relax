@@ -117,6 +117,7 @@ if (count($this->salons->data)): ?>
 <!--                  <input type="checkbox" onclick="chengeStatusProject(--><?//=$item->getId()?><!--)" --><?// if ($item->getProductStatus() ==2): ?><!--checked="checked" --><?// endif; ?><!--/>-->
                     <a href="<?=$this->url(array('salon_id'=>$item->getId()), 'admin-girl-index');?>" class="edit" style="float: left; display:block; margin-right: 10px;" title="Девушки">Девушки</a>
                     <a href="<?=$this->url(array('salon_id'=>$item->getId()), 'admin-massage-index');?>" class="edit" style="float: left; display:block; margin-right: 10px;" title="Массажи">Массажи</a>
+                    <a href="<?=$this->url(array('salon_id'=>$item->getId()), 'admin-comment-index');?>" class="edit" style="float: left; display:block; margin-right: 10px;" title="Комментарии">Комментарии</a>
                 </td>
                 <td style="text-align: right;">
                     <a href="<?=$item->getRoute()->getUrl()?>" target="_black" title="Просмотр"><img src="/static/admin/images/eye.png" alt="" width="16" height="16"></a>&nbsp;&nbsp;

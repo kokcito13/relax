@@ -27,7 +27,7 @@ class Admin_GirlController extends Zend_Controller_Action
 
         $this->view->breadcrumbs->add('Девушки', '');
         $this->view->headTitle()->append('Девушки');
-        $this->view->girls = Application_Model_Kernel_Girl::getList();
+        $this->view->girls = Application_Model_Kernel_Girl::getList($this->view->salon_id);
     }
 
     public function addAction()

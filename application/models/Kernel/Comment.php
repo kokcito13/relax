@@ -1,6 +1,7 @@
 <?php
 
-class Application_Model_Kernel_Comment {
+class Application_Model_Kernel_Comment
+{
 
     private $idComment;
     private $idOwner;
@@ -13,103 +14,139 @@ class Application_Model_Kernel_Comment {
     private $commentType = 1;
     private $commentStatus = 0;
 
-    const TYPE_PUBLIC = 1;
-    const TYPE_PAGE = 2;
+    private $commentAdminText = '';
+    private $commentAdminDate;
 
     const STATUS_CREATE = 0;
-    const STATUS_SHOW = 1;
-    
-    public function __construct($idComment, $idOwner, $parentIdComment, $commentNick, $commentEmail, $commentText, $commentDate, $commentIp, $commentType = self::TYPE_PUBLIC, $commentStatus = self::STATUS_CREATE) {
-        $this->idComment = $idComment;
-        $this->idOwner = $idOwner;
-        $this->parentIdComment = $parentIdComment;
-        $this->commentNick = $commentNick;
-        $this->commentEmail = $commentEmail;
-        $this->commentText = $commentText;
-        $this->commentDate = $commentDate;
-        $this->commentIp = $commentIp;
-        $this->commentType = $commentType;
-        $this->commentStatus = $commentStatus;
+    const STATUS_SHOW   = 1;
+
+    public function __construct($idComment, $idOwner, $parentIdComment,
+                                $commentNick, $commentEmail, $commentText,
+                                $commentDate, $commentIp, $commentType,
+                                $commentStatus = self::STATUS_CREATE,
+                                $commentAdminText = '', $commentAdminDate = null
+    )
+    {
+        $this->idComment        = $idComment;
+        $this->idOwner          = $idOwner;
+        $this->parentIdComment  = $parentIdComment;
+        $this->commentNick      = $commentNick;
+        $this->commentEmail     = $commentEmail;
+        $this->commentText      = $commentText;
+        $this->commentDate      = $commentDate;
+        $this->commentIp        = $commentIp;
+        $this->commentType      = $commentType;
+        $this->commentStatus    = $commentStatus;
+        $this->commentAdminText = $commentAdminText;
+        $this->commentAdminDate = $commentAdminDate;
+
+        if (is_null($this->commentAdminDate)) {
+            $this->commentAdminDate = time();
+        }
     }
 
-    public function getIdComment() {
+    public function getIdComment()
+    {
         return $this->idComment;
     }
-    
-    public function getCommentStatus() {
+
+    public function getCommentStatus()
+    {
         return $this->commentStatus;
     }
-    public function readComment(){
+
+    public function readComment()
+    {
         $this->commentStatus = self::STATUS_SHOW;
     }
 
-    public function getCommentNick() {
+    public function getCommentNick()
+    {
         return $this->commentNick;
     }
 
-    public function getCommentText() {
+    public function getCommentText()
+    {
         return $this->commentText;
     }
-    
-    public function getCommentEmail() {
+
+    public function getCommentAdminText()
+    {
+        return $this->commentAdminText;
+    }
+
+    public function getCommentEmail()
+    {
         return $this->commentEmail;
     }
 
-    public function getCommentDate() {
+    public function getCommentDate()
+    {
         return $this->commentDate;
     }
-    
-    public function getParentIdComment() {
+
+    public function getParentIdComment()
+    {
         return $this->parentIdComment;
     }
 
-    public static function getSelf($data) {
+    public static function getSelf($data)
+    {
         return new self($data->idComment, $data->idOwner, $data->parentIdComment,
                         $data->commentNick, $data->commentEmail, $data->commentText,
                         $data->commentDate, $data->commentIp, $data->commentType,
-                        $data->commentStatus );
+                        $data->commentStatus, $data->commentAdminText, $data->commentAdminDate);
     }
 
-    public static function getList($limit = false, $where = false) {
-        $db = Zend_Registry::get('db');
-        $return = array();
+    public static function getList($salon_id, $status = false, $limit = false, $where = false)
+    {
+        $db     = Zend_Registry::get('db');
+        $return = array ();
         $select = $db->select()->from('comments');
-        if( $where !== false ){
-            $select->where( $where );
+        $select->where('comments.idOwner = ?', $salon_id);
+        if ($status) {
+            $select->where('comments.commentStatus = ?', $status);
+        }
+        if ($where !== false) {
+            $select->where($where);
         }
         $select->order('comments.idComment ASC');
         if ($limit !== false)
             $select->limit($limit);
-        $i = 0;
+        $i       = 0;
         $results = $db->fetchAll($select);
-        foreach ( $results as $result ) {
+        foreach ($results as $result) {
             $return[$result->idComment] = self::getSelf($result);
             $i++;
         }
+
         return $return;
     }
 
-    public function save() {
+    public function save()
+    {
         $db = Zend_Registry::get('db');
         $db->beginTransaction();
         try {
             $db->beginTransaction();
-            $data = array(
-                'idOwner' => $this->idOwner,
+            $data = array (
+                'idOwner'         => $this->idOwner,
                 'parentIdComment' => $this->parentIdComment,
-                'commentNick' => $this->commentNick,
-                'commentEmail' => $this->commentEmail,
-                'commentText' => $this->commentText,
-                'commentDate' => $this->commentDate,
-                'commentIp' => $this->commentIp,
-                'commentType' => $this->commentType,
-                'commentStatus'=>$this->commentStatus
+                'commentNick'     => $this->commentNick,
+                'commentEmail'    => $this->commentEmail,
+                'commentText'     => $this->commentText,
+                'commentDate'     => $this->commentDate,
+                'commentIp'       => $this->commentIp,
+                'commentType'     => $this->commentType,
+                'commentStatus'   => $this->commentStatus,
+                'commentAdminText'   => $this->commentAdminText,
+                'commentAdminDate'   => $this->commentAdminDate
             );
             if (is_null($this->idComment)) {
                 $db->insert('comments', $data);
                 $this->idComment = $db->lastInsertId();
             } else {
-                $db->update('comments', $data, 'idComment = ' . (int) $this->idComment);
+                $db->update('comments', $data, 'idComment = ' . (int)$this->idComment);
             }
             $db->commit();
         } catch (Exception $e) {
@@ -119,48 +156,53 @@ class Application_Model_Kernel_Comment {
         }
     }
 
-    public static function getById($idComment) {
-        $idComment = (int) $idComment;
-        $db = Zend_Registry::get('db');
-        $return = array();
-        $select = $db->select()->from('comments');
+    public static function getById($idComment)
+    {
+        $idComment = (int)$idComment;
+        $db        = Zend_Registry::get('db');
+        $select    = $db->select()->from('comments');
         $select->where('comments.idComment = ?', $idComment);
         $select->limit(1);
         $result = $db->fetchRow($select);
+
         return self::getSelf($result);
     }
 
-    public static function getByParentIdComment($parentIdComment) {
-        $parentIdComment = (int) $parentIdComment;
-        $db = Zend_Registry::get('db');
-        $return = array();
-        $select = $db->select()->from('comments');
+    public static function getByParentIdComment($parentIdComment)
+    {
+        $parentIdComment = (int)$parentIdComment;
+        $db              = Zend_Registry::get('db');
+        $return          = array ();
+        $select          = $db->select()->from('comments');
         $select->where('comments.parentIdComment = ?', $parentIdComment);
         $returnGeter = $db->fetchAll($select);
-        $i=0;
-        foreach ( $returnGeter as $result ) {
+        $i           = 0;
+        foreach ($returnGeter as $result) {
             $return[$i] = self::getSelf($result);
             $i++;
         }
+
         return $return;
     }
 
-    public static function getByidOwner($idOwner) {
-        $idOwner = (int) $idOwner;
-        $db = Zend_Registry::get('db');
-        $return = array();
-        $select = $db->select()->from('comments');
+    public static function getByidOwner($idOwner)
+    {
+        $idOwner = (int)$idOwner;
+        $db      = Zend_Registry::get('db');
+        $return  = array ();
+        $select  = $db->select()->from('comments');
         $select->where('comments.idOwner = ?', $idOwner);
         $select->order('idComment');
         foreach ($db->fetchAll($select) as $result) {
             $return[] = self::getSelf($result);
         }
+
         return $return;
     }
 
-    public function delete() {
-		$db = Zend_Registry::get('db');
-		$db->delete('comments',"comments.idComment = {$this->idComment}");
-	}
-    
+    public function delete()
+    {
+        $db = Zend_Registry::get('db');
+        $db->delete('comments', "comments.idComment = {$this->idComment}");
+    }
 }

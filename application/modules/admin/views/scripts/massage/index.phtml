@@ -19,13 +19,13 @@
             <? ($class === 'grey') ? $class = '' : $class = 'grey'; ?>
             <tr id="<?= $item->getId() ?>" class="<?= $class; ?> id_<?= $item->getId() ?>">
                 <td>
-                    <a href="<?= $this->url(array ('id' => $item->getId(), 'salon_id'=>$this->salon_id), 'admin-girl-edit'); ?>" class="edit"
+                    <a href="<?= $this->url(array ('id' => $item->getId(), 'salon_id'=>$this->salon_id), 'admin-massage-edit'); ?>" class="edit"
                        title="Редактировать">
                         <img src="/static/admin/images/edit.png" alt="Edit" width="16" height="16"/>
                     </a>
                 </td>
                 <td style="padding-left:10px;">
-                    <?=$content['contentName']->getFieldText();?>
+                    <?=$content['name']->getFieldText();?>
                 </td>
                 <td style="text-align: right;"></td>
                 <td style="text-align: left;">

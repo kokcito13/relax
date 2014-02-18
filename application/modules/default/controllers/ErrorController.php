@@ -1,8 +1,6 @@
 <?php
 class ErrorController extends Zend_Controller_Action
 {
-    private $ErrorCount = 0;
-
     public function errorAction()
     {
         if ($_SERVER['SERVER_NAME'] !== 'vinylka.com.ua') {

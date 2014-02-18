@@ -145,11 +145,12 @@ class Application_Model_Kernel_Girl
         return new self($data->id, $data->idContentPack, $data->salon_id, $data->idGallery, $data->age);
     }
 
-    public static function getList()
+    public static function getList($salon_id)
     {
         $db     = Zend_Registry::get('db');
         $return = array ();
         $select = $db->select()->from('girls');
+        $select->where('girls.salon_id = ?', (int)$salon_id);
         if (false !== ($result = $db->fetchAll($select))) {
             foreach ($result as $category) {
                 $return[] = self::getSelf($category);

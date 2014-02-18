@@ -27,7 +27,7 @@ class Admin_MassageController extends Zend_Controller_Action
 
         $this->view->breadcrumbs->add('Массаж', '');
         $this->view->headTitle()->append('Массаж');
-        $this->view->massages = Application_Model_Kernel_Massage::getList();
+        $this->view->massages = Application_Model_Kernel_Massage::getList($this->view->salon_id);
     }
 
     public function addAction()
@@ -67,10 +67,10 @@ class Admin_MassageController extends Zend_Controller_Action
     {
         $this->view->headTitle()->append('Редактировать город');
         $this->_helper->viewRenderer->setScriptAction('add');
-        $this->view->langs = Kernel_Language::getAll();
-        $this->view->id    = (int)$this->_getParam('id');
+        $this->view->langs   = Kernel_Language::getAll();
+        $this->view->id      = (int)$this->_getParam('id');
         $this->view->massage = Application_Model_Kernel_Massage::getById($this->view->id);
-        $getContent        = $this->view->massage->getContentManager()->getContent();
+        $getContent          = $this->view->massage->getContentManager()->getContent();
         foreach ($getContent as $key => $value) {
             $getContent[$key]->setFieldsArray(Application_Model_Kernel_Content_Fields::getFieldsByIdContent($getContent[$key]->getId()));
         }
@@ -116,7 +116,7 @@ class Admin_MassageController extends Zend_Controller_Action
                     }
                 }
 
-                $this->view->massage->setAge($data->age);
+                $this->view->massage->setPrice($data->price);
                 $this->view->massage->validate();
                 $this->view->massage->save();
 
@@ -127,14 +127,13 @@ class Admin_MassageController extends Zend_Controller_Action
                 $this->view->ShowMessage($e->getMessage());
             }
         } else {
-            $_POST['age']     = $this->view->massage->getAge();
+            $_POST['price']   = $this->view->massage->getPrice();
             $_POST['content'] = $this->view->massage->getContentManager()->getContents();
             foreach ($this->view->langs as $lang) {
                 if (isset($_POST['content'][$lang->getId()]))
                     foreach ($_POST['content'][$lang->getId()] as $value)
                         $_POST['content'][$lang->getId()][$value->getFieldName()] = $value->getFieldText();
             }
-
         }
     }
 }

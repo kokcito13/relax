@@ -11,6 +11,8 @@ class Admin_CommentController extends Zend_Controller_Action {
 		$this->view->breadcrumbs = new Application_Model_Kernel_Breadcrumbs();
 		$this->view->page = !is_null($this->_getParam('page')) ? $this->_getParam('page') : 1;
 		$this->view->headTitle()->append('Комменты');
+
+        $this->view->salon_id = (int)$this->_getParam('salon_id');
 	}
 
 	public function indexAction() {
@@ -19,16 +21,13 @@ class Admin_CommentController extends Zend_Controller_Action {
         $this->view->headTitle()->append('Комменты');
         $this->view->type = (int)$this->_getParam('type');
         $this->view->ownerId = (int)$this->_getParam('idProduct');
-		$this->view->comments = Application_Model_Kernel_Comment::getList(false, 'comments.commentType  = '.$this->view->type.' AND comments.idOwner = '.$this->view->ownerId);
+		$this->view->comments = Application_Model_Kernel_Comment::getList($this->view->salon_id);
 	}
 	
-	public function showAction() {
+	public function editAction() {
 		$this->view->headTitle()->append('Комменты');
 		$this->view->back = true;
-        $this->view->comment = Application_Model_Kernel_Comment::getById((int)$this->_getParam('idComment'));
-		$this->view->comment->readComment();
-        $this->view->comment->save();
-        
+        $this->view->comment = Application_Model_Kernel_Comment::getById((int)$this->_getParam('id'));
 	}
 	
 	public function statusAction() {

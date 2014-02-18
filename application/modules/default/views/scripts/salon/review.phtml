@@ -1,0 +1,114 @@
+<? $this->headScript()->captureStart() ?>
+    function submitForm()
+    {
+        var url = '<?=$this->url(array(),'default-comment-add-ajax');?>';
+        var form = $('#form_add_comment');
+        var args = {
+            'first_name': form.find('#first_name').val(),
+            'last_name': form.find('#last_name').val(),
+            'text': form.find('#text').val(),
+            'type': form.find('input[name=rating]:checked').val(),
+            'salon': '<?=$this->salon->getId();?>'
+        };
+
+        $.post( url, args, function( data ) {
+                if (typeof data.error != 'undefined') {
+                    $.each( data.error, function( key, value ) {
+                    alert( key + ": " + value );
+                    });
+                } else {
+                    form.html('<p>Спасибо Ваш комментарий отправлен на модерацию!</p>');
+                    $('#add-comment').hide();
+                }
+                console.log(data);
+            }, "json");
+
+        return false;
+    }
+<? $this->headScript()->captureEnd() ?>
+<div class="breadcrumbs">
+    <span class="backToList">
+        <a href="#">Назад к списку</a>
+    </span>
+</div>
+<div class="singleSalonBox">
+    <?=$this->ShowSalonHeader($this->salon);?>
+    <?=$this->ShowSalonMenu($this->salon, 'review');?>
+
+    <div class="mobileMenu">
+        <ul>
+            <li><a href="#">Девушки</a></li>
+            <li><a class="current" href="#">Цены</a></li>
+            <li><a href="#">Отзывы</a></li>
+            <li><a href="#">Карта</a></li>
+        </ul>
+    </div>
+    <div class="salonContent">
+        <div class="full-width commentsContent">
+            <h2>Отзывы (15)</h2>
+            <a id="add-comment" href="#addCommentForm">Добавить комментарий</a>
+            <div class="commentsList">
+                <?php foreach ($this->comments as $comment): ?>
+                <div class="commentItem">
+                    <div class="commentAuthor">
+                        <strong><?=$comment->getCommentNick();?></strong>
+                        <time><?=Application_Model_Kernel_Date_Manager::formatDate($comment->getCommentDate(), Application_Model_Kernel_Date_Manager::TYPE_USER_VIEW)?></time>
+                    </div>
+                    <div class="commentText">
+                        <p>— <?=$comment->getCommentText();?></p>
+                        <?php $adminText = trim($comment->getCommentAdminText());?>
+                        <? if (!empty($adminText)): ?>
+                            <div class="commentReply">
+                                <strong>Администратор</strong>
+                                <time>02 сентября 2013 в 13:33</time>
+                                <p>— <?=$adminText?></p>
+                            </div>
+                        <? endif; ?>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="loadMoreComments">
+                <a href="#">Загрузить еще комментарии</a>
+            </div>
+        </div>
+    </div>
+    <div class="salonFooter" style="background: url(images/content/salonCover3.png) no-repeat center center;">
+    </div>
+    <?=$this->ShowSalonMenu($this->salon, 'review');?>
+</div>
+<div class="descText">
+    <article>
+        <p></p>
+        <?=$this->contentPage['content']->getFieldText();?>
+        <p></p>
+    </article>
+</div>
+<div id="addCommentForm" style="display:none;">
+    <form action="" id="form_add_comment">
+        <h3>Добавление комментария</h3>
+        <p>Имя:</p>
+        <input type="text" name="first_name" id="first_name" size="" value="" />
+        <p>Оценка:</p>
+        <div class="selectBox">
+            <a href="#">– без оценки –</a>
+            <div class="select-option-box">
+                <input id="id1" type="radio" size="" value="0" name="rating" />
+                <label for="id1">отлично</label>
+                <input id="id2" type="radio" size="" value="1" name="rating" />
+                <label for="id2">хорошо</label>
+                <input id="id3" type="radio" size="" value="2" name="rating" />
+                <label for="id3">плохо</label>
+            </div>
+        </div>
+        <p>Комментарий:</p>
+        <textarea name="text" id="text" cols="30" rows="10"></textarea>
+<!--        <p>Сколько будет 8 – 7 =</p>-->
+<!--        <input type="text" name="" size="" value="" />-->
+        <div class="submitBox">
+            <input type="submit" name="submit" size="" value="Добавить комментарий" onclick="return submitForm();" />
+        </div>
+        <input type="hidden" name="last_name" id="last_name" value=""/>
+    </form>
+</div>
