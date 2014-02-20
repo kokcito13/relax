@@ -1,16 +1,16 @@
-<div class="salonHeader" style="background: url(images/content/salonCover1.png) no-repeat center center;">
+<div class="salonHeader" style="background: url(<?=$this->salon->getPhoto2()->getPath('939:261');?>) no-repeat center center;">
     <div class="salonMetaBox">
         <div class="singleSalonLogo">
-            <img src="images/content/singleLogo.png" alt="">
+            <img src="<?=$this->salon->getPhoto1()->getPath('120:120');?>" alt="">
         </div>
         <h2><?=$this->contentPage['name']->getFieldText();?></h2>
         <div class="clear"></div>
-        <a class="location" href="#"><?=$this->contentPage['adress']->getFieldText();?></a>
+        <a class="location" href="<?=$this->salon->getRoute()->getUrl();?>"><?=$this->contentPage['adress']->getFieldText();?></a>
         <div class="singleSalonCommentsBox">
-            <a href="#">– 15 отзывов</a>
-            <em>положительных – 12</em><br>
-            <em>нейтральных – 2</em><br>
-            <em>отрицательных – 1</em>
+            <a href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>">– <?=$this->countAllComments; ?> отзывов</a>
+            <em>положительных – <?=$this->countGoodComments; ?></em><br>
+            <em>нейтральных – <?=$this->countNormalComments; ?></em><br>
+            <em>отрицательных – <?=$this->countBadComments; ?></em>
         </div>
     </div>
     <div class="salonPhone">

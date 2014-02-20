@@ -27,7 +27,7 @@
             <div class="map-wrap" id="map-wrap"></div>
         </div>
     </div>
-    <div class="salonFooter" style="background: url(images/content/salonCover3.png) no-repeat center center;">
+    <div class="salonFooter" style="background: url(<?=$this->salon->getPhoto3()->getPath('940:150');?>) no-repeat center center;">
     </div>
     <?=$this->ShowSalonMenu($this->salon, 'map');?>
 

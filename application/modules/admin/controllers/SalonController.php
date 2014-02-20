@@ -51,13 +51,13 @@ class Admin_SalonController extends Zend_Controller_Action
             $data = (object)$this->getRequest()->getPost();
             try {
                 $this->view->idPhoto1 = (int)$data->idPhoto1;
-//                $this->view->photo1 = Application_Model_Kernel_Photo::getById($this->view->idPhoto1);
+                $this->view->photo1 = Application_Model_Kernel_Photo::getById($this->view->idPhoto1);
                 $this->view->idPhoto2 = (int)$data->idPhoto2;
-//                $this->view->photo2 = Application_Model_Kernel_Photo::getById($this->view->idPhoto2);
+                $this->view->photo2 = Application_Model_Kernel_Photo::getById($this->view->idPhoto2);
                 $this->view->idPhoto3 = (int)$data->idPhoto3;
-//                $this->view->photo3 = Application_Model_Kernel_Photo::getById($this->view->idPhoto3);
+                $this->view->photo3 = Application_Model_Kernel_Photo::getById($this->view->idPhoto3);
                 $this->view->idPhoto4 = (int)$data->idPhoto4;
-//                $this->view->photo4 = Application_Model_Kernel_Photo::getById($this->view->idPhoto4);
+                $this->view->photo4 = Application_Model_Kernel_Photo::getById($this->view->idPhoto4);
 
                 $url = new Application_Model_Kernel_Routing_Url("/");
                 $defaultParams = new Application_Model_Kernel_Routing_DefaultParams();

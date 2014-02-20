@@ -257,7 +257,11 @@ class Application_Model_Kernel_Photo
             $i += $step;
         }
 
-        @mkdir(PUBLIC_PATH . self::SAVE_PATH . date('dmY') . '/', 0777, true);
+        $dir = PUBLIC_PATH . self::SAVE_PATH . date('dmY') . '/';
+
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
 
         $this->_photoPath .= substr($randomPath, $i, $step) . '.' . strtolower($expansion[1]);
         $this->_photoPath = date('dmY') . '/' . $name;

@@ -45,7 +45,7 @@
     </div>
     <div class="salonContent">
         <div class="full-width commentsContent">
-            <h2>Отзывы (15)</h2>
+            <h2>Отзывы (<?=count($this->comments)?>)</h2>
             <a id="add-comment" href="#addCommentForm">Добавить комментарий</a>
             <div class="commentsList">
                 <?php foreach ($this->comments as $comment): ?>
@@ -69,12 +69,12 @@
                 </div>
                 <?php endforeach; ?>
             </div>
-            <div class="loadMoreComments">
-                <a href="#">Загрузить еще комментарии</a>
-            </div>
+<!--            <div class="loadMoreComments">-->
+<!--                <a href="#">Загрузить еще комментарии</a>-->
+<!--            </div>-->
         </div>
     </div>
-    <div class="salonFooter" style="background: url(images/content/salonCover3.png) no-repeat center center;">
+    <div class="salonFooter" style="background: url(<?=$this->salon->getPhoto3()->getPath('940:150');?>) no-repeat center center;">
     </div>
     <?=$this->ShowSalonMenu($this->salon, 'review');?>
 </div>
@@ -94,11 +94,11 @@
         <div class="selectBox">
             <a href="#">– без оценки –</a>
             <div class="select-option-box">
-                <input id="id1" type="radio" size="" value="0" name="rating" />
+                <input id="id1" type="radio" size="" value="2" name="rating" />
                 <label for="id1">отлично</label>
                 <input id="id2" type="radio" size="" value="1" name="rating" />
                 <label for="id2">хорошо</label>
-                <input id="id3" type="radio" size="" value="2" name="rating" />
+                <input id="id3" type="radio" size="" value="0" name="rating" />
                 <label for="id3">плохо</label>
             </div>
         </div>

@@ -18,7 +18,7 @@
         </ul>
     </div>
     <div class="salonContent">
-        <div class="salonSidebar" style="background: url(images/content/salonCover2.png) no-repeat center center;">
+        <div class="salonSidebar" style="background: url(<?=$this->salon->getPhoto4()->getPath('220:1140');?>) no-repeat center center;">
         </div>
         <div class="salonContentRight">
             <article>
@@ -58,7 +58,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div class="salonFooter" style="background: url(images/content/salonCover3.png) no-repeat center center;">
+    <div class="salonFooter" style="background: url(<?=$this->salon->getPhoto3()->getPath('940:150');?>) no-repeat center center;">
     </div>
     <?=$this->ShowSalonMenu($this->salon, 'vidy-massage');?>
 </div>

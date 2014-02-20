@@ -27,6 +27,8 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
 
     const ITEM_ON_PAGE = 16;
 
+    private $comments = array();
+
     public function __construct(
         $id,
         $idPhoto1, $idPhoto2, $idPhoto3, $idPhoto4,
@@ -524,5 +526,14 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     public function getUrlKey()
     {
         return $this->url_key;
+    }
+
+    public function getComments()
+    {
+        if (empty($this->comments)) {
+            $this->comments = Application_Model_Kernel_Comment::getList($this->id, Application_Model_Kernel_Comment::STATUS_SHOW);
+        }
+
+        return $this->comments;
     }
 }

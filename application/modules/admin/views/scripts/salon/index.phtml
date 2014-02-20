@@ -12,67 +12,7 @@ function chengeStatusProject(id){
 //            alert(result);
         }
     });
-
 }
-
-function chengeStatusProjectMain(id, status){
-    $.ajax({
-        type: "POST",
-        url: '/admin/product/main',
-        data: {
-            "idProduct":id,
-            "statusMain":status
-        },
-        success: function(result) {
-//            alert(result);
-        }
-    });
-
-}
-
-function changePositionPage(id){
-    $.ajax({
-        type: "POST",
-        url: '/admin/pagetrue/position',
-        data: {"id":id,"val":$('#id_page_'+id).val()},
-        success: function(result) {
-            if( result == 1 ){
-               // alert('Проект удачно перемещен');
-            } else {
-               // alert('Не удалось переместить проект');
-            }
-//                        alert(result);
-        }
-    });
-    return false;
-}
-
-function changePositionProject(id){
-    $.ajax({
-        type: "POST",
-        url: '/admin/product/position',
-        data: {"id":id,"val":$('#id_page_'+id).val()},
-        success: function(result) {
-            if( result == 1 ){
-               // alert('Проект удачно перемещен');
-            } else {
-               // alert('Не удалось переместить проект');
-            }
-//                        alert(result);
-        }
-    });
-    return false;
-}
-
-    function amazonProduct(url)
-    {
-        var idAmazon = $('#idAmazon').val().trim();
-
-        window.location = url+'/'+idAmazon;
-
-        return false;
-    }
-
 </script>
 <style>
     .activeLink{
@@ -89,7 +29,6 @@ function changePositionProject(id){
             </td>
             <td></td> 
             <td>
-                Популярные
             </td>
             <td></td>
             <td></td>

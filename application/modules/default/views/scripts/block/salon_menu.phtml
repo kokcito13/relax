@@ -7,7 +7,7 @@
             <a <? if($this->current == 'vidy-massage'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-vidy-massage');?>">Виды массажа и цены</a>
         </li>
         <li>
-            <a <? if($this->current == 'review'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>">Отзывы (15)</a>
+            <a <? if($this->current == 'review'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>">Отзывы (<?=$this->countAllComments; ?>)</a>
         </li>
         <li>
             <a <? if($this->current == 'map'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-map');?>">Показать на карте</a>

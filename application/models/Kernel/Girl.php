@@ -211,4 +211,13 @@ class Application_Model_Kernel_Girl
         $db->delete('girls', "categories.idCategory = {$this->_idCategory}");
         $this->getContentManager()->delete();
     }
+
+    public function getGallery()
+    {
+        if (is_null($this->_gallery)) {
+            $this->_gallery = Application_Model_Kernel_Gallery::getById($this->idGallery);
+        }
+
+        return $this->_gallery;
+    }
 }

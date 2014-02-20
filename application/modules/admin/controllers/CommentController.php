@@ -28,6 +28,18 @@ class Admin_CommentController extends Zend_Controller_Action {
 		$this->view->headTitle()->append('Комменты');
 		$this->view->back = true;
         $this->view->comment = Application_Model_Kernel_Comment::getById((int)$this->_getParam('id'));
+
+
+        if ($this->getRequest()->isPost()) {
+            $data = (object)$this->getRequest()->getPost();
+            $this->view->comment->setCommentStatus($data->status);
+            $this->view->comment->setCommentAdminText($data->text);
+            $this->view->comment->setCommentAdminDate(time());
+            $this->view->comment->setCommentNick($data->name);
+            $this->view->comment->setCommentText($data->text_comment);
+            $this->view->comment->save();
+
+        }
 	}
 	
 	public function statusAction() {

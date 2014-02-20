@@ -205,4 +205,55 @@ class Application_Model_Kernel_Comment
         $db = Zend_Registry::get('db');
         $db->delete('comments', "comments.idComment = {$this->idComment}");
     }
+
+    public function getCommentType()
+    {
+        return $this->commentType;
+    }
+
+    public function getCommentTypeText()
+    {
+        $arr = array(
+            0 => 'Плохо',
+            1 => 'Хорошо',
+            2 => 'Отлично'
+        );
+
+        return $arr[$this->commentType];
+    }
+
+    public function setCommentAdminText($text)
+    {
+        $this->commentAdminText = trim($text);
+
+        return $this;
+    }
+
+    public function setCommentAdminDate($d)
+    {
+        $this->commentAdminDate = $d;
+
+        return $this;
+    }
+
+    public function setCommentStatus($status)
+    {
+        $this->commentStatus = $status;
+
+        return $this;
+    }
+
+    public function setCommentNick($d)
+    {
+        $this->commentNick = trim($d);
+
+        return $this;
+    }
+
+    public function setCommentText($t)
+    {
+        $this->commentText = trim($t);
+
+        return $this;
+    }
 }

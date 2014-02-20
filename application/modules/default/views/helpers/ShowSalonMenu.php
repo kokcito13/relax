@@ -8,6 +8,8 @@ class Zend_View_Helper_ShowSalonMenu
         $view->salon = $salon;
         $view->current = $current;
 
+        $view->countAllComments = count($salon->getComments());
+
         return $view->render('block/salon_menu.phtml');
     }
 }

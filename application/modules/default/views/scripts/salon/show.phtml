@@ -18,56 +18,29 @@
         </ul>
     </div>
     <div class="salonContent">
-        <div class="salonSidebar" style="background: url(images/content/salonCover2.png) no-repeat center center;">
+        <div class="salonSidebar" style="background: url(<?=$this->salon->getPhoto4()->getPath('220:1140');?>) no-repeat center center;">
         </div>
         <div class="salonContentRight">
             <h3>Девушки салона</h3>
-            <div class="singleSalonModelItem">
-                <p><span>Сабина</span>, 23 год</p>
-                <div id="carousel-1" class="salonModelCarouselWrap">
-                    <img src="images/content/salonModel11.png" alt="">
-                    <img src="images/content/salonModel12.png" alt="">
-                    <img src="images/content/salonModel13.png" alt="">
-                    <img src="images/content/salonModel14.png" alt="">
-                    <img src="images/content/salonModel15.png" alt="">
-                    <img src="images/content/salonModel16.png" alt="">
+            <? foreach ($this->girls as $k=>$girl): ?>
+                <? $content = $girl->getContent()->getFields();?>
+                <div class="singleSalonModelItem">
+                    <p><span><?=$content['contentName']->getFieldText();?></span>, <?=$girl->getAge();?> год</p>
+                    <div id="carousel-<?=$k+1?>" class="salonModelCarouselWrap">
+                        <? $photos = $girl->getGallery()->getPhotos(); ?>
+                        <? foreach  ($photos as $photo): ?>
+                            <img src="<?=$photo->getPath('500', true);?>" alt="">
+                        <? endforeach; ?>
+                    </div>
+                    <a id="prev-model-<?=$k+1?>" class="carouselNav prev" href="#"></a>
+                    <a id="next-model-<?=$k+1?>" class="carouselNav next" href="#"></a>
+                    <div class="loaderBox"></div>
                 </div>
-                <a id="prev-model-1" class="carouselNav prev" href="#"></a>
-                <a id="next-model-1" class="carouselNav next" href="#"></a>
-                <div class="loaderBox"></div>
-            </div>
-            <div class="singleSalonModelItem">
-                <p><span>Айрин</span>, 20 лет</p>
-                <div id="carousel-2" class="salonModelCarouselWrap">
-                    <img src="images/content/salonModel14.png" alt="">
-                    <img src="images/content/salonModel15.png" alt="">
-                    <img src="images/content/salonModel16.png" alt="">
-                    <img src="images/content/salonModel11.png" alt="">
-                    <img src="images/content/salonModel12.png" alt="">
-                    <img src="images/content/salonModel13.png" alt="">
-                </div>
-                <a id="prev-model-2" class="carouselNav prev" href="#"></a>
-                <a id="next-model-2" class="carouselNav next" href="#"></a>
-                <div class="loaderBox"></div>
-            </div>
-            <div class="singleSalonModelItem">
-                <p><span>Барбара</span>, 23 года</p>
-                <div id="carousel-3" class="salonModelCarouselWrap">
-                    <img src="images/content/salonModel13.png" alt="">
-                    <img src="images/content/salonModel14.png" alt="">
-                    <img src="images/content/salonModel15.png" alt="">
-                    <img src="images/content/salonModel16.png" alt="">
-                    <img src="images/content/salonModel11.png" alt="">
-                    <img src="images/content/salonModel12.png" alt="">
-                </div>
-                <a id="prev-model-3" class="carouselNav prev" href="#"></a>
-                <a id="next-model-3" class="carouselNav next" href="#"></a>
-                <div class="loaderBox"></div>
-            </div>
+            <? endforeach; ?>
         </div>
         <div class="clear"></div>
     </div>
-    <div class="salonFooter" style="background: url(images/content/salonCover3.png) no-repeat center center;"></div>
+    <div class="salonFooter" style="background: url(<?=$this->salon->getPhoto3()->getPath('940:150');?>) no-repeat center center;"></div>
     <?=$this->ShowSalonMenu($this->salon, 'girls');?>
 </div>
 <div class="descText">
