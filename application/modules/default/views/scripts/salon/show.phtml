@@ -1,11 +1,7 @@
 <? $this->headScript()->captureStart() ?>
 <? $this->headScript()->captureEnd() ?>
-<?//=$this->product->getPhoto1()->getPath('400', true)?>
-<div class="breadcrumbs">
-    <span class="backToList">
-        <a href="#">Назад к списку</a>
-    </span>
-</div>
+<? $this->area = $this->salon->getArea(); ?>
+<?=$this->ShowUrlBack($this->salon);?>
 <div class="singleSalonBox">
     <?=$this->ShowSalonHeader($this->salon);?>
     <?=$this->ShowSalonMenu($this->salon, 'girls');?>

@@ -52,7 +52,7 @@ class Admin_AreaController extends Zend_Controller_Action
                 }
                 $contentManager = new Application_Model_Kernel_Content_Manager(null, $content);
 
-                $this->view->area = new Application_Model_Kernel_Area(null, null, $this->view->city_id );
+                $this->view->area = new Application_Model_Kernel_Area(null, null, $this->view->city_id, $data->url );
                 $this->view->area->setContentManager($contentManager);
                 $this->view->area->validate();
                 $this->view->area->save();
@@ -118,7 +118,7 @@ class Admin_AreaController extends Zend_Controller_Action
                         $content->save();
                     }
                 }
-
+                $this->view->area->setUrl($data->url);
                 $this->view->area->validate();
                 $this->view->area->save();
                 $this->_redirect($this->view->url(array ('city_id'=>$this->view->city_id), 'admin-area-index'));
@@ -128,6 +128,7 @@ class Admin_AreaController extends Zend_Controller_Action
                 $this->view->ShowMessage($e->getMessage());
             }
         } else {
+            $_POST['url']     = $this->view->area->getUrl();
             $_POST['content']     = $this->view->area->getContentManager()->getContents();
             foreach ($this->view->langs as $lang) {
                 if (isset($_POST['content'][$lang->getId()]))

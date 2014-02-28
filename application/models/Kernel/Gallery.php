@@ -34,7 +34,7 @@ class Application_Model_Kernel_Gallery {
 		$select->from('galleryPhotos');
 		$select->join('photos', 'galleryPhotos.idPhoto = photos.idPhoto');
 		$select->where('idGallery = ? ', intval($this->getId(0)));
-		$select->order('photos.photoPosition ASC');
+		$select->order('photos.photoPosition DESC');
 		$select->limit(1);
 		$photo = $db->fetchRow($select);
 		return new Application_Model_Kernel_Photo($photo->idPhoto, $photo->photoPath, $photo->photoAlt, $photo->photoPosition);

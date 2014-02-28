@@ -5,6 +5,7 @@ class Application_Model_Kernel_Area
     protected $id;
     protected $_idContentPack;
     protected $city_id;
+    protected $url;
 
     /**
      * @var Application_Model_Kernel_Content_Manager
@@ -25,15 +26,13 @@ class Application_Model_Kernel_Area
     const TYPE_ERROR_ID_NOT_FOUND              = 'Id not found';
 
 
-    public function __construct($id, $idContentPack, $city_id)
+    public function __construct($id, $idContentPack, $city_id, $url)
     {
         $this->id             = $id;
         $this->_idContentPack = $idContentPack;
         $this->city_id        = $city_id;
+        $this->url        = $url;
     }
-
-
-
 
     public function getId()
     {
@@ -43,6 +42,18 @@ class Application_Model_Kernel_Area
     public function getCityId()
     {
         return $this->city_id;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
     }
 
     /**
@@ -56,6 +67,17 @@ class Application_Model_Kernel_Area
         $db     = Zend_Registry::get('db');
         $select = $db->select()->from('areas');
         $select->where('areas.id = ?', (int)$id);
+        if (false !== ($data = $db->fetchRow($select))) {
+            return self::getSelf($data);
+        } else
+            throw new Exception(self::TYPE_ERROR_ID_NOT_FOUND);
+    }
+
+    public function getByUrl($url)
+    {
+        $db     = Zend_Registry::get('db');
+        $select = $db->select()->from('areas');
+        $select->where('areas.url = ?', $url);
         if (false !== ($data = $db->fetchRow($select))) {
             return self::getSelf($data);
         } else
@@ -118,14 +140,17 @@ class Application_Model_Kernel_Area
 
     public static function getSelf($data)
     {
-        return new self($data->id, $data->idContentPack, $data->city_id);
+        return new self($data->id, $data->idContentPack, $data->city_id, $data->url);
     }
 
-    public static function getList()
+    public static function getList($city_id = false)
     {
         $db     = Zend_Registry::get('db');
         $return = array ();
         $select = $db->select()->from('areas');
+        if ($city_id) {
+            $select->where('city_id = ?', (int)$city_id);
+        }
         if (false !== ($result = $db->fetchAll($select))) {
             foreach ($result as $category) {
                 $return[] = self::getSelf($category);
@@ -139,7 +164,8 @@ class Application_Model_Kernel_Area
     {
         $data = array (
             'idContentPack' => $this->_idContentPack,
-            'city_id'           => $this->city_id
+            'city_id'           => $this->city_id,
+            'url'           => $this->url
         );
         $db   = Zend_Registry::get('db');
         if (is_null($this->id)) {
@@ -175,7 +201,7 @@ class Application_Model_Kernel_Area
     public function delete()
     {
         $db = Zend_Registry::get('db');
-        $db->delete('areas', "categories.idCategory = {$this->_idCategory}");
+        $db->delete('areas', "area.id = {$this->id}");
         $this->getContentManager()->delete();
     }
 }

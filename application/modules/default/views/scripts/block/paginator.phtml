@@ -1,23 +1,19 @@
-<?php if ( $this->pageCount > 1): ?>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="pagination">
-                <?php if (isset($this->previous)): ?>
-                    <li><a href="#" onclick="return common.goToPage(<?=$this->previous?>);">&laquo;</a></li>
+<?php if ( $this->pageCount > 1 ): ?>
+    <div class="pagination">
+        <ul>
+            <?php if (isset($this->previous)): ?>
+                <li class="prev"><a href="<?= $this->url(array("page" => $this->previous)) ?>"></a></li>
+            <?php endif; ?>
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <li><a href="<?= $this->url(array("page" => $page)) ?>"><?= $page; ?></a></li>
+                <?php else: ?>
+                    <li class="current"><?= $page; ?></li>
                 <?php endif; ?>
-                <?php foreach ($this->pagesInRange as $page): ?>
-                    <?php if ($page != $this->current): ?>
-                        <li><a href="#" onclick="return common.goToPage(<?= $page; ?>);"><?= $page; ?></a></li>
-                    <?php else: ?>
-                        <li class="active"><a href="#" onclick="return common.goToPage(<?= $page; ?>);"><?= $page; ?></a></li>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-                <?php if (isset($this->next)): ?>
-                     <li><a href="#" onclick="return common.goToPage(<?=$this->next?>);">&raquo;</a></li>
-                <?php endif; ?>
-            </ul>
-        </div>
+            <?php endforeach; ?>
+            <?php if (isset($this->next)): ?>
+                <li class="next"><a href="<?= $this->url(array("page" => $this->next)) ?>"></a></li>
+            <?php endif; ?>
+        </ul>
     </div>
-    <div class="row">
 <?php endif; ?>

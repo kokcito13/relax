@@ -1,0 +1,16 @@
+<div class="subscribeBox">
+    <div class="subscribeText">
+        <? if ($this->city): ?>
+            <p>В <strong><?=$this->cityContent['contentName']->getFieldText();?></strong> каждую неделю появляются новые девушки</p>
+        <? else: ?>
+            <p>Каждую неделю появляются новые девушки</p>
+        <? endif; ?>
+        <p><em>Подпишись и получи фотографии новых девушек на свой E-mail:</em></p>
+    </div>
+    <form action="" onsubmit="return sendSubscribe(this);">
+        <input type="text" class="input_subscribe" name="s" size="10" value="Ваш E-mail" onblur="if (this.value == '') {this.value = 'Ваш E-mail';}" onfocus="if (this.value == 'Ваш E-mail') {this.value = '';}"/>
+        <input type="submit" value="Хочу"/>
+        <div class="clear"></div>
+    </form>
+    <div class="clear"></div>
+</div>

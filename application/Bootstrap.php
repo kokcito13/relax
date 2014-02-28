@@ -58,11 +58,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         }
         $view->siteSetings = Application_Model_Kernel_SiteSetings::getBy();
 
-        $remarketing      = new Zend_Session_Namespace('remarketing');
-        if (!isset($remarketing->product_id)) {
-            $remarketing->product_id = 0;
+        $view->currentCityConten = false;
+        $view->currentCity = Kernel_City::findCityFromUrl();
+        if ($view->currentCity) {
+            $view->currentCityContent = $view->currentCity->getContent()->getFields();
         }
-        $view->product_id = $remarketing->product_id;
 
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
         $viewRenderer->setView($view);

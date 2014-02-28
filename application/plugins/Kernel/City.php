@@ -1,22 +1,32 @@
 <?php
 class Kernel_City
 {
-
-    private static $currentCityUrl = null;
-
     public function __construct()
     {
 
     }
 
-
     public static function findCityFromUrl()
     {
-        if (mb_strlen($_SERVER['REQUEST_URI'], 'utf8') > 3 && mb_substr($_SERVER['REQUEST_URI'], 1, 1) !== "?") {
+        $city = false;
+        $serverName = $_SERVER['SERVER_NAME'];
+        $uri = substr($serverName, 0, -strlen(SITE_NAME) );
 
+        if (!empty($uri)) {
+            $city = Application_Model_Kernel_City::getByUrl( substr($uri, 0, -1) );
         }
 
-        return false;
+        return $city;
+    }
+
+    public static function getUrlForLink($city)
+    {
+        $cityUrl = 'http://'.SITE_NAME;
+        if ($city) {
+            $cityUrl = 'http://'.$city->getUrl().'.'.SITE_NAME;
+        }
+
+        return $cityUrl;
     }
 
 }

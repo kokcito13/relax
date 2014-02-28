@@ -50,6 +50,17 @@ class Application_Model_Kernel_City
             throw new Exception(self::TYPE_ERROR_ID_NOT_FOUND);
     }
 
+    public static function getByUrl($url)
+    {
+        $db         = Zend_Registry::get('db');
+        $select     = $db->select()->from('cities');
+        $select->where('cities.url = ?', $url);
+        if (false !== ($data = $db->fetchRow($select))) {
+            return self::getSelf($data);
+        } else
+            throw new Exception(self::TYPE_ERROR_ID_NOT_FOUND);
+    }
+
     public function getId()
     {
         return $this->id;

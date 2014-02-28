@@ -21,9 +21,51 @@
     <script type="text/javascript" src="/static/default/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/static/default/js/script.js"></script>
     <?=$this->headScript()?>
+    <script>
+        function changeCity(ele)
+        {
+            $('#empty_area').html('– Сначала выберите город –');
+            var cityId = ele.val();
+            $('.area_inp').hide();
+            $('.area_in_city_'+cityId).show();
+        }
+
+        function sendSubscribe(form_ele)
+        {
+            var url = '<?=$this->url(array(),'default-subscribe-add-ajax')?>';
+
+            var form = $(form_ele);
+            var args = {
+                'city_id': '<?=$this->currentCity?$this->currentCity->getId():0?>',
+                'area_id': '<?=isset($this->area)?$this->area->getId():0?>',
+                'email': form.find('.input_subscribe').val()
+            };
+
+            $.post( url, args, function( data ) {
+                if (typeof data.error != 'undefined') {
+                    $.each( data.error, function( key, value ) {
+                        alert( key + ": " + value );
+                    });
+                } else {
+                    alert('<p>Спасибо Вы подписаны на новости!</p>');
+                    form.find('.input_subscribe').val('');
+                }
+                console.log(data);
+            }, "json");
+
+
+            return false;
+        }
+    </script>
 </head>
 <body>
-    <?php echo $this->partial('blocks/header.phtml', array ('menu' => $this->menu, 'blocks' => $this->blocks, 'siteSetings' => $this->siteSetings, 'item' => isset($this->itemContent) ? true : false)) ?>
+    <?php echo $this->partial('blocks/header.phtml', array (
+                                                           'menu' => $this->menu,
+                                                           'blocks' => $this->blocks,
+                                                           'siteSetings' => $this->siteSetings,
+                                                           'cityContent' => $this->currentCityContent,
+                                                           'area' => isset($this->area)?$this->area:false
+                                                     )) ?>
     <section class="container">
         <div class="wrapper">
             <?php echo $this->layout()->content ?>
@@ -33,5 +75,10 @@
                                                            'blocks'      => $this->blocks,
                                                            'siteSetings' => $this->siteSetings
                                                      )) ?>
+    <script>
+        $(function(){
+            changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'));
+        });
+    </script>
 </body>
 </html>

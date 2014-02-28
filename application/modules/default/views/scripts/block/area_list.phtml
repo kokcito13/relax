@@ -1,0 +1,5 @@
+<?php foreach($this->areas as $area): ?>
+    <?php $content = $area->getContent()->getFields();?>
+    <input class="area_inp area_input_city_<?=$area->getCityId();?>" id="<?=$area->getUrl();?>" type="radio" size="" value="" name="<?=$area->getUrl();?>" />
+    <label style="display: none;" class="area_inp area_in_city_<?=$area->getCityId();?>" for="<?=$area->getUrl();?>"><?=$content['contentName']->getFieldText();?></label>
+<?php endforeach; ?>

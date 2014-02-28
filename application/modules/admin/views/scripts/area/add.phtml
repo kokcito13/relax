@@ -1,5 +1,11 @@
 <?=$this->partial('blocks/menus/blog.phtml');?>
 <form action="<?=$this->url(array())?>" method="post" id="PageForm">
+    <table class="zebra edit">
+        <tr class="">
+            <td width="193" class="first">URL:</td>
+            <td><input name="url" type="text" class="field" value="<?=(isset($_POST['url'])) ? htmlspecialchars( $_POST['url']) : ''?>" /></td>
+        </tr>
+    </table>
     <div id="tabs">
         <?php if (sizeof($this->langs) > 1): ?>
             <ul>

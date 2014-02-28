@@ -56,7 +56,7 @@ class Admin_GalleryController extends Zend_Controller_Action {
 		}
 		$this->view->breadcrumbs->add('Добавление фотографий', '');	
 		$this->view->idGallery = intval($this->_getParam('idGallery'));
-		$this->view->galleryPhotos =  Application_Model_Kernel_Gallery::getGalleryPhotos($this->view->idGallery);
+		$this->view->galleryPhotos = array_reverse( Application_Model_Kernel_Gallery::getGalleryPhotos($this->view->idGallery) );
 	}
 	
 	public function uploadAction() {

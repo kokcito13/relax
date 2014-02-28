@@ -28,6 +28,9 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     const ITEM_ON_PAGE = 16;
 
     private $comments = array();
+    private $girls = null;
+    private $area = null;
+    private $city = null;
 
     public function __construct(
         $id,
@@ -535,5 +538,60 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         }
 
         return $this->comments;
+    }
+
+    public function getArea()
+    {
+        if (is_null($this->area)) {
+            $this->area = Application_Model_Kernel_Area::getById($this->area_id);
+        }
+
+        return $this->area;
+    }
+
+    public function getCity()
+    {
+        if (is_null($this->city)) {
+            $this->city = Application_Model_Kernel_City::getById($this->city_id);
+        }
+
+        return $this->city;
+    }
+
+    public function getBadComments()
+    {
+        $arr = array();
+        $comments = $this->getComments();
+
+        foreach ($comments as $comment) {
+            if ($comment->getCommentType() == 0) {
+                $arr[] = $comment;
+            }
+        }
+
+        return $arr;
+    }
+
+    public function getGoodComments()
+    {
+        $arr = array();
+        $comments = $this->getComments();
+
+        foreach ($comments as $comment) {
+            if ($comment->getCommentType() == 2) {
+                $arr[] = $comment;
+            }
+        }
+
+        return $arr;
+    }
+
+    public function getGirls()
+    {
+        if (is_null($this->girls)) {
+            $this->girls = Application_Model_Kernel_Girl::getList($this->id);
+        }
+
+        return $this->girls;
     }
 }

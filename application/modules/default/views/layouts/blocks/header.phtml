@@ -1,6 +1,6 @@
 <header>
     <div class="wrapper">
-        <a class="logo" href=""><img src="/static/default/images/logo.png"></a>
+        <a class="logo" href="<?=Kernel_City::getUrlForLink(false)?>"><img src="/static/default/images/logo.png"></a>
         <div class="top-info">
             <a href="#">
                 <img src="/static/default/images/content/topinfo.png" alt="">
@@ -10,34 +10,24 @@
         <div class="searchBox">
             <form action="">
                 <div id="selectOne" class="selectBox">
-                    <a href="#">– Выберите город –</a>
+                    <? if ($this->cityContent != false) :?>
+                        <a href="#">– <?=$this->cityContent['contentName']->getFieldText();?> –</a>
+                    <? else: ?>
+                        <a href="#">– Все города –</a>
+                    <? endif; ?>
                     <div class="select-option-box">
                         <?=$this->ShowListCities()?>
-                        <input id="kiev" type="radio" size="" value="" name="city" />
-                        <label for="kiev">Киев</label>
-                        <input id="odessa" type="radio" size="" value="" name="city" />
-                        <label for="odessa">Одесса</label>
-                        <input id="kharkiv" type="radio" size="" value="" name="city" />
-                        <label for="kharkiv">Харьков</label>
-                        <input id="donetsk" type="radio" size="" value="" name="city" />
-                        <label for="donetsk">Донецк</label>
-                        <input id="lviv" type="radio" size="" value="" name="city" />
-                        <label for="lviv">Львов</label>
                     </div>
                 </div>
                 <div id="selectTwo" class="selectBox">
-                    <a href="#">– Сначала выберите город –</a>
+                    <? if ($this->area != false) :?>
+                        <? $content = $this->area->getContent()->getFields();?>
+                        <a href="#">– <?=$content['contentName']->getFieldText();?> –</a>
+                    <? else: ?>
+                        <a href="#" id="empty_area">– Сначала выберите город –</a>
+                    <? endif; ?>
                     <div class="select-option-box">
-                        <input id="kiev2" type="radio" size="" value="" name="city2" />
-                        <label for="kiev2">Киев</label>
-                        <input id="odessa2" type="radio" size="" value="" name="city2" />
-                        <label for="odessa2">Одесса</label>
-                        <input id="kharkiv2" type="radio" size="" value="" name="city2" />
-                        <label for="kharkiv2">Харьков</label>
-                        <input id="donetsk2" type="radio" size="" value="" name="city2" />
-                        <label for="donetsk2">Донецк</label>
-                        <input id="lviv2" type="radio" size="" value="" name="city2" />
-                        <label for="lviv2">Львов</label>
+                        <?=$this->ShowListArea($this->area)?>
                     </div>
                 </div>
                 <input type="text" name="" size="" value="Поиск по названию салона" onblur="if (this.value == '') {this.value = 'Поиск по названию салона';}" onfocus="if (this.value == 'Поиск по названию салона') {this.value = '';}"/>

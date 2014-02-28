@@ -45,4 +45,28 @@ class AjaxController extends Zend_Controller_Action
 
         return false;
     }
+
+    public function addSubscribeAction()
+    {
+        $response = array();
+        if ($this->getRequest()->isPost()) {
+            $data = (object)array_merge($this->getRequest()->getPost(), $_GET);
+            if (empty($data->email)) {
+                $response['error']['Ваше имя'] = 'Пустое поле!';
+            }
+
+            if (!isset($response['error']) || empty($response['error'])) {
+                $subscribe = new Application_Model_Kernel_Subscribe(null, $data->city_id, $data->area_id, $data->email);
+                $subscribe->save();
+
+                $response['success'] = true;
+            }
+        } else {
+            $response['error']['Not POST'] = 'Запрос не постовый';
+        }
+
+        echo json_encode($response);
+
+        return false;
+    }
 }

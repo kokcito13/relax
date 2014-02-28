@@ -1,5 +1,8 @@
 <?php 
 //phpinfo();exit();
+
+define('SITE_NAME','rel.l');
+
 // Указание пути к директории приложения
 define('PUBLIC_PATH',realpath(dirname(__FILE__)));
 defined('APPLICATION_PATH')
