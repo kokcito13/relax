@@ -286,7 +286,8 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
             $select->join('content', 'content.idContentPack = pages.idContentPack');
             $select->where('content.idLanguage = ?', Kernel_Language::getCurrent()->getId());
             if ($searchName) {
-                $select->where('content.contentName = ?', $searchName);
+                $select->join('fields', "fields.idContent = content.idContent AND fields.fieldName = 'name'");
+                $select->where('fields.fieldText LIKE ?', $searchName);
             }
         }
         $select->where('pages.pageType = ?', self::TYPE_SALON);

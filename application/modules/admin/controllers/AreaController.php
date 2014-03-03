@@ -138,4 +138,16 @@ class Admin_AreaController extends Zend_Controller_Action
 
         }
     }
+
+    public function deleteAction()
+    {
+        $this->view->id       = (int)$this->_getParam('id');
+        $this->view->area = Application_Model_Kernel_Area::getById($this->view->id);
+        $this->view->area->delete();
+
+        $this->_redirect($this->view->url(array ('city_id'=>$this->view->city_id), 'admin-area-index'));
+
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout()->disableLayout();
+    }
 }

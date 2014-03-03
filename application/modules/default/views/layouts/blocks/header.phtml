@@ -8,12 +8,18 @@
         </div>
         <div class="clear"></div>
         <div class="searchBox">
-            <form action="">
+            <?
+                $lang = '';
+                if ($this->currentLang->getId() != 1) {
+                    $lang = '-'.$this->currentLang->getCustomName();
+                }
+            ?>
+            <form action="<?=$this->url(array('url_key'=>'','word'=>''),'default-list-area'.$lang)?>" onsubmit="return goToPage(this);">
                 <div id="selectOne" class="selectBox">
                     <? if ($this->cityContent != false) :?>
                         <a href="#">– <?=$this->cityContent['contentName']->getFieldText();?> –</a>
                     <? else: ?>
-                        <a href="#">– Все города –</a>
+                        <a href="#">– <?=Kernel_Block::getText('Все города', $this->blocks);?> –</a>
                     <? endif; ?>
                     <div class="select-option-box">
                         <?=$this->ShowListCities()?>
@@ -24,15 +30,15 @@
                         <? $content = $this->area->getContent()->getFields();?>
                         <a href="#">– <?=$content['contentName']->getFieldText();?> –</a>
                     <? else: ?>
-                        <a href="#" id="empty_area">– Сначала выберите город –</a>
+                        <a href="#" id="empty_area">– <?=Kernel_Block::getText('Сначала выберите город', $this->blocks);?> –</a>
                     <? endif; ?>
                     <div class="select-option-box">
                         <?=$this->ShowListArea($this->area)?>
                     </div>
                 </div>
-                <input type="text" name="" size="" value="Поиск по названию салона" onblur="if (this.value == '') {this.value = 'Поиск по названию салона';}" onfocus="if (this.value == 'Поиск по названию салона') {this.value = '';}"/>
+                <input type="text" name="word" size="" value="<?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?>" onblur="if (this.value == '') {this.value = '<?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?>';}" onfocus="if (this.value == '<?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?>') {this.value = '';}"/>
                 <div class="clear"></div>
-                <input type="submit" name="" size="" value="Показать салоны" />
+                <input type="submit" size="" value="Показать салоны" />
                 <!--
                 <input type="button" name="" size="" value="Показать салоны" />
                 <button>Показать салоны</button>

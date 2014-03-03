@@ -1,4 +1,14 @@
 <?= $this->partial('blocks/menus/top.phtml'); ?>
+<script>
+    function confirmDelete()
+    {
+        if (!confirm('Уверены что хотите удалить?')) {
+            return false;
+        }
+
+        return true;
+    }
+</script>
 <table class="zebra" id="projectsTable">
     <thead>
     <tr>
@@ -31,7 +41,7 @@
                 <td style="text-align: left;">
                 </td>
                 <td style="text-align: left;">
-                    <a href="#" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt=""
+                    <a href="<?= $this->url(array ('id' => $item->getId(), 'salon_id'=>$this->salon_id), 'admin-massage-delete'); ?>" onclick="return confirmDelete();" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt=""
                                                                     width="9" height="8"/></a>
                 </td>
             </tr>

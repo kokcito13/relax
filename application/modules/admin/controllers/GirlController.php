@@ -137,4 +137,16 @@ class Admin_GirlController extends Zend_Controller_Action
 
         }
     }
+
+    public function deleteAction()
+    {
+        $this->view->id       = (int)$this->_getParam('id');
+        $this->view->salon = Application_Model_Kernel_Girl::getById($this->view->id);
+        $this->view->salon->delete();
+
+        $this->_redirect($this->view->url(array ('salon_id' => $this->view->salon_id), 'admin-girl-index'));
+
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout()->disableLayout();
+    }
 }

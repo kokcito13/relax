@@ -112,7 +112,7 @@ class Application_Model_Kernel_Area
     public function getContent()
     {
         if (is_null($this->_content)) {
-            $this->_content = Application_Model_Kernel_Content_Language::get($this->_idContentPack, 1);
+            $this->_content = Application_Model_Kernel_Content_Language::get($this->_idContentPack, Kernel_Language::getCurrent()->getId());
         }
 
         return $this->_content;
@@ -182,26 +182,10 @@ class Application_Model_Kernel_Area
         }
     }
 
-//    public function show()
-//    {
-//        $db = Zend_Registry::get('db');
-//        $db->update('areas', array (
-//                                        'areas.categoryStatus' => self::STATUS_SHOW
-//                                  ), "categories.idCategory = {$this->_idCategory}");
-//    }
-//
-//    public function hide()
-//    {
-//        $db = Zend_Registry::get('db');
-//        $db->update('areas', array (
-//                                        'areas.categoryStatus' => self::STATUS_HIDE
-//                                  ), "categories.idCategory = {$this->_idCategory}");
-//    }
-
     public function delete()
     {
         $db = Zend_Registry::get('db');
-        $db->delete('areas', "area.id = {$this->id}");
+        $db->delete('areas', "areas.id = {$this->id}");
         $this->getContentManager()->delete();
     }
 }

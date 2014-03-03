@@ -1,5 +1,5 @@
 <?php foreach($this->cities as $city): ?>
     <?php $content = $city->getContent()->getFields();?>
-    <input onclick="changeCity($(this));" id="<?=$city->getUrl();?>" type="radio" size="" value="<?=$city->getId();?>" name="city" />
+    <input class="city_<?=$city->getId();?>" onclick="changeCity($(this));" id="<?=$city->getUrl();?>" data-url="<?=$city->getUrl();?>" type="radio" size="" value="<?=$city->getId();?>" name="city" />
     <label class="city_inp" for="<?=$city->getUrl();?>"><?=$content['contentName']->getFieldText();?></label>
 <?php endforeach; ?>

@@ -22,9 +22,21 @@
     <script type="text/javascript" src="/static/default/js/script.js"></script>
     <?=$this->headScript()?>
     <script>
+        function setCurrentCityAndArea()
+        {
+            var city_id = '<?=$this->currentCity?$this->currentCity->getId():0?>';
+            var area_id = '<?=isset($this->area)?$this->area->getId():0?>';
+            if (city_id != 0) {
+                $('.city_'+city_id).attr('checked','checked');
+            }
+            if (area_id != 0) {
+                $('.area_input_city_'+city_id).attr('checked','checked');
+            }
+        }
+
         function changeCity(ele)
         {
-            $('#empty_area').html('– Сначала выберите город –');
+            $('#empty_area').html('– <?=Kernel_Block::getText('Сначала выберите город', $this->blocks);?> –');
             var cityId = ele.val();
             $('.area_inp').hide();
             $('.area_in_city_'+cityId).show();
@@ -47,12 +59,36 @@
                         alert( key + ": " + value );
                     });
                 } else {
-                    alert('<p>Спасибо Вы подписаны на новости!</p>');
+                    alert('<p><?=Kernel_Block::getText('Спасибо Вы подписаны на новости!', $this->blocks);?></p>');
                     form.find('.input_subscribe').val('');
                 }
                 console.log(data);
             }, "json");
 
+
+            return false;
+        }
+
+        function goToPage(ele)
+        {
+            var httpText = 'http://';
+            var site_name = '<?=SITE_NAME?>';
+            var city = $('input[name=city]:checked').data('url');
+            var area = $('input[name=area]:checked').data('url');
+            var word = $('input[name=word]').val().trim();
+
+            if (city != '') {
+                httpText+= city+'.';
+            }
+            httpText += site_name;
+            if (area != '' && area != null) {
+                httpText+= '/'+area;
+            }
+            if (word != '') {
+                httpText+= '/'+word;
+            }
+
+            window.location.href = httpText;
 
             return false;
         }
@@ -64,6 +100,7 @@
                                                            'blocks' => $this->blocks,
                                                            'siteSetings' => $this->siteSetings,
                                                            'cityContent' => $this->currentCityContent,
+                                                           'currentLang' => $this->currentLang,
                                                            'area' => isset($this->area)?$this->area:false
                                                      )) ?>
     <section class="container">
@@ -78,6 +115,7 @@
     <script>
         $(function(){
             changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'));
+            setCurrentCityAndArea();
         });
     </script>
 </body>

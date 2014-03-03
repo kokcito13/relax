@@ -7,14 +7,14 @@
         <div class="clear"></div>
         <a class="location" href="<?=$this->salon->getRoute()->getUrl();?>"><?=$this->contentPage['adress']->getFieldText();?></a>
         <div class="singleSalonCommentsBox">
-            <a href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>">– <?=$this->countAllComments; ?> отзывов</a>
-            <em>положительных – <?=$this->countGoodComments; ?></em><br>
-            <em>нейтральных – <?=$this->countNormalComments; ?></em><br>
-            <em>отрицательных – <?=$this->countBadComments; ?></em>
+            <a href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>">– <?=$this->countAllComments; ?> <?=Kernel_Block::getText('отзывов', $this->blocks);?></a>
+            <em><?=Kernel_Block::getText('положительных', $this->blocks);?> – <?=$this->countGoodComments; ?></em><br>
+            <em><?=Kernel_Block::getText('нейтральных', $this->blocks);?> – <?=$this->countNormalComments; ?></em><br>
+            <em><?=Kernel_Block::getText('отрицательных', $this->blocks);?> – <?=$this->countBadComments; ?></em>
         </div>
     </div>
     <div class="salonPhone">
         <span data-salon-phone="<?=$this->salon->getPhone()?>"><?=mb_substr($this->salon->getPhone(), 0, 5)?> XX-XX-XXX</span>
-        <a href="#">Показать</a>
+        <a href="#"><?=Kernel_Block::getText('Показать', $this->blocks);?></a>
     </div>
 </div>

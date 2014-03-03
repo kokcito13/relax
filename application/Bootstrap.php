@@ -64,6 +64,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $view->currentCityContent = $view->currentCity->getContent()->getFields();
         }
 
+        $view->currentLang = Kernel_Language::getCurrent();
+
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
         $viewRenderer->setView($view);
     }

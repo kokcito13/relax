@@ -1,4 +1,14 @@
 <?= $this->partial('blocks/menus/top.phtml'); ?>
+<script>
+    function confirmDelete()
+    {
+        if (!confirm('Уверены что хотите удалить?')) {
+            return false;
+        }
+
+        return true;
+    }
+</script>
 <table class="zebra" id="projectsTable">
     <thead>
     <tr>
@@ -33,7 +43,7 @@
                        title="Районы">Районы</a>
                 </td>
                 <td style="text-align: left;">
-                    <a href="#" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt=""
+                    <a href="<?= $this->url(array ('id' => $item->getId()), 'admin-city-delete'); ?>" class="delete" title="Удалить" onclick="return confirmDelete();"><img src="/static/admin/images/icon_delete.gif" alt=""
                                                                     width="9" height="8"/></a>
                 </td>
             </tr>

@@ -41,40 +41,16 @@ class Admin_CommentController extends Zend_Controller_Action {
 
         }
 	}
-	
-	public function statusAction() {
-		$this->_helper->viewRenderer->setNoRender();
-    	$this->_helper->layout()->disableLayout();
-	   	if($this->getRequest()->isPost()) {
-			$data = (object)$this->getRequest()->getPost();
-			switch (intval($data->type)) {
-   				case 1://change status
-   				break;
-   				case 2: //delete
-   					$comment = Application_Model_Kernel_Comment::getById((int)$data->id);
-   					$comment->delete();
-   				break;
-   			}
-   		}
-   	}
-    
-    public function positionAction(){
+
+    public function deleteAction()
+    {
+        $this->view->id       = (int)$this->_getParam('id');
+        $this->view->comment = Application_Model_Kernel_Comment::getById($this->view->id);
+        $this->view->comment->delete();
+
+        $this->_redirect($this->view->url(array ('salon_id' => $this->view->salon_id), 'admin-comment-index'));
+
         $this->_helper->viewRenderer->setNoRender();
         $this->_helper->layout()->disableLayout();
-        if ($this->getRequest()->isPost()){
-            $data = (object) $this->getRequest()->getPost();
-            $ar = (array)json_decode( $data->ar );
-            $i = 0;
-            $mes = true;
-            foreach( $ar as $key=>$value ){
-                if($key == 0)
-                    continue;
-                $mes = Application_Model_Kernel_Aphorism::changePosition($key, (1000-$i) )|$mes;
-                $i++;
-            }
-            echo $mes;
-        }
-        
     }
-
 }

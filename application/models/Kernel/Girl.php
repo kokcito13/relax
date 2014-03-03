@@ -189,27 +189,12 @@ class Application_Model_Kernel_Girl
         }
     }
 
-//    public function show()
-//    {
-//        $db = Zend_Registry::get('db');
-//        $db->update('girls', array (
-//                                        'girls.categoryStatus' => self::STATUS_SHOW
-//                                  ), "categories.idCategory = {$this->_idCategory}");
-//    }
-//
-//    public function hide()
-//    {
-//        $db = Zend_Registry::get('db');
-//        $db->update('girls', array (
-//                                        'girls.categoryStatus' => self::STATUS_HIDE
-//                                  ), "categories.idCategory = {$this->_idCategory}");
-//    }
-
     public function delete()
     {
         $db = Zend_Registry::get('db');
-        $db->delete('girls', "categories.idCategory = {$this->_idCategory}");
+        $db->delete('girls', "girls.id = {$this->id}");
         $this->getContentManager()->delete();
+        $this->getGallery()->delete();
     }
 
     public function getGallery()

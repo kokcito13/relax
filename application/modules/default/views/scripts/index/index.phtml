@@ -15,11 +15,11 @@
             <div class="clear"></div>
             <a class="location" href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$area->getUrl()),'default-list-area');?>"><?=$areaContent['contentName']->getFieldText();?></a>
             <div class="commentValueBox">
-                <span class="commentIcon"></span> – <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-review');?>"><?=count($salon->getComments())?> отзывов</a>
+                <span class="commentIcon"></span> – <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-review');?>"><?=count($salon->getComments())?> <?=Kernel_Block::getText('отзывов', $this->blocks);?></a>
             </div>
-            <em>положительных – <?=count($salon->getGoodComments())?></em>
+            <em><?=Kernel_Block::getText('положительных', $this->blocks);?> – <?=count($salon->getGoodComments())?></em>
             <br>
-            <em>отрицательных – <?=count($salon->getBadComments())?></em>
+            <em><?=Kernel_Block::getText('отрицательных', $this->blocks);?> – <?=count($salon->getBadComments())?></em>
             <div class="clear"></div>
         </div>
         <div class="salonModelBox">

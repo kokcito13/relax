@@ -91,8 +91,13 @@ class SalonController extends Zend_Controller_Action
 
     public function areaAction()
     {
+        $word = false;
         $this->view->url_key = $this->_getParam('url_key');
-        $this->view->page = $this->_getParam('page');
+        $this->view->page = (int)$this->_getParam('page');
+        $this->view->word = $this->_getParam('word');
+        if ($this->view->word != 0) {
+            $word = '%'.$this->view->word.'%';
+        }
 
         $this->view->area = Application_Model_Kernel_Area::getByUrl($this->view->url_key);
         $this->view->areaContent = $this->view->area->getContent()->getFields();
@@ -100,7 +105,7 @@ class SalonController extends Zend_Controller_Action
         $city = Kernel_City::findCityFromUrl();
         $where = 'salons.area_id = '.$this->view->area->getId().' AND salons.city_id = '.$city->getId();
 
-        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, false, 1, $this->view->page, 3, false, true, $where);
+        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, $word, 1, $this->view->page, 3, false, true, $where);
 
         $this->view->title = '';
         $this->view->keywords = '';

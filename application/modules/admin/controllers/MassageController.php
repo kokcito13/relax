@@ -136,4 +136,16 @@ class Admin_MassageController extends Zend_Controller_Action
             }
         }
     }
+
+    public function deleteAction()
+    {
+        $this->view->id       = (int)$this->_getParam('id');
+        $this->view->salon = Application_Model_Kernel_Massage::getById($this->view->id);
+        $this->view->salon->delete();
+
+        $this->_redirect($this->view->url(array ('salon_id' => $this->view->salon_id), 'admin-massage-index'));
+
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout()->disableLayout();
+    }
 }

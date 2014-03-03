@@ -1,15 +1,15 @@
 <div class="subscribeBox">
     <div class="subscribeText">
         <? if ($this->city): ?>
-            <p>В <strong><?=$this->cityContent['contentName']->getFieldText();?></strong> каждую неделю появляются новые девушки</p>
+            <p><?=Kernel_Block::getText('in', $this->blocks);?> <strong><?=$this->cityContent['contentName']->getFieldText();?></strong> <?=Kernel_Block::getText('email_box_top_category', $this->blocks);?></p>
         <? else: ?>
-            <p>Каждую неделю появляются новые девушки</p>
+            <p><?=Kernel_Block::getText('email_box_top_main', $this->blocks);?></p>
         <? endif; ?>
-        <p><em>Подпишись и получи фотографии новых девушек на свой E-mail:</em></p>
+        <p><em><?=Kernel_Block::getText('email_box_bottom', $this->blocks);?></em></p>
     </div>
     <form action="" onsubmit="return sendSubscribe(this);">
-        <input type="text" class="input_subscribe" name="s" size="10" value="Ваш E-mail" onblur="if (this.value == '') {this.value = 'Ваш E-mail';}" onfocus="if (this.value == 'Ваш E-mail') {this.value = '';}"/>
-        <input type="submit" value="Хочу"/>
+        <input type="text" class="input_subscribe" name="s" size="10" value="<?=Kernel_Block::getText('Ваш E-mail', $this->blocks);?>" onblur="if (this.value == '') {this.value = '<?=Kernel_Block::getText('Ваш E-mail', $this->blocks);?>';}" onfocus="if (this.value == '<?=Kernel_Block::getText('Ваш E-mail', $this->blocks);?>') {this.value = '';}"/>
+        <input type="submit" value="<?=Kernel_Block::getText('want', $this->blocks);?>"/>
         <div class="clear"></div>
     </form>
     <div class="clear"></div>

@@ -17,7 +17,7 @@
         <div class="salonSidebar" style="background: url(<?=$this->salon->getPhoto4()->getPath('220:1140');?>) no-repeat center center;">
         </div>
         <div class="salonContentRight">
-            <h3>Девушки салона</h3>
+            <h3><?=Kernel_Block::getText('Девушки салона', $this->blocks);?></h3>
             <? foreach ($this->girls as $k=>$girl): ?>
                 <? $content = $girl->getContent()->getFields();?>
                 <div class="singleSalonModelItem">

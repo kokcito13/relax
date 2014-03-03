@@ -1,4 +1,14 @@
 <?=$this->partial('blocks/menus/top.phtml');?>
+<script>
+    function confirmDelete()
+    {
+        if (!confirm('Уверены что хотите удалить?')) {
+            return false;
+        }
+
+        return true;
+    }
+</script>
 <table class="zebra">
     <thead> 
         <tr> 
@@ -27,7 +37,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <a href="javascript:changeStatus(<?=$item->getIdComment();?>,2);" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt="" width="9" height="8" /></a>
+                        <a href="<?=$this->url(array('id' => $item->getIdComment(),'salon_id'=>$this->salon_id), 'admin-comment-delete');?>" onclick="return confirmDelete();" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt="" width="9" height="8" /></a>
                     </td>
               </tr>
         <?php endforeach; ?>

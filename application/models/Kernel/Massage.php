@@ -169,26 +169,10 @@ class Application_Model_Kernel_Massage
         }
     }
 
-//    public function show()
-//    {
-//        $db = Zend_Registry::get('db');
-//        $db->update('massages', array (
-//                                        'massages.categoryStatus' => self::STATUS_SHOW
-//                                  ), "categories.idCategory = {$this->_idCategory}");
-//    }
-//
-//    public function hide()
-//    {
-//        $db = Zend_Registry::get('db');
-//        $db->update('massages', array (
-//                                        'massages.categoryStatus' => self::STATUS_HIDE
-//                                  ), "categories.idCategory = {$this->_idCategory}");
-//    }
-
     public function delete()
     {
         $db = Zend_Registry::get('db');
-        $db->delete('massages', "categories.idCategory = {$this->_idCategory}");
+        $db->delete('massages', "massages.id = {$this->id}");
         $this->getContentManager()->delete();
     }
 }

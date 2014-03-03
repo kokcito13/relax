@@ -4,7 +4,7 @@
 		<tr class="">
 			<td width="193" class="first">Название блока:</td>
 			<td>
-				<input name="blockName" type="text" class="field" value="<?=(isset($_POST['blockName'])) ? $_POST['blockName'] : ''?>" />
+				<input name="blockName" <? if ($this->edit):?>disabled="disabled"<? endif; ?> type="text" class="field" value="<?=(isset($_POST['blockName'])) ? $_POST['blockName'] : ''?>" />
 			</td>
 		</tr>
 	</table>
