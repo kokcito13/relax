@@ -20,7 +20,7 @@
             <h3><?=Kernel_Block::getText('Девушки салона', $this->blocks);?></h3>
             <? foreach ($this->girls as $k=>$girl): ?>
                 <? $content = $girl->getContent()->getFields();?>
-                <div class="singleSalonModelItem">
+                <div class="singleSalonModelItem" id="girl_<?=$girl->getId()?>">
                     <p><span><?=$content['contentName']->getFieldText();?></span>, <?=$girl->getAge();?> год</p>
                     <div id="carousel-<?=$k+1?>" class="salonModelCarouselWrap">
                         <? $photos = $girl->getGallery()->getPhotos(); ?>

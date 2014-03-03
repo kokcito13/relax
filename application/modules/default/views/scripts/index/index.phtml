@@ -26,7 +26,7 @@
             <? foreach ($salon->getGirls() as $k=>$girl): ?>
                 <? $contentGirl = $girl->getContent()->getFields();?>
                 <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
-                <a href="#" class="salonModelItem">
+                <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$salon->getRoute()->getUrl();?>#girl_<?=$girl->getId()?>" class="salonModelItem">
                     <img src="<?=$photo->getPath('240:240');?>" alt="">
                     <h4><?=$contentGirl['contentName']->getFieldText();?></h4>
                 </a>

@@ -11,9 +11,14 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         $this->view->idPage      = (int)$this->_getParam('idPage');
-        $this->view->contentPage = Application_Model_Kernel_Page_ContentPage::getByPageId($this->view->idPage)->getContent()->getFields();
+        $this->view->page = Application_Model_Kernel_Page_ContentPage::getByPageId($this->view->idPage);
 
-//        $this->view->publicList = Application_Model_Kernel_Product::getList(false, false, true, true, false, Application_Model_Kernel_Page::STATUS_SHOW, 1, Application_Model_Kernel_Product::ITEM_ON_PAGE, Application_Model_Kernel_Product::ITEM_ON_PAGE, true, false);
+        $city = Kernel_City::findCityFromUrl();
+        if ($city) {
+            $this->view->contentPage = $city->getContent()->getFields();
+        } else {
+            $this->view->contentPage = $this->view->page->getContent()->getFields();
+        }
 
         $this->view->text        = $this->view->contentPage['content']->getFieldText();
         $this->view->title       = $this->view->contentPage['title']->getFieldText();
