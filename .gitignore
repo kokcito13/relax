@@ -7,4 +7,4 @@ imagecache/*
 tmp/adminka_images/*
 .idea/*
 extras/documentation
-static/default/uploads/*
+static/default/upload/*
