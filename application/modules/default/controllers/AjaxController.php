@@ -69,4 +69,48 @@ class AjaxController extends Zend_Controller_Action
 
         return false;
     }
+
+
+    public function getSalonsAction()
+    {
+        $response = array();
+        if ($this->getRequest()->isGet()) {
+            $data = $_GET;
+            $where = false;
+
+            $word = trim($data['word']);
+            $city = (int)$data['city'];
+            $area = (int)$data['area'];
+
+            if (!empty($word)) {
+                $word = '%'.$this->view->word.'%';
+            } else {
+                $word = false;
+            }
+
+            if ($city != 0) {
+                $where = 'salons.city_id = '.$city;
+                if ($area != 0) {
+                    $where .= " AND salons.area_id = ".$area;
+                }
+            }
+
+            $view = new Zend_View(array('basePath' => APPLICATION_PATH . '/modules/default/views'));
+            $view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, $word, 1, (int)$data['page'], Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
+            $view->blocks = Application_Model_Kernel_Block::getList(true)->data;
+            foreach ($view->blocks as $key => $value) {
+                $view->blocks[$key] = $value->getContent()->getFields();
+            }
+
+            $response['html'] = $view->render('block/list.phtml');
+
+            $response['success'] = true;
+        } else {
+            $response['error']['Not POST'] = 'Запрос не постовый';
+        }
+
+        echo json_encode($response);
+
+        return false;
+    }
 }

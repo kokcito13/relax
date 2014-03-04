@@ -25,6 +25,6 @@ class IndexController extends Zend_Controller_Action
         $this->view->keywords    = $this->view->contentPage['keywords']->getFieldText();
         $this->view->description = $this->view->contentPage['description']->getFieldText();
 
-        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, false, 1, 1, 3, false, true, false);
+        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, false, 1, 1, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, false);
     }
 }

@@ -12,46 +12,12 @@
         <a href="<?=$this->url();?>"><?=$this->areaContent['contentName']->getFieldText();?></a>
     </span>
 </div>
-<?php foreach ($this->salons->data as $k=>$salon): ?>
-    <? $content = $salon->getContent()->getFields();?>
-    <div class="salonItem">
-        <div class="newSalonLabel"></div>
-        <div class="salonInfo">
-            <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$salon->getRoute()->getUrl();?>" class="salonLogo">
-                <img src="<?=$salon->getPhoto1()->getPath('120:120');?>" alt="">
-                <h3><?=$content['name']->getFieldText();?></h3>
-            </a>
-            <div class="clear"></div>
-            <a class="location" href="<?=$this->url();?>"><?=$this->areaContent['contentName']->getFieldText();?></a>
-            <div class="commentValueBox">
-                <span class="commentIcon"></span> – <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-review');?>"><?=count($salon->getComments())?> отзывов</a>
-            </div>
-            <em><?=Kernel_Block::getText('положительных', $this->blocks);?> – <?=count($salon->getGoodComments())?></em>
-            <br>
-            <em><?=Kernel_Block::getText('отрицательных', $this->blocks);?> – <?=count($salon->getBadComments())?></em>
-            <div class="clear"></div>
-        </div>
-        <div class="salonModelBox">
-            <? foreach ($salon->getGirls() as $k=>$girl): ?>
-                <? $contentGirl = $girl->getContent()->getFields();?>
-                <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
-                <a href="#" class="salonModelItem">
-                    <img src="<?=$photo->getPath('240:240');?>" alt="">
-                    <h4><?=$contentGirl['contentName']->getFieldText();?></h4>
-                </a>
-            <? endforeach; ?>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <? if ($k == 1): ?>
-        <div class="content-info">
-            <a href="#">
-                <img src="/static/default/images/content/contentInfo.png" alt="">
-            </a>
-        </div>
-    <? endif; ?>
-<? endforeach; ?>
-<?=$this->paginationControl($this->salons->paginator, 'Sliding', 'block/paginator.phtml')?>
+<div id="list_block">
+    <?php echo $this->partial('block/list.phtml', array (
+                                                        'salons' => $this->salons
+                                                  )) ?>
+</div>
+
 <?=$this->ShowSubscribe();?>
 <div class="descText">
     <article>

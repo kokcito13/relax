@@ -25,7 +25,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     private $call_price = 0;
     private $url_key;
 
-    const ITEM_ON_PAGE = 16;
+    const ITEM_ON_PAGE = 3;
 
     private $comments = array();
     private $girls = null;

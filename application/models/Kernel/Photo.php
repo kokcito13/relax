@@ -131,7 +131,7 @@ class Application_Model_Kernel_Photo
     {
         $idPhoto = intval($idPhoto);
         if ($idPhoto == 0) {
-            return null;
+            return new self(null, 'image.jpg', '', 0);
         }
 
 
@@ -148,8 +148,9 @@ class Application_Model_Kernel_Photo
 
 //                $cache->save($photo);
             return $photo;
-        } else
+        } else {
             throw new Exception(self::ERROR_NO_PHOTO);
+        }
 //        }
     }
 

@@ -92,6 +92,28 @@
 
             return false;
         }
+
+        function getAjaxPage(page)
+        {
+            var city_id = '<?=$this->currentCity?$this->currentCity->getId():0?>';
+            var area_id = '<?=isset($this->area)?$this->area->getId():0?>';
+            var word = '<?=isset($this->word)?$this->word:''?>';
+
+            $.getJSON( "<?=$this->url(array(), 'default-salons-get-ajax');?>",
+                {
+                    city: city_id,
+                    area: area_id,
+                    word: word,
+                    page: page
+                }
+            ).done(function( data ) {
+                    if (data.success) {
+                        $('#list_block').html(data.html);
+                    } else {
+                        console.log(data.error);
+                    }
+                });
+        }
     </script>
 </head>
 <body>
@@ -116,6 +138,11 @@
         $(function(){
             changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'));
             setCurrentCityAndArea();
+            $('body').on('click','.pagination a', function(){
+                getAjaxPage($(this).data('page'))
+
+                return false;
+            });
         });
     </script>
 </body>

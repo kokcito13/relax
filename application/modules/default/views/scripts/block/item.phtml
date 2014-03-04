@@ -1,0 +1,33 @@
+<? $content = $this->salon->getContent()->getFields();?>
+<? $area = $this->salon->getArea();?>
+<? $areaContent = $area->getContent()->getFields();?>
+<div class="salonItem">
+    <div class="newSalonLabel"></div>
+    <div class="salonInfo">
+        <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>" class="salonLogo">
+            <img src="<?=$this->salon->getPhoto1()->getPath('120:120');?>" alt="">
+            <h3><?=$content['name']->getFieldText();?></h3>
+        </a>
+        <div class="clear"></div>
+        <a class="location" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$area->getUrl()),'default-list-area');?>"><?=$areaContent['contentName']->getFieldText();?></a>
+        <div class="commentValueBox">
+            <span class="commentIcon"></span> – <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>"><?=count($this->salon->getComments())?> <?=Kernel_Block::getText('отзывов', $this->blocks);?></a>
+        </div>
+        <em><?=Kernel_Block::getText('положительных', $this->blocks);?> – <?=count($this->salon->getGoodComments())?></em>
+        <br>
+        <em><?=Kernel_Block::getText('отрицательных', $this->blocks);?> – <?=count($this->salon->getBadComments())?></em>
+        <div class="clear"></div>
+    </div>
+    <div class="salonModelBox">
+        <? foreach ($this->salon->getGirls() as $key=>$girl): ?>
+            <? if( $key >= 3 ) break; ?>
+            <? $contentGirl = $girl->getContent()->getFields();?>
+            <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
+            <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>#girl_<?=$girl->getId()?>" class="salonModelItem">
+                <img src="<?=$photo->getPath('240:240');?>" alt="">
+                <h4><?=$contentGirl['contentName']->getFieldText();?></h4>
+            </a>
+        <? endforeach; ?>
+    </div>
+    <div class="clear"></div>
+</div>

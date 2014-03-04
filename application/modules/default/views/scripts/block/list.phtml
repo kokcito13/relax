@@ -1,0 +1,13 @@
+<?php foreach ($this->salons->data as $k=>$salon): ?>
+    <?php echo $this->partial('block/item.phtml', array (
+                                                        'salon' => $salon
+                                                  )) ?>
+    <? if ($k == 1): ?>
+        <div class="content-info">
+            <a href="#">
+                <img src="/static/default/images/content/contentInfo.png" alt="">
+            </a>
+        </div>
+    <? endif; ?>
+<? endforeach; ?>
+<?=$this->paginationControl($this->salons->paginator, 'Sliding', 'block/paginator.phtml')?>

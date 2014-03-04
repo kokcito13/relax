@@ -191,10 +191,8 @@ class Application_Model_Kernel_Block
     public function delete()
     {
         $db = Zend_Registry::get('db');
-        if ($this->getStatus() !== self::STATUS_SYSTEM) {
-            $db->delete('blocks', "blocks.idBlock = {$this->getId()}");
-            $this->getContentManager()->delete();
-        }
+        $db->delete('blocks', "blocks.idBlock = {$this->getId()}");
+        $this->getContentManager()->delete();
     }
 
     public function increasePosition()

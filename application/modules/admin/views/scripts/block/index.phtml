@@ -1,4 +1,14 @@
 <?= $this->partial('blocks/menus/top.phtml'); ?>
+    <script>
+        function confirmDelete()
+        {
+            if (!confirm('Уверены что хотите удалить?')) {
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 <table class="zebra"> 
     <thead> 
         <tr> 
@@ -26,7 +36,10 @@
                     </td> 
                     <td><?= strip_tags( Application_Model_Kernel_Content_Fields::getFieldByIdContentAndNameField($item->getContent()->getId(), 'name')->getFieldText() )?></td> 
                     <td></td>
-                    <td></td>
+                    <td>
+                        <a href="<?= $this->url(array ('idBlock' => $item->getId()), 'admin-block-delete'); ?>" onclick="return confirmDelete();" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt=""
+                                                                                                                                                                                                           width="9" height="8" /></a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

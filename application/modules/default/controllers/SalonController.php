@@ -105,7 +105,7 @@ class SalonController extends Zend_Controller_Action
         $city = Kernel_City::findCityFromUrl();
         $where = 'salons.area_id = '.$this->view->area->getId().' AND salons.city_id = '.$city->getId();
 
-        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, $word, 1, $this->view->page, 3, false, true, $where);
+        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, $word, 1, $this->view->page, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
 
         $this->view->title = '';
         $this->view->keywords = '';

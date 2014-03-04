@@ -117,7 +117,7 @@ class Admin_BlockController extends Zend_Controller_Action
                     }
                 }
 
-                $block->setName($data->blockName);
+//                $block->setName($data->blockName);
                 $block->save();
                 $this->_redirect($this->view->url(array ('page' => $this->view->page), 'admin-block-index'));
             } catch (Application_Model_Kernel_Exception $e) {
@@ -136,4 +136,15 @@ class Admin_BlockController extends Zend_Controller_Action
         }
     }
 
+    public function deleteAction()
+    {
+        $this->view->id       = (int)$this->_getParam('idBlock');
+        $this->view->block = Application_Model_Kernel_Block::getById($this->view->id);
+        $this->view->block->delete();
+
+        $this->_redirect($this->view->url(array (), 'admin-block-index'));
+
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout()->disableLayout();
+    }
 }
