@@ -131,7 +131,7 @@ class Admin_PageController extends Zend_Controller_Action {
         $this->_helper->layout()->disableLayout();
         if ($this->getRequest()->isPost()) {
             $data = (object) $this->getRequest()->getPost();
-            $page = Application_Model_Kernel_Product::getByIdPage( (int)$data->id ) ;
+            $page = Application_Model_Kernel_Salon::getByIdPage( (int)$data->id ) ;
             switch ( (int)$data->type ) {
                 case 1://change status
                     switch ( (int)$page->getStatus() ) {

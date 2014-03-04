@@ -36,7 +36,7 @@
 
         function changeCity(ele)
         {
-            $('#empty_area').html('– <?=Kernel_Block::getText('Сначала выберите город', $this->blocks);?> –');
+            $('#empty_area').html('– <?=Kernel_Block::getText('Сначала выберите район', $this->blocks);?> –');
             var cityId = ele.val();
             $('.area_inp').hide();
             $('.area_in_city_'+cityId).show();

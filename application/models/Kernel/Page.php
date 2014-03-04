@@ -273,5 +273,4 @@ abstract class Application_Model_Kernel_Page implements Application_Model_Kernel
             $db->update('pages', array("pageStatus"=>$status), 'idPage = ' . (int)$idPage );
             
         }
-        
 }
