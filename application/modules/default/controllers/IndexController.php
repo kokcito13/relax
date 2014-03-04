@@ -10,12 +10,14 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $where = false;
         $this->view->idPage      = (int)$this->_getParam('idPage');
         $this->view->page = Application_Model_Kernel_Page_ContentPage::getByPageId($this->view->idPage);
 
         $city = Kernel_City::findCityFromUrl();
         if ($city) {
             $this->view->contentPage = $city->getContent()->getFields();
+            $where = 'salons.city_id = '.$city->getId();
         } else {
             $this->view->contentPage = $this->view->page->getContent()->getFields();
         }
@@ -25,6 +27,6 @@ class IndexController extends Zend_Controller_Action
         $this->view->keywords    = $this->view->contentPage['keywords']->getFieldText();
         $this->view->description = $this->view->contentPage['description']->getFieldText();
 
-        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, false, 1, 1, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, false);
+        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, false, 1, 1, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
     }
 }
