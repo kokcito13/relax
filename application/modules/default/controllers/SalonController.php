@@ -107,9 +107,14 @@ class SalonController extends Zend_Controller_Action
 
         $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, $word, 1, $this->view->page, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
 
-        $this->view->title = '';
-        $this->view->keywords = '';
-        $this->view->description = '';
+        $title = $this->view->areaContent['title']->getFieldText();
+        $keywords = $this->view->areaContent['keywords']->getFieldText();
+        $description = $this->view->areaContent['description']->getFieldText();
+
+        $this->view->text        = $this->view->areaContent['content']->getFieldText();
+        $this->view->title = $title;
+        $this->view->keywords = $keywords;
+        $this->view->description = $description;
     }
 
     public function akciyAction()
@@ -121,6 +126,8 @@ class SalonController extends Zend_Controller_Action
         $title = $this->view->contentPage['title']->getFieldText();
         $keywords = $this->view->contentPage['keywords']->getFieldText();
         $description = $this->view->contentPage['description']->getFieldText();
+
+
 
         $this->view->title = $title;
         $this->view->keywords = $keywords;

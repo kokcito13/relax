@@ -1,5 +1,9 @@
 <?php foreach($this->areas as $area): ?>
     <?php $content = $area->getContent()->getFields();?>
-    <input class="area_inp area_input_city_<?=$area->getCityId();?>" data-url="<?=$area->getUrl();?>" id="<?=$area->getUrl();?>" type="radio" size="" value="<?=$area->getUrl();?>" name="area" />
+    <input class="area_inp area_input_city_<?=$area->getCityId();?>" data-id="<?=$area->getId()?>" data-idarea="<?=$this->currentArea->getId()?>" data-url="<?=$area->getUrl();?>" onclick="changeArea($('.city_<?=$area->getCityId();?>'), '<?=$area->getUrl();?>')" id="<?=$area->getUrl();?>" type="radio" value="<?=$area->getUrl();?>" name="area"
+        <? if ($this->currentArea->getId() == $area->getId()): ?>
+            checked="checked"
+        <? endif; ?>
+        />
     <label style="display: none;" class="area_inp area_in_city_<?=$area->getCityId();?>" for="<?=$area->getUrl();?>"><?=$content['contentName']->getFieldText();?></label>
 <?php endforeach; ?>

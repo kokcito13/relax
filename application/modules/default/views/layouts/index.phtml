@@ -29,13 +29,29 @@
             if (city_id != 0) {
                 $('.city_'+city_id).attr('checked','checked');
             }
-            if (area_id != 0) {
-                $('.area_input_city_'+city_id).attr('checked','checked');
-            }
+//            if (area_id != 0) {
+//                $('.area_input_city_'+city_id).attr('checked','checked');
+//            }
         }
 
-        function changeCity(ele)
+        function changeArea(ele, area_url)
         {
+            var httpText = 'http://';
+            var site_name = '<?=SITE_NAME?>';
+            var city = $(ele).data('url');
+
+            window.location.href = httpText+city+'.'+site_name+'/'+area_url;
+        }
+
+        function changeCity(ele, clickFn)
+        {
+            if (clickFn) {
+                var httpText = 'http://';
+                var site_name = '<?=SITE_NAME?>';
+                var city = $(ele).data('url');
+
+                window.location.href = httpText+city+'.'+site_name;
+            }
             $('#empty_area').html('– <?=Kernel_Block::getText('Сначала выберите район', $this->blocks);?> –');
             var cityId = ele.val();
             $('.area_inp').hide();
@@ -123,7 +139,8 @@
                                                            'siteSetings' => $this->siteSetings,
                                                            'cityContent' => $this->currentCityContent,
                                                            'currentLang' => $this->currentLang,
-                                                           'area' => isset($this->area)?$this->area:false
+                                                           'area' => isset($this->area)?$this->area:false,
+                                                           'word' => isset($this->word)?$this->word:'',
                                                      )) ?>
     <section class="container">
         <div class="wrapper">
@@ -136,7 +153,7 @@
                                                      )) ?>
     <script>
         $(function(){
-            changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'));
+            changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'), false);
             setCurrentCityAndArea();
             $('body').on('click','.pagination a', function(){
                 getAjaxPage($(this).data('page'))
