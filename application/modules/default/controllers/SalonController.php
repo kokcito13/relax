@@ -5,6 +5,10 @@ class SalonController extends Zend_Controller_Action
 
     public function preDispatch()
     {
+        $array = Application_Model_Kernel_Block::getList(true)->data;
+        foreach ($array as $key => $value) {
+            $this->view->blocksArray[$key] = $value->getContent()->getFields();
+        }
     }
 
     public function showAction()
@@ -34,6 +38,9 @@ class SalonController extends Zend_Controller_Action
         $keywords = $this->view->contentPage['keywords']->getFieldText();
         $description = $this->view->contentPage['description']->getFieldText();
 
+        $title = Kernel_Block::getText('Описание заведения.', $this->blocksArray).' '.$title;
+        $description = Kernel_Block::getText('Описание и дополнительная инофрмация,', $this->blocksArray).' '.$description;
+
         $this->view->title = $title;
         $this->view->keywords = $keywords;
         $this->view->description = $description;
@@ -48,6 +55,9 @@ class SalonController extends Zend_Controller_Action
         $title = $this->view->contentPage['title']->getFieldText();
         $keywords = $this->view->contentPage['keywords']->getFieldText();
         $description = $this->view->contentPage['description']->getFieldText();
+
+        $title = Kernel_Block::getText('Расположение на карте.', $this->blocksArray).' '.$title;
+        $description = Kernel_Block::getText('Расположение на карте,', $this->blocksArray).' '.$description;
 
         $this->view->title = $title;
         $this->view->keywords = $keywords;
@@ -66,6 +76,9 @@ class SalonController extends Zend_Controller_Action
         $keywords = $this->view->contentPage['keywords']->getFieldText();
         $description = $this->view->contentPage['description']->getFieldText();
 
+        $title = Kernel_Block::getText('Виды массажа и цены.', $this->blocksArray).' '.$title;
+        $description = Kernel_Block::getText('Стоимость и описание услуг,', $this->blocksArray).' '.$description;
+
         $this->view->title = $title;
         $this->view->keywords = $keywords;
         $this->view->description = $description;
@@ -82,7 +95,10 @@ class SalonController extends Zend_Controller_Action
 
         $title = $this->view->contentPage['title']->getFieldText();
         $keywords = $this->view->contentPage['keywords']->getFieldText();
-        $description = $this->view->contentPage['description']->getFieldText();
+        $description = $this->view->contentPage['name']->getFieldText();
+
+        $title = Kernel_Block::getText('Отзывы и рейтинг.', $this->blocksArray).' '.$title;
+        $description = Kernel_Block::getText('Только актуальные отзывы пользователей салона эротического массажа', $this->blocksArray).' '.$description;
 
         $this->view->title = $title;
         $this->view->keywords = $keywords;
@@ -95,7 +111,7 @@ class SalonController extends Zend_Controller_Action
         $this->view->url_key = $this->_getParam('url_key');
         $this->view->page = (int)$this->_getParam('page');
         $this->view->word = $this->_getParam('word');
-        if ($this->view->word != 0) {
+        if ($this->view->word !== '0') {
             $word = '%'.$this->view->word.'%';
         }
 
@@ -127,7 +143,8 @@ class SalonController extends Zend_Controller_Action
         $keywords = $this->view->contentPage['keywords']->getFieldText();
         $description = $this->view->contentPage['description']->getFieldText();
 
-
+        $title = Kernel_Block::getText('Акции и скидки.', $this->blocksArray).' '.$title;
+        $description = Kernel_Block::getText('Акции и скидки,', $this->blocksArray).' '.$description;
 
         $this->view->title = $title;
         $this->view->keywords = $keywords;

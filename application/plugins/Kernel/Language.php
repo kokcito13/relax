@@ -96,17 +96,25 @@ class Kernel_Language
     public static function getAll()
     {
         $return = array ();
-        $db     = Zend_Registry::get('db');
-        $select = $db->select()->from('langs');
-        $res    = $db->fetchAll($select);
-        if ($res !== false) {
-            foreach ($res as $lang) {
-                $return[] = new self($lang->idLang, $lang->isoName, $lang->fullName, $lang->customName, $lang->localeStatus);
-            }
+        $cachemanager = Zend_Registry::get('cachemanager');
+        $cache = $cachemanager->getCache('locales');
+        if (($return = $cache->load('LIST')) !== false) {
 
             return $return;
         } else {
-            throw new Exception(self::ERROR_EMPTY_LANG_TABLE);
+            $db     = Zend_Registry::get('db');
+            $select = $db->select()->from('langs');
+            $res    = $db->fetchAll($select);
+            if ($res !== false) {
+                foreach ($res as $lang) {
+                    $return[] = new self($lang->idLang, $lang->isoName, $lang->fullName, $lang->customName, $lang->localeStatus);
+                }
+                $cache->save($return);
+
+                return $return;
+            } else {
+                throw new Exception(self::ERROR_EMPTY_LANG_TABLE);
+            }
         }
     }
 
@@ -119,14 +127,26 @@ class Kernel_Language
         if (is_null(self::$currentIsoName)) {
             self::setDefaultLang();
         }
-        $db     = Zend_Registry::get('db');
-        $select = $db->select()->from('langs');
-        $select->where('langs.isoName = ?', self::$currentIsoName);
-        $select->limit(1);
-        if (($lang = $db->fetchRow($select)) !== false)
-            return new self($lang->idLang, $lang->isoName, $lang->fullName, $lang->customName, $lang->localeStatus);
-        else
-            throw new Exception(self::ERROR_INVALID_LANG_ISO_NAME);
+        $cachemanager = Zend_Registry::get('cachemanager');
+        $cache = $cachemanager->getCache('locales');
+        if (($return = $cache->load(self::$currentIsoName)) !== false) {
+
+            return $return;
+        } else {
+            $db     = Zend_Registry::get('db');
+            $select = $db->select()->from('langs');
+            $select->where('langs.isoName = ?', self::$currentIsoName);
+            $select->limit(1);
+            if (($lang = $db->fetchRow($select)) !== false) {
+                $return =  new self($lang->idLang, $lang->isoName, $lang->fullName, $lang->customName, $lang->localeStatus);
+                $cache->save($return);
+
+                return $return;
+            } else {
+                throw new Exception(self::ERROR_INVALID_LANG_ISO_NAME);
+            }
+
+        }
     }
 
     public static function idToIso($idLang)

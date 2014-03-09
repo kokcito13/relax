@@ -117,7 +117,6 @@ class Application_Model_Kernel_Block
             $this->idContentPack   = $this->getContentManager()
                 ->saveContentData()
                 ->getIdContentPack();
-            //ставим AI idContent
             $data['idContentPack'] = $this->idContentPack;
             $db->insert('blocks', $data);
             $this->idBlock = $db->lastInsertId();
@@ -125,6 +124,7 @@ class Application_Model_Kernel_Block
             $this->getContentManager()->saveContentData(); //Сохраняем весь конент через меджер
             $db->update('blocks', $data, 'idBlock = ' . $this->getId());
         }
+        $this->clearCache();
     }
 
     public static function getList($content = false, $page = false, $countOnPage = false, $limit = false)
@@ -136,27 +136,37 @@ class Application_Model_Kernel_Block
             $select->join('content', 'content.idContentPack = blocks.idContentPack');
             $select->where('content.idLanguage = ?', Kernel_Language::getCurrent()->getId());
         }
-        if ($limit !== false && $page === false)
+        if ($limit !== false && $page === false) {
             $select->limit($limit);
-        if ($page !== false) {
-            $paginator = Zend_Paginator::factory($select);
-            $paginator->setItemCountPerPage($countOnPage);
-            $paginator->setPageRange(40);
-            $paginator->setCurrentPageNumber($page);
-            $return->paginator = $paginator;
-        } else {
-            $return->paginator = $db->fetchAll($select);
         }
-        $return->data = array ();
-        $i            = 0;
-        foreach ($return->paginator as $blockData) {
-            $return->data[$blockData->blockName] = new self($blockData->idBlock, $blockData->idContentPack, $blockData->blockName);
-            if ($content) {
-                $contentLang = new Application_Model_Kernel_Content_Language($blockData->idContent, $blockData->idLanguage, $blockData->idContentPack);
-                $contentLang->setFieldsArray(Application_Model_Kernel_Content_Fields::getFieldsByIdContent($blockData->idContent));
-                $return->data[$blockData->blockName]->setContent($contentLang);
+
+        $cachemanager = Zend_Registry::get('cachemanager');
+        $cache = $cachemanager->getCache('blocklist');
+        if (($return = $cache->load(md5($select->assemble() . 'page=' . (int)$page . 'onPage=' . (int)$countOnPage))) !== false) {
+
+            return $return;
+        } else {
+            if ($page !== false) {
+                $paginator = Zend_Paginator::factory($select);
+                $paginator->setItemCountPerPage($countOnPage);
+                $paginator->setPageRange(40);
+                $paginator->setCurrentPageNumber($page);
+                $return->paginator = $paginator;
+            } else {
+                $return->paginator = $db->fetchAll($select);
             }
-            $i++;
+            $return->data = array ();
+            $i            = 0;
+            foreach ($return->paginator as $blockData) {
+                $return->data[$blockData->blockName] = new self($blockData->idBlock, $blockData->idContentPack, $blockData->blockName);
+                if ($content) {
+                    $contentLang = new Application_Model_Kernel_Content_Language($blockData->idContent, $blockData->idLanguage, $blockData->idContentPack);
+                    $contentLang->setFieldsArray(Application_Model_Kernel_Content_Fields::getFieldsByIdContent($blockData->idContent));
+                    $return->data[$blockData->blockName]->setContent($contentLang);
+                }
+                $i++;
+            }
+            $cache->save($return);
         }
 
         return $return;
@@ -193,11 +203,19 @@ class Application_Model_Kernel_Block
         $db = Zend_Registry::get('db');
         $db->delete('blocks', "blocks.idBlock = {$this->getId()}");
         $this->getContentManager()->delete();
+
+        $this->clearCache();
     }
 
     public function increasePosition()
     {
         $db = Zend_Registry::get('db');
         $db->update('blocks', array ('blockPosition' => new Zend_Db_Expr('blockPosition + 1')), 'blockType = ' . $this->getType());
+    }
+
+    private function clearCache()
+    {
+        $cacheManager = Zend_Registry::get('cachemanager');
+        $cacheManager->getCache('blocklist')->clean();
     }
 }

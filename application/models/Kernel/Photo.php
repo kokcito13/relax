@@ -68,8 +68,8 @@ class Application_Model_Kernel_Photo
         } else {
             $db->update('photos', $data, 'idPhoto = ' . intval($this->_idPhoto));
         }
+        $this->clearCache();
 
-//        $this->clearCache();
         return $this;
     }
 
@@ -88,7 +88,7 @@ class Application_Model_Kernel_Photo
             $db = Zend_Registry::get('db');
             unlink(PUBLIC_PATH . self::SAVE_PATH . $this->_photoPath);
             $db->delete('photos', "photos.idPhoto = {$this->_idPhoto}");
-//        $this->clearCache();
+        $this->clearCache();
         }
 
         return $this;
@@ -112,11 +112,11 @@ class Application_Model_Kernel_Photo
     private function clearCache()
     {
         if (!is_null($this->getId())) {
-//            $cachemanager = Zend_Registry::get('cachemanager');
-//            $cache = $cachemanager->getCache('photo');
-//            if (!is_null($cache)) {
-//                $cache->remove($this->getId());
-//            }
+            $cachemanager = Zend_Registry::get('cachemanager');
+            $cache = $cachemanager->getCache('photo');
+            if (!is_null($cache)) {
+                $cache->remove($this->getId());
+            }
         }
     }
 
@@ -133,25 +133,23 @@ class Application_Model_Kernel_Photo
         if ($idPhoto == 0) {
             return new self(null, 'image.jpg', '', 0);
         }
-
-
-//        $cachemanager = Zend_Registry::get('cachemanager');
-//        $cache = $cachemanager->getCache('photo');
-//        if (($photo = $cache->load($idPhoto)) !== false) {
-//            return $photo;
-//        } else {
+        $cachemanager = Zend_Registry::get('cachemanager');
+        $cache = $cachemanager->getCache('photo');
+        if (($photo = $cache->load($idPhoto)) !== false) {
+            return $photo;
+        } else {
         $db     = Zend_Registry::get('db');
         $select = $db->select()->from('photos');
         $select->where('idPhoto = ?', intval($idPhoto));
         if (false !== ($photoData = $db->fetchRow($select))) {
             $photo = new self($photoData->idPhoto, $photoData->photoPath, $photoData->photoAlt, $photoData->photoPosition);
+            $cache->save($photo);
 
-//                $cache->save($photo);
             return $photo;
         } else {
             throw new Exception(self::ERROR_NO_PHOTO);
         }
-//        }
+        }
     }
 
     public function getPhotoDir()

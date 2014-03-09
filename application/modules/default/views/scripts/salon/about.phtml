@@ -5,11 +5,12 @@
 <div class="singleSalonBox">
     <?=$this->ShowSalonHeader($this->salon);?>
     <?=$this->ShowSalonMenu($this->salon, 'about');?>
-</div>
-<div class="descText">
-    <article>
-        <p></p>
-        <?=$this->contentPage['content']->getFieldText();?>
-        <p></p>
-    </article>
+    <div class="descText">
+        <article>
+            <p></p>
+            <?=$this->contentPage['content']->getFieldText();?>
+            <p></p>
+        </article>
+    </div>
+    <?=$this->ShowSalonMenu($this->salon, 'about');?>
 </div>
