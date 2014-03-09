@@ -22,16 +22,15 @@
     <script type="text/javascript" src="/static/default/js/script.js"></script>
     <?=$this->headScript()?>
     <script>
+        var inProgress = false;
+        var page = 2;
+
         function setCurrentCityAndArea()
         {
             var city_id = '<?=$this->currentCity?$this->currentCity->getId():0?>';
-            var area_id = '<?=isset($this->area)?$this->area->getId():0?>';
             if (city_id != 0) {
                 $('.city_'+city_id).attr('checked','checked');
             }
-//            if (area_id != 0) {
-//                $('.area_input_city_'+city_id).attr('checked','checked');
-//            }
         }
 
         function changeArea(ele, area_url)
@@ -48,7 +47,7 @@
             if (clickFn) {
                 var httpText = 'http://';
                 var site_name = '<?=SITE_NAME?>';
-                var city = $(ele).data('url');
+                var city = ele.data('url');
 
                 window.location.href = httpText+city+'.'+site_name;
             }
@@ -109,8 +108,13 @@
             return false;
         }
 
-        function getAjaxPage(page)
+        function getAjaxPage()
         {
+            if (page == 0 || inProgress)
+                return false;
+
+            inProgress = true;
+
             var city_id = '<?=$this->currentCity?$this->currentCity->getId():0?>';
             var area_id = '<?=isset($this->area)?$this->area->getId():0?>';
             var word = '<?=isset($this->word)?$this->word:''?>';
@@ -124,13 +128,26 @@
                 }
             ).done(function( data ) {
                     if (data.success) {
-                        $('#list_block').html(data.html);
+                        $('#list_block').append(data.html);
+                        page = data.page;
                     } else {
                         console.log(data.error);
                     }
+                    inProgress = false;
                 });
         }
     </script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-17073410-28', 'viprelax.net');
+        ga('send', 'pageview');
+
+    </script>
+
 </head>
 <body>
     <?php echo $this->partial('blocks/header.phtml', array (
@@ -167,5 +184,31 @@
             });
         });
     </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter24223378 = new Ya.Metrika({id:24223378,
+                        webvisor:true,
+                        clickmap:true,
+                        accurateTrackBounce:true});
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="//mc.yandex.ru/watch/24223378" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 </body>
 </html>

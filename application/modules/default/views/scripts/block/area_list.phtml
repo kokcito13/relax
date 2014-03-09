@@ -1,4 +1,5 @@
 <?php foreach($this->areas as $area): ?>
+    <? if ($this->currentCity->getId() != $area->getCityId()) continue; ?>
     <?php $content = $area->getContent()->getFields();?>
     <input class="area_inp area_input_city_<?=$area->getCityId();?>" data-id="<?=$area->getId()?>" data-idarea="<?=$this->currentArea->getId()?>" data-url="<?=$area->getUrl();?>" onclick="changeArea($('.city_<?=$area->getCityId();?>'), '<?=$area->getUrl();?>')" id="<?=$area->getUrl();?>" type="radio" value="<?=$area->getUrl();?>" name="area"
         <? if ($this->currentArea->getId() == $area->getId()): ?>
@@ -7,3 +8,14 @@
         />
     <label style="display: none;" class="area_inp area_in_city_<?=$area->getCityId();?>" for="<?=$area->getUrl();?>"><?=$content['contentName']->getFieldText();?></label>
 <?php endforeach; ?>
+<? if ( !is_null($this->currentArea->getId()) ): ?>
+    <input class="area_inp area_input_city_<?=$this->currentCity->getId();?>"
+           onclick="changeCity($('#<?=$this->currentCity->getUrl();?>'), true);"
+           data-url="<?=$this->currentCity->getUrl();?>"
+           type="radio"
+           name="area"/>
+    <label
+        for="current_city_<?=$this->currentCity->getUrl();?>"
+        onclick="changeCity($('#<?=$this->currentCity->getUrl();?>'), true);"
+        ><?=Kernel_Block::getText('Все районы', $this->blocks);?></label>
+<? endif; ?>

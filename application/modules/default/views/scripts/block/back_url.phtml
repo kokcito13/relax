@@ -1,5 +1,14 @@
 <div class="breadcrumbs">
-    <span class="backToList">
-        <a href="<?=$this->cityUrl;?><?=$this->url(array('url_key'=>$this->area->getUrl()),'default-list-area');?>"><?=Kernel_Block::getText('Назад к списку', $this->blocks);?></a>
+    <span>
+        <a href="http://<? echo SITE_NAME ?>"><?=Kernel_Block::getText('Салоны эротического массажа', $this->blocks);?></a>
+    </span>
+    <span>
+        <a href="<?=$this->cityUrl?>"><?=$this->cityContent['contentName']->getFieldText();?></a>
+    </span>
+    <span>
+        <a href="<?=$this->cityUrl?>/<?=$this->area->getUrl()?>"><?=$this->areaContent['contentName']->getFieldText();?></a>
+    </span>
+    <span>
+        <span><?=$this->salonContent['name']->getFieldText();?></span>
     </span>
 </div>

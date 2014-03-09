@@ -30,7 +30,7 @@ class Admin_AreaController extends Zend_Controller_Action
 
         $this->view->breadcrumbs->add('Районы города - '.$this->view->cityContent['contentName']->getFieldText(), '');
         $this->view->headTitle()->append('Районы города - '.$this->view->cityContent['contentName']->getFieldText());
-        $this->view->areas = Application_Model_Kernel_Area::getList();
+        $this->view->areas = Application_Model_Kernel_Area::getList($this->view->city_id);
     }
 
     public function addAction()

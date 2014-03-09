@@ -8,8 +8,12 @@ class Zend_View_Helper_ShowUrlBack
         $view = new Zend_View(array ('basePath' => APPLICATION_PATH . '/modules/default/views'));
 
         $view->salon    = $salon;
+        $view->salonContent = $salon->getContent()->getFields();
         $view->area = $salon->getArea();
-        $view->cityUrl = Kernel_City::getUrlForLink($salon->getCity());
+        $view->areaContent = $view->area->getContent()->getFields();
+        $view->city = $salon->getCity();
+        $view->cityUrl = Kernel_City::getUrlForLink($view->city);
+        $view->cityContent = $view->city->getContent()->getFields();
 
         $view->blocks = Application_Model_Kernel_Block::getList(true)->data;
         foreach ($view->blocks as $key => $value) {

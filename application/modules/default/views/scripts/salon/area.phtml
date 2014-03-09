@@ -1,15 +1,17 @@
 <? $this->headScript()->captureStart() ?>
 <? $this->headScript()->captureEnd() ?>
 <?=$this->ShowSubscribe();?>
+<? $city = Kernel_City::findCityFromUrl();?>
+<? $cityConten = $city->getContent()->getFields();?>
 <div class="breadcrumbs">
     <span>
         <a href="http://<? echo SITE_NAME ?>"><?=Kernel_Block::getText('Салоны эротического массажа', $this->blocks);?></a>
     </span>
     <span>
-        <a href="<?=Kernel_City::getUrlForLink(Kernel_City::findCityFromUrl())?>">Киев</a>
+        <a href="<?=Kernel_City::getUrlForLink($city)?>"><?=$cityConten['contentName']->getFieldText();?></a>
     </span>
     <span>
-        <a href="<?=$this->url();?>"><?=$this->areaContent['contentName']->getFieldText();?></a>
+        <span><?=$this->areaContent['contentName']->getFieldText();?></span>
     </span>
 </div>
 <div id="list_block">
@@ -24,3 +26,14 @@
         <?=$this->text;?>
     </article>
 </div>
+<script>
+    $(document).ready(function(){
+        /* Используйте вариант $('#more').click(function() для того, чтобы дать пользователю возможность управлять процессом, кликая по кнопке "Дальше" под блоком статей (см. файл index.php) */
+        $(window).scroll(function() {
+            /* Если высота окна + высота прокрутки больше или равны высоте всего документа и ajax-запрос в настоящий момент не выполняется, то запускаем ajax-запрос */
+            if($(window).scrollTop() + $(window).height() >= $(document).height() - 200) {
+                getAjaxPage();
+            }
+        });
+    });
+</script>

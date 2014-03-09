@@ -25,7 +25,7 @@ class Application_Model_Kernel_Block
     const ERROR_CONTENT_LANG_IS_NOT_DEFINED    = 'Content lang model is not defined';
 
 
-    public function __construct($idBlock, $idContentPack, $blockName)
+    public function __construct($idBlock = null, $idContentPack = null, $blockName = '')
     {
         $this->idBlock       = $idBlock;
         $this->idContentPack = $idContentPack;

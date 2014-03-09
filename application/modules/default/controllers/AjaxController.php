@@ -81,6 +81,7 @@ class AjaxController extends Zend_Controller_Action
             $word = trim($data['word']);
             $city = (int)$data['city'];
             $area = (int)$data['area'];
+            $page = (int)$data['page'];
 
             if (!empty($word)) {
                 $word = '%'.$this->view->word.'%';
@@ -96,14 +97,20 @@ class AjaxController extends Zend_Controller_Action
             }
 
             $view = new Zend_View(array('basePath' => APPLICATION_PATH . '/modules/default/views'));
-            $view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, $word, 1, (int)$data['page'], Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
+            $view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, $word, 1, $page, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
             $view->blocks = Application_Model_Kernel_Block::getList(true)->data;
             foreach ($view->blocks as $key => $value) {
                 $view->blocks[$key] = $value->getContent()->getFields();
             }
 
-            $response['html'] = $view->render('block/list.phtml');
+            if ($page == $view->salons->paginator->count()) {
+                $page = 0;
+            } else {
+                $page++;
+            }
 
+            $response['html'] = $view->render('block/list.phtml');
+            $response['page'] = $page;
             $response['success'] = true;
         } else {
             $response['error']['Not POST'] = 'Запрос не постовый';

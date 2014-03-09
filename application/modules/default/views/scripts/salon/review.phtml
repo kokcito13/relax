@@ -26,6 +26,7 @@
         return false;
     }
 <? $this->headScript()->captureEnd() ?>
+<? $this->area = $this->salon->getArea(); ?>
 <?=$this->ShowUrlBack($this->salon);?>
 <div class="singleSalonBox">
     <?=$this->ShowSalonHeader($this->salon);?>
