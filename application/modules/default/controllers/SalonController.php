@@ -80,12 +80,15 @@ class SalonController extends Zend_Controller_Action
         $this->view->salon = Application_Model_Kernel_Salon::getByUrlKey($this->view->url_key);
         $this->view->contentPage = $this->view->salon->getContent()->getFields();
 
-        $title = $this->view->contentPage['title']->getFieldText();
-        $keywords = $this->view->contentPage['keywords']->getFieldText();
-        $description = $this->view->contentPage['description']->getFieldText();
+        $name = $this->view->contentPage['name']->getFieldText();
+        $cityFields =  $this->view->salon->getCity()->getContent()->getFields();
+        $cityname = $cityFields['contentName']->getFieldText();
+        $areaFields = $this->view->salon->getArea()->getContent()->getFields();
+        $areaName = $areaFields['contentName']->getFieldText();
 
-        $title = Kernel_Block::getText('Расположение на карте.', $this->view->blocksArray).' '.$title;
-        $description = Kernel_Block::getText('Расположение на карте,', $this->view->blocksArray).' '.$description;
+        $title = Kernel_Block::getText('Салон эротического массажа', $this->view->blocksArray).' '.$name.' '.Kernel_Block::getText('на карте  города', $this->view->blocksArray).' '.$cityname;
+        $description = Kernel_Block::getText('Точное расположение салона эротического массажа', $this->view->blocksArray).' '.$name.' '.Kernel_Block::getText('на карте  города', $this->view->blocksArray).' '.$cityname.' '.Kernel_Block::getText('в районе', $this->view->blocksArray).' '.$areaName;
+        $keywords = Kernel_Block::getText('Салон, эротического, массажа,', $this->view->blocksArray).' '.$name.', '.$cityname.', '.$areaName.', '.Kernel_Block::getText('район, карта, проехать', $this->view->blocksArray).'.';
 
         $this->view->title = $title;
         $this->view->keywords = $keywords;

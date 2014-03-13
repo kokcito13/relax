@@ -2,6 +2,11 @@
 <? $this->headScript()->captureEnd() ?>
 <?=$this->ShowSubscribe();?>
 <? $city = Kernel_City::findCityFromUrl();?>
+<? if($this->salons->paginator->count() < 2): ?>
+    <script>
+        page = 0;
+    </script>
+<? endif; ?>
 <? if ($city): ?>
     <? $cityConten = $city->getContent()->getFields();?>
     <div class="breadcrumbs">

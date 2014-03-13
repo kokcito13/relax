@@ -3,6 +3,11 @@
 <?=$this->ShowSubscribe();?>
 <? $city = Kernel_City::findCityFromUrl();?>
 <? $cityConten = $city->getContent()->getFields();?>
+<? if($this->salons->paginator->count() < 2): ?>
+    <script>
+        page = 0;
+    </script>
+<? endif; ?>
 <div class="breadcrumbs">
     <span>
         <a href="http://<? echo SITE_NAME ?>"><?=Kernel_Block::getText('Салоны эротического массажа', $this->blocks);?></a>
