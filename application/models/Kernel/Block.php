@@ -153,7 +153,7 @@ class Application_Model_Kernel_Block
                 $paginator->setCurrentPageNumber($page);
                 $return->paginator = $paginator;
             } else {
-                $return->paginator = $db->fetchAll($select);
+                @$return->paginator = $db->fetchAll($select);
             }
             $return->data = array ();
             $i            = 0;

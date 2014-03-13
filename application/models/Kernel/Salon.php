@@ -541,6 +541,15 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         return $this->comments;
     }
 
+    public function getNewComments()
+    {
+        if (empty($this->comments)) {
+            $this->comments = Application_Model_Kernel_Comment::getList($this->id, Application_Model_Kernel_Comment::STATUS_CREATE);
+        }
+
+        return $this->comments;
+    }
+
     public function getArea()
     {
         if (is_null($this->area)) {

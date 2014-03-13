@@ -20,3 +20,19 @@
         </li>
     </ul>
 </div>
+<div class="mobileMenu">
+    <ul>
+        <li>
+            <a <? if($this->current == 'girls'): ?>class="current"<? endif; ?> href="<?=$this->salon->getRoute()->getUrl();?>"><?=Kernel_Block::getText('Девушки', $this->blocks);?></a>
+        </li>
+        <li>
+            <a <? if($this->current == 'vidy-massage'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-vidy-massage');?>"><?=Kernel_Block::getText('Масажи', $this->blocks);?></a>
+        </li>
+        <li>
+            <a <? if($this->current == 'review'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>"><?=Kernel_Block::getText('Отзывы', $this->blocks);?></a>
+        </li>
+        <li>
+            <a <? if($this->current == 'map'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-map');?>"><?=Kernel_Block::getText('Карта', $this->blocks);?></a>
+        </li>
+    </ul>
+</div>

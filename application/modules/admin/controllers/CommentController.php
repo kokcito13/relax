@@ -39,6 +39,7 @@ class Admin_CommentController extends Zend_Controller_Action {
             $this->view->comment->setCommentText($data->text_comment);
             $this->view->comment->save();
 
+            $this->_redirect($this->view->url(array ('salon_id' => $this->view->salon_id), 'admin-comment-index'));
         }
 	}
 

@@ -15,6 +15,6 @@
     </div>
     <div class="salonPhone">
         <span data-salon-phone="<?=$this->salon->getPhone()?>"><?=mb_substr($this->salon->getPhone(), 0, 5)?> XX-XX-XXX</span>
-        <a href="#"><?=Kernel_Block::getText('Показать', $this->blocks);?></a>
+        <a href="#" onclick="ga('send', 'event', 'show_number', 'click', '<?=$this->salon->getRoute()->getUrl();?>');"><?=Kernel_Block::getText('Показать', $this->blocks);?></a>
     </div>
 </div>

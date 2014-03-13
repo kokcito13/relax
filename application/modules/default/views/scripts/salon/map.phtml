@@ -5,15 +5,6 @@
 <div class="singleSalonBox">
     <?=$this->ShowSalonHeader($this->salon);?>
     <?=$this->ShowSalonMenu($this->salon, 'map');?>
-
-    <div class="mobileMenu">
-        <ul>
-            <li><a href="#">Девушки</a></li>
-            <li><a class="current" href="#">Цены</a></li>
-            <li><a href="#">Отзывы</a></li>
-            <li><a href="#">Карта</a></li>
-        </ul>
-    </div>
     <div class="salonContent">
         <div class="full-width map">
             <h2><?=Kernel_Block::getText('Салон на карте', $this->blocks);?></h2>

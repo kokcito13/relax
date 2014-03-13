@@ -47,22 +47,22 @@
      $(document).ready(function(){
         initUploaderWall({
             'upload_button_id':'file_uploader1',
-            'action': '/admin/photo/upload/<?=$this->idPhoto1?>',
+            'action': '<?=$this->url(array('idPhoto'=>$this->idPhoto1),'admin-photo-upload')?>',
             'button_label': 'Загрузить'
         },1);
          initUploaderWall({
              'upload_button_id':'file_uploader2',
-             'action': '/admin/photo/upload/<?=$this->idPhoto2?>',
+             'action': '<?=$this->url(array('idPhoto'=>$this->idPhoto2),'admin-photo-upload')?>',
              'button_label': 'Загрузить'
          },2);
          initUploaderWall({
              'upload_button_id':'file_uploader3',
-             'action': '/admin/photo/upload/<?=$this->idPhoto3?>',
+             'action': '<?=$this->url(array('idPhoto'=>$this->idPhoto3),'admin-photo-upload')?>',
              'button_label': 'Загрузить'
          },3);
          initUploaderWall({
              'upload_button_id':'file_uploader4',
-             'action': '/admin/photo/upload/<?=$this->idPhoto4?>',
+             'action': '<?=$this->url(array('idPhoto'=>$this->idPhoto4),'admin-photo-upload')?>',
              'button_label': 'Загрузить'
          },4);
     });
