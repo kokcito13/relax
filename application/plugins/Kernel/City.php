@@ -12,6 +12,12 @@ class Kernel_City
         $serverName = $_SERVER['SERVER_NAME'];
         $uri = substr($serverName, 0, -strlen(SITE_NAME) );
 
+        $ar = explode('.', $serverName);
+        if ($ar[0] === "www") {
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: http://'.substr($_SERVER['SERVER_NAME'], 4));
+        }
+
         if (!empty($uri)) {
             $city = Application_Model_Kernel_City::getByUrl( substr($uri, 0, -1) );
         }
