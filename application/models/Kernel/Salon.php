@@ -410,6 +410,9 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     {
         if (is_null($this->photo2))
             $this->photo2 = Application_Model_Kernel_Photo::getById($this->idPhoto2);
+        if ($this->photo2->getPhotoPath() == 'image.jpg') {
+            $this->photo2->setPhotoPath('banner3.png');
+        }
 
         return $this->photo2;
     }
@@ -418,6 +421,9 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     {
         if (is_null($this->photo3))
             $this->photo3 = Application_Model_Kernel_Photo::getById($this->idPhoto3);
+        if ($this->photo3->getPhotoPath() == 'image.jpg') {
+            $this->photo3->setPhotoPath('banner1.jpg');
+        }
 
         return $this->photo3;
     }
@@ -426,6 +432,9 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     {
         if (is_null($this->photo4))
             $this->photo4 = Application_Model_Kernel_Photo::getById($this->idPhoto4);
+        if ($this->photo4->getPhotoPath() == 'image.jpg') {
+            $this->photo4->setPhotoPath('banner2.jpg');
+        }
 
         return $this->photo4;
     }

@@ -33,10 +33,11 @@
 </div>
 <script>
     $(document).ready(function(){
-        /* Используйте вариант $('#more').click(function() для того, чтобы дать пользователю возможность управлять процессом, кликая по кнопке "Дальше" под блоком статей (см. файл index.php) */
         $(window).scroll(function() {
-            /* Если высота окна + высота прокрутки больше или равны высоте всего документа и ajax-запрос в настоящий момент не выполняется, то запускаем ajax-запрос */
-            if($(window).scrollTop() + $(window).height() >= $(document).height() - 200) {
+
+            var currentPosition = $(window).scrollTop() + $(window).height();
+            var positionToGet = $(document).height() - (600 + $('.descText > article').height());
+            if( currentPosition >= positionToGet ) {
                 getAjaxPage();
             }
         });

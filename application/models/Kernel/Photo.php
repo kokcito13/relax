@@ -165,6 +165,13 @@ class Application_Model_Kernel_Photo
         return $this->_photoPath;
     }
 
+    public function setPhotoPath($path)
+    {
+        $this->_photoPath = $path;
+	
+	return $this;
+    }
+
     public function getPath($type, $priview = false)
     {
         $view = Zend_Layout::getMvcInstance()->getView();
