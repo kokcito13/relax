@@ -219,6 +219,10 @@ else
 						<td width="193" class="first">Название:</td>
 						<td><input name="content[<?=$lang->getId()?>][name]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['name'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['name']) : ''?>" /></td>
 					</tr>
+                    <tr class="">
+                        <td width="193" class="first">Head:</td>
+                        <td><input name="content[<?=$lang->getId()?>][head]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['head'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['head']) : ''?>" /></td>
+                    </tr>
 					<tr class="">
 						<td width="193" class="first">Титл:</td>
 						<td><input name="content[<?=$lang->getId()?>][title]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['title'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['title']) : ''?>" /></td>

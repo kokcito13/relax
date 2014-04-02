@@ -5,6 +5,7 @@
             <td width="193" class="first">URL:</td>
             <td><input name="url" type="text" class="field" value="<?=(isset($_POST['url'])) ? htmlspecialchars( $_POST['url']) : ''?>" /></td>
         </tr>
+
     </table>
     <div id="tabs">
         <?php if (sizeof($this->langs) > 1): ?>
@@ -20,6 +21,10 @@
                     <tr class="grey">
                         <td width="193" class="first">Название:</td>
                         <td><input name="content[<?=$lang->getId()?>][contentName]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['contentName'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['contentName']) : ''?>" /></td>
+                    </tr>
+                    <tr class="">
+                        <td width="193" class="first">Head:</td>
+                        <td><input name="content[<?=$lang->getId()?>][head]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['head'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['head']) : ''?>" /></td>
                     </tr>
                     <tr class="">
                         <td width="193" class="first">Title:</td>

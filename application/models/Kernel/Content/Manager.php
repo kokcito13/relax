@@ -116,11 +116,13 @@ class Application_Model_Kernel_Content_Manager {
      * @name getLangs
      * @return array[][]
      */
-    public function getContents() {
-        $data = array();
+    public function getContents()
+    {
+        $data = array ();
         foreach ($this->_content as $content) {
             $data[$content->getIdLang()] = $this->getLangContent($content->getIdLang());
         }
+
         return $data;
     }
 

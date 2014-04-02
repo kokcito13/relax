@@ -1,1 +1,43 @@
-<?php echo $this->navigation()->sitemap($this->menus);
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<?=$this->ShowSubscribe();?>
+<div id="list_block">
+    <p>Города и районы:</p>
+    <? foreach ($this->cities as $city):?>
+        <? $cityContent = $city->getContent()->getFields(); ?>
+        - <a href="<?=Kernel_City::getUrlForLink($city)?>"><?=$cityContent['contentName']->getFieldText()?></a><br/>
+        <? foreach ($city->getAreas() as $area): ?>
+            <? $areaContent = $area->getContent()->getFields(); ?>
+            -- <a href="<?=Kernel_City::getUrlForLink($city)?><?=$this->url(array('url_key'=>$area->getUrl()),'default-list-area');?>"><?=$areaContent['contentName']->getFieldText()?></a><br/>
+        <? endforeach; ?>
+    <? endforeach; ?>
+    <p>Салоны:</p>
+    <? foreach ($this->salons as $salon):?>
+        <? $salonContent = $salon->getContent()->getFields(); ?>
+        - <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$salon->getRoute()->getUrl();?>"><?=$salonContent['name']->getFieldText()?></a><br/>
+        <ul style="padding-left: 20px;">
+            <li>
+                <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-vidy-massage');?>"><?=Kernel_Block::getText('Виды массажа и цены', $this->blocks);?> - <?=$salonContent['name']->getFieldText()?></a>
+            </li>
+            <li>
+                <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-review');?>"><?=Kernel_Block::getText('Отзывы', $this->blocks);?> - <?=$salonContent['name']->getFieldText()?></a>
+            </li>
+            <li>
+                <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-map');?>"><?=Kernel_Block::getText('Показать на карте', $this->blocks);?> - <?=$salonContent['name']->getFieldText()?></a>
+            </li>
+            <li>
+                <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-akciy');?>"><?=Kernel_Block::getText('Акции салона', $this->blocks);?> - <?=$salonContent['name']->getFieldText()?></a>
+            </li>
+            <li>
+                <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-about');?>"><?=Kernel_Block::getText('О салоне', $this->blocks);?> - <?=$salonContent['name']->getFieldText()?></a>
+            </li>
+        </ul>
+        <br/>
+    <? endforeach; ?>
+</div>
+<?=$this->ShowSubscribe();?>
+<div class="descText">
+    <article>
+        <?php echo $this->text ?>
+    </article>
+</div>

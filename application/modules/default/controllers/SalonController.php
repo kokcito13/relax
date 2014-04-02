@@ -54,6 +54,8 @@ class SalonController extends Zend_Controller_Action
         $this->view->title = $title;
         $this->view->keywords = $keywords;
         $this->view->description = $description;
+
+        $this->view->headText = isset($this->view->contentPage['head'])?$this->view->contentPage['head']->getFieldText():'';
     }
 
     public function aboutAction()
@@ -72,6 +74,8 @@ class SalonController extends Zend_Controller_Action
         $this->view->title = $title;
         $this->view->keywords = $keywords;
         $this->view->description = $description;
+
+        $this->view->headText = isset($this->view->contentPage['head'])?$this->view->contentPage['head']->getFieldText():'';
     }
 
     public function mapAction()
@@ -93,6 +97,8 @@ class SalonController extends Zend_Controller_Action
         $this->view->title = $title;
         $this->view->keywords = $keywords;
         $this->view->description = $description;
+
+        $this->view->headText = isset($this->view->contentPage['head'])?$this->view->contentPage['head']->getFieldText():'';
     }
 
     public function vidyMassageAction()
@@ -113,6 +119,8 @@ class SalonController extends Zend_Controller_Action
         $this->view->title = $title;
         $this->view->keywords = $keywords;
         $this->view->description = $description;
+
+        $this->view->headText = isset($this->view->contentPage['head'])?$this->view->contentPage['head']->getFieldText():'';
     }
 
 
@@ -134,6 +142,8 @@ class SalonController extends Zend_Controller_Action
         $this->view->title = $title;
         $this->view->keywords = $keywords;
         $this->view->description = $description;
+
+        $this->view->headText = isset($this->view->contentPage['head'])?$this->view->contentPage['head']->getFieldText():'';
     }
 
     public function areaAction()
@@ -182,6 +192,8 @@ class SalonController extends Zend_Controller_Action
         $this->view->title = $title;
         $this->view->keywords = $keywords;
         $this->view->description = $description;
+
+        $this->view->headText = isset($this->view->areaContent['head'])?$this->view->contentPage['head']->getFieldText():'';
     }
 
     public function akciyAction()
@@ -200,5 +212,7 @@ class SalonController extends Zend_Controller_Action
         $this->view->title = $title;
         $this->view->keywords = $keywords;
         $this->view->description = $description;
+
+        $this->view->headText = isset($this->view->contentPage['head'])?$this->view->contentPage['head']->getFieldText():'';
     }
 }

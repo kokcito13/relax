@@ -186,4 +186,44 @@ class Application_Model_Kernel_Content_Fields
             $db->rollBack();
         }
     }
+
+    public function setFieldText($text)
+    {
+        $this->fieldText = trim($text);
+
+        return $this;
+    }
+
+    public static function setFieldsForModel($postContent, $getContent, &$model)
+    {
+        self::deleteCache();
+        $langs = Kernel_Language::getAll();
+        foreach ($langs as $lang) {
+            $idContent = $getContent[$lang->getId()]->getId();
+            $contentFields = $getContent[$lang->getId()]->getFields();
+            foreach ($postContent[$lang->getId()] as $key => $value) {
+                if (isset($contentFields[$key])) {
+                    $contentFields[$key]
+                        ->setFieldText($value)
+                        ->save();
+                } else {
+                    $field = new Application_Model_Kernel_Content_Fields(null, $idContent, $key, $value);
+                    $field->save();
+                }
+            }
+        }
+
+        if (count($postContent) > count($getContent)) {
+            foreach ($langs as $lang) {
+                if (!isset($getContent[$lang->getId()])) {
+                    $content = new Application_Model_Kernel_Content_Language(null, $lang->getId(), $model->getContentManager()->getIdContentPack());
+                    foreach ($postContent[$lang->getId()] as $key => $value) {
+                        $content->setFields($key, $value);
+                    }
+                    $model->getContentManager()->addContentLanguage($lang->getId(), $content);
+                    $model->getContentManager()->saveContentData();
+                }
+            }
+        }
+    }
 }

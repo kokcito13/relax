@@ -22,6 +22,10 @@
                         <td><input name="content[<?=$lang->getId()?>][contentName]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['contentName'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['contentName']) : ''?>" /></td>
                     </tr>
                     <tr class="">
+                        <td width="193" class="first">Head:</td>
+                        <td><input name="content[<?=$lang->getId()?>][head]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['head'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['head']) : ''?>" /></td>
+                    </tr>
+                    <tr class="">
                         <td width="193" class="first">Title:</td>
                         <td><input name="content[<?=$lang->getId()?>][title]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['title'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['title']) : ''?>" /></td>
                     </tr>

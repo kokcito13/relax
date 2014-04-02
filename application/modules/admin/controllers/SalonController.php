@@ -108,7 +108,6 @@ class Admin_SalonController extends Zend_Controller_Action
 
     public function editAction()
     {
-        $fields = array();
         $this->view->langs = Kernel_Language::getAll();
         $this->view->back = true;
         $this->_helper->viewRenderer->setScriptAction('add');
@@ -122,45 +121,11 @@ class Admin_SalonController extends Zend_Controller_Action
         $this->view->idPhoto4 = $this->view->salon->getIdPhoto4();
 
         $getContent = $this->view->salon->getContentManager()->getContent();
-        foreach ($getContent as $key => $value) {
-            $getContent[$key]->setFieldsArray(Application_Model_Kernel_Content_Fields::getFieldsByIdContent($getContent[$key]->getId()));
-        }
         $this->view->idPage = $this->view->salon->getIdPage();
         if ($this->getRequest()->isPost()) {
             $data = (object)$this->getRequest()->getPost();
             try {
-                foreach ($this->view->langs as $lang) {
-                    $value = $getContent[$lang->getId()];
-                    $oldFields = $value->getFields();
-                    $idContent = $value->getId();
-                    foreach ($data->content[$lang->getId()] as $keyLang => $valueLang) {
-                        $valueFields = $oldFields[$keyLang];
-                        if (!isset($valueFields)) {
-                            $field = new Application_Model_Kernel_Content_Fields(null, $idContent, $keyLang, $valueLang);
-                            $field->save();
-                            continue;
-                        }
-                        if ($valueLang !== $valueFields->getFieldText()) {
-                            $fields[] = new Application_Model_Kernel_Content_Fields($valueFields->getIdField(), $valueFields->getIdContent(), $valueFields->getFieldName(), $valueLang);
-                        }
-                    }
-                    $this->view->salon->getContentManager()->setLangContent($lang->getId(), $fields);
-                    $fields = array();
-                }
-
-                if (count($data->content) > count($getContent)) {
-                    foreach ($getContent as $key => $value) {
-                        $idContentPack = $value->getIdContentPack();
-                        unset($data->content[$value->getIdLang()]);
-                    }
-                    foreach ($data->content as $key => $value) {
-                        $content = new Application_Model_Kernel_Content_Language(null, $key, $idContentPack);
-                        foreach ($value as $k => $v) {
-                            $content->setFields($k, $v);
-                        }
-                        $content->save();
-                    }
-                }
+                Application_Model_Kernel_Content_Fields::setFieldsForModel($data->content, $getContent, $this->view->salon);
 
                 $this->view->idPhoto1 = (int)$data->idPhoto1;
                 $this->view->photo1 = Application_Model_Kernel_Photo::getById($this->view->idPhoto1);

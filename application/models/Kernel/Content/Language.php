@@ -63,7 +63,7 @@ class Application_Model_Kernel_Content_Language
         $this->_idContentPack = intval($idContentPack);
     }
 
-    public function setFields($key, $value, $idField = 0)
+    public function setFields($key, $value, $idField = null)
     {
         $this->fields[] = new Application_Model_Kernel_Content_Fields($idField, $this->_idContent, $key, $value);
     }

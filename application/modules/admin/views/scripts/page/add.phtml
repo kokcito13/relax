@@ -31,6 +31,10 @@
 						<td width="193" class="first">Дескрипшин:</td>
 						<td><input name="content[<?=$lang->getId()?>][description]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['description'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['description']) : ''?>" /></td>
 					</tr>
+                    <tr class="">
+                        <td width="193" class="first">Head:</td>
+                        <td><input name="content[<?=$lang->getId()?>][head]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['head'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['head']) : ''?>" /></td>
+                    </tr>
 					<tr class="grey">
 						<td width="193" class="first">Кейвордс:</td>
 						<td><input name="content[<?=$lang->getId()?>][keywords]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['keywords'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['keywords']) : ''?>" /></td>

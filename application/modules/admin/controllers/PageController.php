@@ -68,42 +68,7 @@ class Admin_PageController extends Zend_Controller_Action {
             $data = (object) $this->getRequest()->getPost();
             try {
                 $this->view->page->getRoute()->setUrl($data->url);
-                foreach ($this->view->langs as $lang) {
-                    foreach ($data->content[$lang->getId()] as $keyLang => $valueLang){
-                        foreach ($getContent as $key => $value){
-                            if( $value->getIdLang() == $lang->getId() ){
-                                foreach ($value->getFields() as $keyField => $valueFields){
-                                    if ($keyLang === $valueFields->getFieldName()){
-                                        if ($valueLang !== $valueFields->getFieldText()){
-                                            $fields[] = new Application_Model_Kernel_Content_Fields($valueFields->getIdField(), $valueFields->getIdContent(), $valueFields->getFieldName(), $valueLang);
-                                        } else {
-                                            break;
-                                        }
-                                    } else if( !isset($getContent[$keyLang]) ){
-                                        $field = new Application_Model_Kernel_Content_Fields(null, $idContent, $keyLang, $valueLang);
-                                        $field->save();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if( isset($getContent[$lang->getId()]) ){
-                        $this->view->page->getContentManager()->setLangContent($lang->getId(), $fields);
-                        $fields = array();
-                    }
-                }
-                if( count($data->content) > count($getContent) ){
-                    foreach ($getContent as $key => $value){
-                        $idContentPack = $value->getIdContentPack();
-                        unset($data->content[$value->getIdLang()]);
-                    }
-                    foreach( $data->content as $key=>$value ){
-                        $content = new Application_Model_Kernel_Content_Language(null, $key, $idContentPack);
-                        foreach($value as $k=>$v)
-                            $content->setFields($k, $v);
-                        $content->save();
-                    }
-                }
+                Application_Model_Kernel_Content_Fields::setFieldsForModel($data->content, $getContent, $this->view->page);
                 
                 //$this->view->page->validate();
                 $this->view->page->save();

@@ -179,4 +179,9 @@ class Application_Model_Kernel_City
         $db->delete('cities', "cities.id = {$this->id}");
         $this->getContentManager()->delete();
     }
+
+    public function getAreas()
+    {
+        return Application_Model_Kernel_Area::getList($this->id);
+    }
 }

@@ -72,50 +72,11 @@ class Admin_CityController extends Zend_Controller_Action
         $this->view->id       = (int)$this->_getParam('id');
         $this->view->category = Application_Model_Kernel_City::getById($this->view->id);
         $getContent           = $this->view->category->getContentManager()->getContent();
-        foreach ($getContent as $key => $value) {
-            $getContent[$key]->setFieldsArray(Application_Model_Kernel_Content_Fields::getFieldsByIdContent($getContent[$key]->getId()));
-        }
+
         if ($this->getRequest()->isPost()) {
             $data = (object)$this->getRequest()->getPost();
             try {
-                $fields               = array ();
-                foreach ($this->view->langs as $lang) {
-                    foreach ($data->content[$lang->getId()] as $keyLang => $valueLang) {
-                        foreach ($getContent as $key => $value) {
-                            if ($value->getIdLang() == $lang->getId()) {
-                                foreach ($value->getFields() as $keyField => $valueFields) {
-                                    $gContent = $value->getFields();
-                                    if ($keyLang === $valueFields->getFieldName()) {
-                                        if ($valueLang !== $valueFields->getFieldText()) {
-                                            $fields[] = new Application_Model_Kernel_Content_Fields($valueFields->getIdField(), $valueFields->getIdContent(), $valueFields->getFieldName(), $valueLang);
-                                        } else {
-                                            break;
-                                        }
-                                    } else if (!isset($gContent[$keyLang])) {
-                                        $field = new Application_Model_Kernel_Content_Fields(null, $value->getId(), $keyLang, $valueLang);
-                                        $field->save();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (isset($getContent[$lang->getId()])) {
-                        $this->view->category->getContentManager()->setLangContent($lang->getId(), $fields);
-                        $fields = array ();
-                    }
-                }
-                if (count($data->content) > count($getContent)) {
-                    foreach ($getContent as $key => $value) {
-                        $idContentPack = $value->getIdContentPack();
-                        unset($data->content[$value->getIdLang()]);
-                    }
-                    foreach ($data->content as $key => $value) {
-                        $content = new Application_Model_Kernel_Content_Language(null, $key, $idContentPack);
-                        foreach ($value as $k => $v)
-                            $content->setFields($k, $v);
-                        $content->save();
-                    }
-                }
+                Application_Model_Kernel_Content_Fields::setFieldsForModel($data->content, $getContent, $this->view->category);
 
                 $this->view->category->setUrl($data->url);
                 $this->view->category->validate();
@@ -127,14 +88,13 @@ class Admin_CityController extends Zend_Controller_Action
                 $this->view->ShowMessage($e->getMessage());
             }
         } else {
-            $_POST['content']     = $this->view->category->getContentManager()->getContents();
-            $_POST['url']         = $this->view->category->getUrl();
+            $_POST['content'] = $this->view->category->getContentManager()->getContents();
+            $_POST['url']     = $this->view->category->getUrl();
             foreach ($this->view->langs as $lang) {
                 if (isset($_POST['content'][$lang->getId()]))
                     foreach ($_POST['content'][$lang->getId()] as $value)
                         $_POST['content'][$lang->getId()][$value->getFieldName()] = $value->getFieldText();
             }
-
         }
     }
 
