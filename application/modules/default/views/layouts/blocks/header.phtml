@@ -2,8 +2,8 @@
     <div class="wrapper">
         <a class="logo" href="<?=Kernel_City::getUrlForLink(false)?>"><img src="/static/default/images/logo.png" width="321" height="77"></a>
         <div class="top-info">
-            <a href="#">
-                <img src="/static/default/images/content/topinfo.png" alt="">
+            <a href="<?=$this->siteSetings->getUrl1();?>">
+                <img src="<?=$this->siteSetings->getPhoto1()->getPath('591:60')?>" alt="">
             </a>
         </div>
         <div class="clear"></div>
@@ -38,7 +38,7 @@
                 </div>
                 <input type="text" name="word" size="" value="<? if (!isset($this->word) || empty($this->word)):?><?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?><? else: ?><?=$this->word?><? endif ?>" onblur="if (this.value == '') {this.value = '<?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?>';}" onfocus="if (this.value == '<?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?>') {this.value = '';}"/>
                 <div class="clear"></div>
-                <input type="submit" size="" value="Показать салоны" />
+<!--                <input type="submit" size="" value="Показать салоны" />-->
                 <!--
                 <input type="button" name="" size="" value="Показать салоны" />
                 <button>Показать салоны</button>

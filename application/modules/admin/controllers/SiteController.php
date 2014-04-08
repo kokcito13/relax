@@ -24,20 +24,21 @@ class Admin_SiteController extends Zend_Controller_Action
         $this->view->info = Application_Model_Kernel_SiteSetings::getBy();
 
         $this->view->idPhoto1 = $this->view->info->getIdPhoto1();
+        $this->view->idPhoto2 = $this->view->info->getIdPhoto2();
 
         if ($this->getRequest()->isPost()) {
             $data = (object)$this->getRequest()->getPost();
             try {
-
                 $this->view->idPhoto1 = (int)$data->idPhoto1;
-
                 $this->view->photo1 = Application_Model_Kernel_Photo::getById($this->view->idPhoto1);
 
+                $this->view->idPhoto2 = (int)$data->idPhoto2;
+                $this->view->photo2 = Application_Model_Kernel_Photo::getById($this->view->idPhoto2);
+
                 $this->view->info->setIdPhoto1($this->view->idPhoto1);
-                $this->view->info->setRate($data->rate);
-                $this->view->info->setMinPrice($data->minPrice);
-                $this->view->info->setPhone($data->phone);
-                $this->view->info->setEmail($data->email);
+                $this->view->info->setIdPhoto2($this->view->idPhoto1);
+                $this->view->info->setUrl1($data->url1);
+                $this->view->info->setUrl2($data->url2);
 
                 $this->view->info->save();
 
@@ -48,9 +49,8 @@ class Admin_SiteController extends Zend_Controller_Action
                 $this->view->ShowMessage($e->getMessage());
             }
         } else {
-
             $this->view->photo1 = Application_Model_Kernel_Photo::getById($this->view->idPhoto1);
-
+            $this->view->photo2 = Application_Model_Kernel_Photo::getById($this->view->idPhoto2);
         }
         $this->view->breadcrumbs->add('Редактировать', '');
         $this->view->headTitle()->append('Редактировать');

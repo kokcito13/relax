@@ -4,26 +4,22 @@ class Application_Model_Kernel_SiteSetings
 
     protected $id;
     protected $idPhoto1;
+    protected $idPhoto2;
 
-    protected $rate;
-    protected $minPrice;
-
-    protected $phone;
-    protected $email;
-
+    protected $url1;
+    protected $url2;
 
     protected $photo1 = null;
+    protected $photo2 = null;
 
-    public function __construct($id, $idPhoto1, $rate, $minPrice, $phone, $email)
+    public function __construct($id, $idPhoto1, $idPhoto2, $url1, $url2)
     {
         $this->id = $id;
         $this->idPhoto1 = $idPhoto1;
-        $this->rate = $rate;
-        $this->minPrice = $minPrice;
-        $this->phone = $phone;
-        $this->email = $email;
+        $this->idPhoto2 = $idPhoto2;
+        $this->url1 = $url1;
+        $this->url2 = $url2;
     }
-
 
     public function getIdPhoto1()
     {
@@ -50,55 +46,34 @@ class Application_Model_Kernel_SiteSetings
         $this->idPhoto1 = $idPhoto1;
     }
 
+    public function getIdPhoto2()
+    {
+        return $this->idPhoto2;
+    }
+
+    public function getPhoto2()
+    {
+        if (is_null($this->photo2))
+            $this->photo2 = Application_Model_Kernel_Photo::getById($this->idPhoto2);
+
+        return $this->photo2;
+    }
+
+    public function setPhoto2(Application_Model_Kernel_Photo &$photo2)
+    {
+        $this->photo2 = $photo2;
+
+        return $this;
+    }
+
+    public function setIdPhoto2($idPhoto2)
+    {
+        $this->idPhoto2 = $idPhoto2;
+    }
+    
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getRate()
-    {
-        return $this->rate;
-    }
-
-    public function getMinPrice()
-    {
-        return $this->minPrice;
-    }
-
-    public function setMinPrice($value)
-    {
-        $this->minPrice = (int)$value;
-    }
-
-    public function setRate($value)
-    {
-        $this->rate = (int)$value;
-    }
-
-    public function getPhone()
-    {
-
-        return $this->phone;
-    }
-
-    public function setPhone($value)
-    {
-        $this->phone = $value;
-
-        return $this;
-    }
-
-    public function getEmail()
-    {
-
-        return $this->email;
-    }
-
-    public function setEmail($value)
-    {
-        $this->email = $value;
-
-        return $this;
     }
 
     public function validate()
@@ -120,10 +95,9 @@ class Application_Model_Kernel_SiteSetings
     {
         $data = array(
             'idPhoto1'     => $this->idPhoto1,
-            'rate'         => $this->rate,
-            'minPrice' => $this->minPrice,
-            'phone' => $this->phone,
-            'email' => $this->email
+            'idPhoto2'         => $this->idPhoto2,
+            'url1' => $this->url1,
+            'url2' => $this->url2
         );
         $db = Zend_Registry::get('db');
         $db->update('site_setings', $data, 'id = ' . $this->getId());
@@ -136,10 +110,34 @@ class Application_Model_Kernel_SiteSetings
         $select->where('site_setings.id = 1');
         $select->limit(1);
         if (($block = $db->fetchRow($select)) !== false) {
-            return new self($block->id, $block->idPhoto1, $block->rate, $block->minPrice, $block->phone, $block->email);
+            return new self($block->id, $block->idPhoto1, $block->idPhoto1, $block->url1, $block->url2);
         }
         else {
             throw new Exception('Table NOT FOUND');
         }
+    }
+
+    public function getUrl1()
+    {
+        return $this->url1;
+    }
+
+    public function getUrl2()
+    {
+        return $this->url2;
+    }
+
+    public function setUrl1($url)
+    {
+        $this->url1 = $url;
+
+        return $this;
+    }
+
+    public function setUrl2($url)
+    {
+        $this->url2 = $url;
+
+        return $this;
     }
 }

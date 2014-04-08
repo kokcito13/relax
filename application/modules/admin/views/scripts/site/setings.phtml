@@ -40,6 +40,11 @@
             'action': '/admin/photo/upload/<?=$this->idPhoto1?>',
             'button_label': 'Загрузить'
         },1);
+         initUploaderWall({
+             'upload_button_id':'file_uploader2',
+             'action': '/admin/photo/upload/<?=$this->idPhoto2?>',
+             'button_label': 'Загрузить'
+         },2);
     });
 </script>
 <?
@@ -47,12 +52,15 @@ if( isset($this->photo1) )
     $photoPath1 = trim($this->photo1->getPhotoPath());
 else 
     $photoPath1 = '';
+if( isset($this->photo2) )
+    $photoPath2 = trim($this->photo2->getPhotoPath());
+else 
+    $photoPath2 = '';
 ?>
 <form action="<?= $this->url() ?>" method="post" id="PageForm"> 
     <table class="zebra edit">
-        <tr class=""   style="display:none;">
-            <td width="193" class="first">Картинка Шапки
-                
+        <tr class="">
+            <td width="193" class="first">Banner1
                 <a href="<?if ($this->idPhoto1 === 0 || empty($photoPath1) ): ?>/static/admin/images/nobg.png<? else: echo Application_Model_Kernel_Photo::getById($this->idPhoto1)->getPath('210:130'); endif ?>" target="_blank" id="previewImage1" class="preview <? if ($this->idPhoto1 === 0 || empty($photoPath1) ): ?>hide<? endif ?>" title="">
                     <img src="/static/admin/images/picture.png" alt="">
                 </a>
@@ -62,25 +70,28 @@ else
             </td>
         </tr>
         <tr class="grey">
-            <td width="193" class="first">% накрутки:</td>
-            <td><input name="rate" type="integer" class="field" value="<?php echo $this->info->getRate();?>" /></td>
+            <td width="193" class="first">URL1:</td>
+            <td><input name="url1" type="integer" class="field" value="<?php echo $this->info->getUrl1();?>" /></td>
         </tr>
         <tr class="">
-            <td width="193" class="first">Минимальная цена:</td>
-            <td><input name="minPrice" type="integer" class="field" value="<?php echo $this->info->getMinPrice();?>" /></td>
+            <td width="193" class="first">Banner2
+                <a href="<?if ($this->idPhoto2 === 0 || empty($photoPath2) ): ?>/static/admin/images/nobg.png<? else: echo Application_Model_Kernel_Photo::getById($this->idPhoto2)->getPath('220:130'); endif ?>" target="_blank" id="previewImage2" class="preview <? if ($this->idPhoto2 === 0 || empty($photoPath2) ): ?>hide<? endif ?>" title="">
+                    <img src="/static/admin/images/picture.png" alt="">
+                </a>
+            </td>
+            <td>
+                <div id="file_uploader2"></div>
+            </td>
         </tr>
         <tr class="grey">
-            <td width="193" class="first">Телефон:</td>
-            <td><input name="phone" type="text" class="field" value="<?php echo $this->info->getPhone();?>"/></td>
-        </tr>
-        <tr class="">
-            <td width="193" class="first">Е-маил:</td>
-            <td><input name="email" type="email" class="field" value="<?php echo $this->info->getEmail();?>"/></td>
+            <td width="193" class="first">URL2:</td>
+            <td><input name="url2" type="text" class="field" value="<?php echo $this->info->getUrl2();?>"/></td>
         </tr>
         <tr class="grey">
             <td colspan="2">
                 <div class="m10 centerButton">
-                    <input id="idPhoto1" type="hidden" name="idPhoto1" value="<?=$this->idPhoto1?>" />
+                    <input id="idPhoto1" type="hidden" name="idPhoto1" value="<?=$this->idPhoto1;?>" />
+                    <input id="idPhoto2" type="hidden" name="idPhoto2" value="<?=$this->idPhoto2;?>" />
                     <a href="javascript:SubmitPageFrom();" class="button_blue">Сохранить</a>
                 </div>
             </td>
