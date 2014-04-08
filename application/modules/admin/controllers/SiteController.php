@@ -36,7 +36,7 @@ class Admin_SiteController extends Zend_Controller_Action
                 $this->view->photo2 = Application_Model_Kernel_Photo::getById($this->view->idPhoto2);
 
                 $this->view->info->setIdPhoto1($this->view->idPhoto1);
-                $this->view->info->setIdPhoto2($this->view->idPhoto1);
+                $this->view->info->setIdPhoto2($this->view->idPhoto2);
                 $this->view->info->setUrl1($data->url1);
                 $this->view->info->setUrl2($data->url2);
 

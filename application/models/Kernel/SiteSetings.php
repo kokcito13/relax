@@ -110,7 +110,7 @@ class Application_Model_Kernel_SiteSetings
         $select->where('site_setings.id = 1');
         $select->limit(1);
         if (($block = $db->fetchRow($select)) !== false) {
-            return new self($block->id, $block->idPhoto1, $block->idPhoto1, $block->url1, $block->url2);
+            return new self($block->id, $block->idPhoto1, $block->idPhoto2, $block->url1, $block->url2);
         }
         else {
             throw new Exception('Table NOT FOUND');

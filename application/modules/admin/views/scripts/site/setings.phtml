@@ -37,12 +37,12 @@
      $(document).ready(function(){
         initUploaderWall({
             'upload_button_id':'file_uploader1',
-            'action': '/admin/photo/upload/<?=$this->idPhoto1?>',
+            'action': '/admin/photo/upload/<?=$this->idPhoto1?>/u.html',
             'button_label': 'Загрузить'
         },1);
          initUploaderWall({
              'upload_button_id':'file_uploader2',
-             'action': '/admin/photo/upload/<?=$this->idPhoto2?>',
+             'action': '/admin/photo/upload/<?=$this->idPhoto2?>/u.html',
              'button_label': 'Загрузить'
          },2);
     });
@@ -99,3 +99,8 @@ else
     </table>
 </form>
 <input id="uploadUrl" type="hidden" value="<?=$this->url(array(),'admin-photo-upload')?>"/>
+<div style="display: none;">
+<textarea name="textareas_ru_RU" id="textareas_ru_RU" ></textarea>
+<textarea name="textareas_ua_UA" id="textareas_ua_UA" style="display: none;"></textarea>
+<textarea name="textareas_en_EN" id="textareas_en_EN" style="display: none;"></textarea>
+</div>
