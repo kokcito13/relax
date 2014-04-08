@@ -108,6 +108,7 @@ class AjaxController extends Zend_Controller_Action
             } else {
                 $page++;
             }
+            $view->siteSetings = Application_Model_Kernel_SiteSetings::getBy();
 
             $response['html'] = $view->render('block/list.phtml');
             $response['page'] = $page;
