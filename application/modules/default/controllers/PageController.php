@@ -54,4 +54,36 @@ class PageController extends Zend_Controller_Action
         $this->view->cities = $cities;
         $this->view->salons = $salons;
     }
+
+    public function sitemapxmlAction()
+    {
+        $pages = array();
+        $contentPages = Application_Model_Kernel_Page_ContentPage::getList(false, false, false, true, false, 1, false, false, false)->data;
+        $city = Kernel_City::findCityFromUrl();
+        if ($city) {
+            $areas = $city->getAreas();
+            $salons = Application_Model_Kernel_Salon::getList(false, false, true, true, false, 1, false, false, false)->data;
+            $pages = array_merge($salons, $pages, $areas);
+        }
+
+        $pages = array_merge($contentPages, $pages);
+
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        $container = new Zend_Navigation();
+
+        foreach ($pages as $page) {
+            if ( get_class($page) === 'Application_Model_Kernel_Area') {
+                $uri = $page->getUrl();
+            } else {
+                $uri = $page->getRoute()->getUrl();
+            }
+            $container->addPage(Zend_Navigation_Page::factory(array(
+                'uri' => $uri,
+            )));
+        }
+
+        echo $this->view->navigation()->sitemap($container);
+    }
 }
