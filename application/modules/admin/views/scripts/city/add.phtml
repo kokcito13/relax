@@ -44,6 +44,18 @@
                             <textarea  id="textareas_<?=$lang->getIsoName()?>" rows='10' class='content' cols='40' name="content[<?=$lang->getId()?>][content]" tabindex='2' ><?=(isset($_POST['content'][$lang->getId()]['content'])) ? $_POST['content'][$lang->getId()]['content'] : ''?></textarea>
                         </td>
                     </tr>
+                    <tr class="">
+                        <td width="193" class="first">Robots.txt:</td>
+                        <td>
+                            <textarea  rows='10' cols='40' name="content[<?=$lang->getId()?>][robots]" tabindex='2' ><?=(isset($_POST['content'][$lang->getId()]['robots'])) ? $_POST['content'][$lang->getId()]['robots'] : ''?></textarea>
+                        </td>
+                    </tr>
+                    <tr class="">
+                        <td width="193" class="first">Sitemap.xml:</td>
+                        <td>
+                            <textarea  rows='10' cols='40' name="content[<?=$lang->getId()?>][sitemap]" tabindex='2' ><?=(isset($_POST['content'][$lang->getId()]['sitemap'])) ? $_POST['content'][$lang->getId()]['sitemap'] : ''?></textarea>
+                        </td>
+                    </tr>
                 </table>
             </div>
         <?php endforeach ?>

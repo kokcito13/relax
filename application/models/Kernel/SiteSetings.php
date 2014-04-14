@@ -12,13 +12,19 @@ class Application_Model_Kernel_SiteSetings
     protected $photo1 = null;
     protected $photo2 = null;
 
-    public function __construct($id, $idPhoto1, $idPhoto2, $url1, $url2)
+    protected $robots = '';
+    protected $sitemap = '';
+
+    public function __construct($id, $idPhoto1, $idPhoto2, $url1, $url2, $robots = '', $sitemap = '')
     {
         $this->id = $id;
         $this->idPhoto1 = $idPhoto1;
         $this->idPhoto2 = $idPhoto2;
         $this->url1 = $url1;
         $this->url2 = $url2;
+
+        $this->robots = $robots;
+        $this->sitemap = $sitemap;
     }
 
     public function getIdPhoto1()
@@ -76,6 +82,30 @@ class Application_Model_Kernel_SiteSetings
         return $this->id;
     }
 
+    public function getRobots()
+    {
+        return $this->robots;
+    }
+
+    public function setRobots($text)
+    {
+        $this->robots = $text;
+
+        return $this;
+    }
+
+    public function getSitemap()
+    {
+        return $this->sitemap;
+    }
+
+    public function setSitemap($text)
+    {
+        $this->sitemap = $text;
+
+        return $this;
+    }
+
     public function validate()
     {
 //        if ($this->getName() === '') {
@@ -97,7 +127,9 @@ class Application_Model_Kernel_SiteSetings
             'idPhoto1'     => $this->idPhoto1,
             'idPhoto2'         => $this->idPhoto2,
             'url1' => $this->url1,
-            'url2' => $this->url2
+            'url2' => $this->url2,
+            'robots' => $this->robots,
+            'sitemap' => $this->sitemap
         );
         $db = Zend_Registry::get('db');
         $db->update('site_setings', $data, 'id = ' . $this->getId());
@@ -110,7 +142,7 @@ class Application_Model_Kernel_SiteSetings
         $select->where('site_setings.id = 1');
         $select->limit(1);
         if (($block = $db->fetchRow($select)) !== false) {
-            return new self($block->id, $block->idPhoto1, $block->idPhoto2, $block->url1, $block->url2);
+            return new self($block->id, $block->idPhoto1, $block->idPhoto2, $block->url1, $block->url2, $block->robots, $block->sitemap);
         }
         else {
             throw new Exception('Table NOT FOUND');

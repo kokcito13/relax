@@ -87,7 +87,19 @@ else
             <td width="193" class="first">URL2:</td>
             <td><input name="url2" type="text" class="field" value="<?php echo $this->info->getUrl2();?>"/></td>
         </tr>
+        <tr class="">
+            <td width="193" class="first">Robots.txt:</td>
+            <td>
+                <textarea rows='10' cols='40' name="robots"><?php echo $this->info->getRobots();?></textarea>
+            </td>
+        </tr>
         <tr class="grey">
+            <td width="193" class="first">Sitemap.xml:</td>
+            <td>
+                <textarea rows='10' cols='40' name="sitemap"><?php echo $this->info->getSitemap();?></textarea>
+            </td>
+        </tr>
+        <tr class="">
             <td colspan="2">
                 <div class="m10 centerButton">
                     <input id="idPhoto1" type="hidden" name="idPhoto1" value="<?=$this->idPhoto1;?>" />

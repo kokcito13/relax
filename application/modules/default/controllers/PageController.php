@@ -57,33 +57,41 @@ class PageController extends Zend_Controller_Action
 
     public function sitemapxmlAction()
     {
-        $pages = array();
-        $contentPages = Application_Model_Kernel_Page_ContentPage::getList(false, false, false, true, false, 1, false, false, false)->data;
-        $city = Kernel_City::findCityFromUrl();
-        if ($city) {
-            $areas = $city->getAreas();
-            $salons = Application_Model_Kernel_Salon::getList(false, false, true, true, false, 1, false, false, false)->data;
-            $pages = array_merge($salons, $pages, $areas);
-        }
-
-        $pages = array_merge($contentPages, $pages);
-
         $this->view->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
+        header("Content-Type: text/xml; charset=utf-8");
 
-        $container = new Zend_Navigation();
-
-        foreach ($pages as $page) {
-            if ( get_class($page) === 'Application_Model_Kernel_Area') {
-                $uri = $page->getUrl();
-            } else {
-                $uri = $page->getRoute()->getUrl();
-            }
-            $container->addPage(Zend_Navigation_Page::factory(array(
-                'uri' => $uri,
-            )));
+        $city = Kernel_City::findCityFromUrl();
+        if ($city) {
+            $content = $city->getContent()->getFields();
+            $text = $content['sitemap']->getFieldText();
+        } else {
+            $settings = Application_Model_Kernel_SiteSetings::getBy();
+            $text = $settings->getSitemap();
         }
 
-        echo $this->view->navigation()->sitemap($container);
+        echo $text;
+
+        exit(0);
+    }
+
+    public function robotstxtAction()
+    {
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        header("Content-type:text/html");
+
+        $city = Kernel_City::findCityFromUrl();
+        if ($city) {
+            $content = $city->getContent()->getFields();
+            $text = $content['robots']->getFieldText();
+        } else {
+            $settings = Application_Model_Kernel_SiteSetings::getBy();
+            $text = $settings->getRobots();
+        }
+
+        echo $text;
+
+        exit(0);
     }
 }

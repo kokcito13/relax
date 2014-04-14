@@ -39,6 +39,8 @@ class Admin_SiteController extends Zend_Controller_Action
                 $this->view->info->setIdPhoto2($this->view->idPhoto2);
                 $this->view->info->setUrl1($data->url1);
                 $this->view->info->setUrl2($data->url2);
+                $this->view->info->setRobots($data->robots);
+                $this->view->info->setSitemap($data->sitemap);
 
                 $this->view->info->save();
 
