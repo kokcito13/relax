@@ -36,7 +36,7 @@
                         <?=$this->ShowListArea($this->area)?>
                     </div>
                 </div>
-                <input type="text" name="word" size="" value="<? if (!isset($this->word) || empty($this->word)):?><?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?><? else: ?><?=$this->word?><? endif ?>" onblur="if (this.value == '') {this.value = '<?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?>';}" onfocus="if (this.value == '<?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?>') {this.value = '';}"/>
+                <input type="text" name="word" size="" value="<? if (!isset($this->word) || empty($this->word)):?><?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?><? else: ?><?=$this->word?><? endif ?>" onblur="if (this.value == '') {this.value = '<?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?>';}" onfocus="if (this.value == '<?=Kernel_Block::getText('Поиск по названию салона', $this->blocks);?>') {this.value = '';}" style="display: none;"/>
                 <div class="clear"></div>
 <!--                <input type="submit" size="" value="Показать салоны" />-->
                 <!--
