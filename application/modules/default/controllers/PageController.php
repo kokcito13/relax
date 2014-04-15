@@ -79,7 +79,7 @@ class PageController extends Zend_Controller_Action
     {
         $this->view->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        header("Content-type:text/html");
+        header("Content-type:text/plain");
 
         $city = Kernel_City::findCityFromUrl();
         if ($city) {
