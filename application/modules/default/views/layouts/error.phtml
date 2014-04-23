@@ -1,3 +1,4 @@
+<? if (isset($_GET['DBG'])): ?>
 <html>
 	<head>
 		<title>Application error</title>
@@ -17,7 +18,7 @@
   		<?php endif ?>
   	</body>
 </html>
-<? /*
+<? else: ?>
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -231,4 +232,5 @@
     <noscript><div><img src="//mc.yandex.ru/watch/24223378" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 </body>
-</html> */?>
+</html>
+<? endif; ?>
