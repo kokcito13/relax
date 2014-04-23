@@ -5,5 +5,14 @@
 <div class="singleSalonBox">
     <?=$this->ShowSalonHeader($this->salon);?>
     <?=$this->ShowSalonMenu($this->salon, 'akciy');?>
+    <div class="descText" style="margin-top: 10px;">
+        <? if (isset($this->contentPage['discount'])):?>
+        <article>
+            <p></p>
+            <?=$this->contentPage['discount']->getFieldText();?>
+            <p></p>
+        </article>
+        <? endif; ?>
+    </div>
     <?=$this->ShowSalonMenu($this->salon, 'akciy');?>
 </div>

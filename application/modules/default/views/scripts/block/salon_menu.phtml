@@ -15,9 +15,6 @@
         <li>
             <a <? if($this->current == 'akciy'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-akciy');?>"><?=Kernel_Block::getText('Акции салона', $this->blocks);?></a>
         </li>
-        <li>
-            <a <? if($this->current == 'about'): ?>class="current"<? endif; ?> href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-about');?>"><?=Kernel_Block::getText('О салоне', $this->blocks);?></a>
-        </li>
     </ul>
 </div>
 <div class="mobileMenu">

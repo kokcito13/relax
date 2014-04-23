@@ -5,7 +5,7 @@
     <div class="newSalonLabel"></div>
     <div class="salonInfo">
         <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>" class="salonLogo">
-            <img src="<?=$this->salon->getPhoto1()->getPath('120', true);?>" alt="" width="80" height="80">
+            <img src="<?=$this->salon->getPhoto1()->getPath('120', true);?>" alt="Салон эротического массажа <?=$content['name']->getFieldText();?>" width="80" height="80">
             <h3><?=$content['name']->getFieldText();?></h3>
         </a>
         <div class="clear"></div>
@@ -24,7 +24,7 @@
             <? $contentGirl = $girl->getContent()->getFields();?>
             <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
             <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>#girl_<?=$girl->getId()?>" class="salonModelItem">
-                <img src="<?=$photo->getPath('240:240');?>" alt="">
+                <img src="<?=$photo->getPath('240:240');?>" alt="Массажистка <?=$contentGirl['contentName']->getFieldText();?>">
                 <h4><?=$contentGirl['contentName']->getFieldText();?></h4>
             </a>
         <? endforeach; ?>

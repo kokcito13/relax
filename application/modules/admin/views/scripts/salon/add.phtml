@@ -241,12 +241,12 @@ else
 							<textarea  id="textareas_<?=$lang->getIsoName()?>" rows='10' class='content' cols='40' name="content[<?=$lang->getId()?>][content]" tabindex='2' ><?=(isset($_POST['content'][$lang->getId()]['content'])) ? $_POST['content'][$lang->getId()]['content'] : ''?></textarea>
 						</td>
 					</tr>
-<!--                    <tr class="">-->
-<!--                        <td width="193" class="first">Наши заметки:</td>-->
-<!--                        <td>-->
-<!--                            <textarea  rows='10' class='content' cols='40' name="content[--><?//=$lang->getId()?><!--][shpora]" tabindex='2' >--><?//=(isset($_POST['content'][$lang->getId()]['shpora'])) ? $_POST['content'][$lang->getId()]['shpora'] : ''?><!--</textarea>-->
-<!--                        </td>-->
-<!--                    </tr>-->
+                    <tr class="">
+                        <td width="193" class="first">Акции:</td>
+                        <td>
+                            <textarea  rows='10' class='content' cols='40' name="content[<?=$lang->getId()?>][discount]" tabindex='2' ><?=(isset($_POST['content'][$lang->getId()]['discount'])) ? $_POST['content'][$lang->getId()]['discount'] : ''?></textarea>
+                        </td>
+                    </tr>
                     <tr class="grey">
                         <td width="193" class="first">Адресс:</td>
                         <td><input name="content[<?=$lang->getId()?>][adress]" type="text" class="field" value="<?=(isset($_POST['content'][$lang->getId()]['adress'])) ? htmlspecialchars( $_POST['content'][$lang->getId()]['adress']) : ''?>" /></td>

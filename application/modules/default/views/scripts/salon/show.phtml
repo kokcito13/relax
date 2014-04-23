@@ -17,7 +17,7 @@
                     <div id="carousel-<?=$k+1?>" class="salonModelCarouselWrap">
                         <? $photos = $girl->getGallery()->getPhotos(); ?>
                         <? foreach  ($photos as $photo): ?>
-                            <img src="<?=$photo->getPath('500', true);?>" alt="">
+                            <img src="<?=$photo->getPath('500', true);?>" alt="Массажистка <?=$content['contentName']->getFieldText();?>">
                         <? endforeach; ?>
                     </div>
                     <a id="prev-model-<?=$k+1?>" class="carouselNav prev" href="#"></a>
@@ -25,6 +25,14 @@
                     <div class="loaderBox"></div>
                 </div>
             <? endforeach; ?>
+        </div>
+        <div class="clear"></div>
+        <div class="descText" style="margin-top: 10px;">
+            <article>
+                <p></p>
+                <?=$this->contentPage['content']->getFieldText();?>
+                <p></p>
+            </article>
         </div>
         <div class="clear"></div>
     </div>
