@@ -5,7 +5,7 @@
         </div>
         <h2><?=$this->contentPage['name']->getFieldText();?></h2>
         <div class="clear"></div>
-        <a class="location" href="<?=$this->salon->getRoute()->getUrl();?>"><?=$this->contentPage['adress']->getFieldText();?></a>
+        <a class="location" href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-map');?>"><?=$this->contentPage['adress']->getFieldText();?></a>
         <div class="singleSalonCommentsBox">
             <a href="<?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>">– <?=$this->countAllComments; ?> <?=Kernel_Block::getText('отзывов', $this->blocks);?></a>
             <em><?=Kernel_Block::getText('положительных', $this->blocks);?> – <?=$this->countGoodComments; ?></em><br>

@@ -29,119 +29,17 @@
     <script>
         var inProgress = false;
         var page = 2;
-
-        function setCurrentCityAndArea()
-        {
-            var city_id = '<?=$this->currentCity?$this->currentCity->getId():0?>';
-            if (city_id != 0) {
-                $('.city_'+city_id).attr('checked','checked');
-            }
-        }
-
-        function changeArea(ele, area_url)
-        {
-            var httpText = 'http://';
-            var site_name = '<?=SITE_NAME?>';
-            var city = $(ele).data('url');
-
-            window.location.href = httpText+city+'.'+site_name+'/'+area_url;
-        }
-
-        function changeCity(ele, clickFn)
-        {
-            if (clickFn) {
-                var httpText = 'http://';
-                var site_name = '<?=SITE_NAME?>';
-                var city = ele.data('url');
-
-                window.location.href = httpText+city+'.'+site_name;
-            }
-            $('#empty_area').html('– <?=Kernel_Block::getText('Сначала выберите район', $this->blocks);?> –');
-            var cityId = ele.val();
-            $('.area_inp').hide();
-            $('.area_in_city_'+cityId).show();
-        }
-
-        function sendSubscribe(form_ele)
-        {
-            var url = '<?=$this->url(array(),'default-subscribe-add-ajax')?>';
-
-            var form = $(form_ele);
-            var args = {
-                'city_id': '<?=$this->currentCity?$this->currentCity->getId():0?>',
-                'area_id': '<?=isset($this->area)?$this->area->getId():0?>',
-                'email': form.find('.input_subscribe').val()
-            };
-
-            $.post( url, args, function( data ) {
-                if (typeof data.error != 'undefined') {
-                    $.each( data.error, function( key, value ) {
-                        alert( key + ": " + value );
-                    });
-                } else {
-                    alert('<p><?=Kernel_Block::getText('Спасибо Вы подписаны на новости!', $this->blocks);?></p>');
-                    form.find('.input_subscribe').val('');
-                }
-                console.log(data);
-            }, "json");
-
-
-            return false;
-        }
-
-        function goToPage(ele)
-        {
-            var httpText = 'http://';
-            var site_name = '<?=SITE_NAME?>';
-            var city = $('input[name=city]:checked').data('url');
-            var area = $('input[name=area]:checked').data('url');
-            var word = $('input[name=word]').val().trim();
-
-            if (city != '') {
-                httpText+= city+'.';
-            }
-            httpText += site_name;
-            if (area != '' && area != null) {
-                httpText+= '/'+area;
-            }
-            if (word != '') {
-                httpText+= '/'+word;
-            }
-
-            window.location.href = httpText;
-
-            return false;
-        }
-
-        function getAjaxPage()
-        {
-            if (page == 0 || inProgress)
-                return false;
-
-            inProgress = true;
-
-            var city_id = '<?=$this->currentCity?$this->currentCity->getId():0?>';
-            var area_id = '<?=isset($this->area)?$this->area->getId():0?>';
-            var word = '<?=isset($this->word)?$this->word:''?>';
-
-            $.getJSON( "<?=$this->url(array(), 'default-salons-get-ajax');?>",
-                {
-                    city: city_id,
-                    area: area_id,
-                    word: word,
-                    page: page
-                }
-            ).done(function( data ) {
-                    if (data.success) {
-                        $('#list_block').append(data.html);
-                        page = data.page;
-                    } else {
-                        console.log(data.error);
-                    }
-                    inProgress = false;
-                });
-        }
+        var SITE_NAME = '<?=SITE_NAME?>';
+        var URL_SUBSCRIBE = '<?=$this->url(array(),'default-subscribe-add-ajax')?>';
+        var URL_PAGINATION = "<?=$this->url(array(), 'default-salons-get-ajax');?>";
+        var CITY_ID = '<?=$this->currentCity?$this->currentCity->getId():0?>';
+        var AREA_ID = '<?=isset($this->area)?$this->area->getId():0?>';
+        var CURRENT_WORD = '<?=isset($this->word)?$this->word:''?>';
+        var TEXT_SELECT_CITY = '– <?=Kernel_Block::getText('Сначала выберите район', $this->blocks);?> –';
+        var TEXT_NEWS_SUBSCRIBE = '<p><?=Kernel_Block::getText('Спасибо Вы подписаны на новости!', $this->blocks);?></p>';
+        var TEXT_AFTER_PHONE = '<?=Kernel_Block::getText('скидка 5% за упоминание сайта viprelax', $this->blocks);?>';
     </script>
+
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -177,7 +75,9 @@
     <?php echo $this->partial('blocks/footer.phtml', array (
                                                            'blocks'      => $this->blocks,
                                                            'siteSetings' => $this->siteSetings
+
                                                      )) ?>
+    <script type="text/javascript" src="/static/default/js/more.js"></script>
     <script>
         $(function(){
             changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'), false);

@@ -9,7 +9,7 @@
             <h3><?=$content['name']->getFieldText();?></h3>
         </a>
         <div class="clear"></div>
-        <a class="location" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$area->getUrl()),'default-list-area');?>"><?=$areaContent['contentName']->getFieldText();?></a>
+        <a class="location" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-map');?>"><?=$areaContent['contentName']->getFieldText();?></a>
         <div class="commentValueBox">
             <span class="commentIcon"></span> – <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>"><?=count($this->salon->getComments())?> <?=Kernel_Block::getText('отзывов', $this->blocks);?></a>
         </div>
