@@ -97,7 +97,7 @@ class AjaxController extends Zend_Controller_Action
             }
 
             $view = new Zend_View(array('basePath' => APPLICATION_PATH . '/modules/default/views'));
-            $view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, $word, 1, $page, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
+            $view->salons = Application_Model_Kernel_Salon::getList('salons.call_price', "DESC", true, true, $word, 1, $page, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
             $view->blocks = Application_Model_Kernel_Block::getList(true)->data;
             foreach ($view->blocks as $key => $value) {
                 $view->blocks[$key] = $value->getContent()->getFields();

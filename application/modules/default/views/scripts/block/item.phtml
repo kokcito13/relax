@@ -1,7 +1,11 @@
 <? $content = $this->salon->getContent()->getFields();?>
 <? $area = $this->salon->getArea();?>
 <? $areaContent = $area->getContent()->getFields();?>
-<div class="salonItem">
+<div class="salonItem"
+     data-lat="<?=$this->salon->getLat();?>"
+     data-lng="<?=$this->salon->getLng();?>"
+     data-url="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>"
+    >
     <div class="newSalonLabel"></div>
     <div class="salonInfo">
         <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>" class="salonLogo">

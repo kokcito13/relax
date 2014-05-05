@@ -28,12 +28,60 @@
 
 <?=$this->ShowSubscribe();?>
 <div class="descText">
+    <article">
+    <div class="map-wrap" id="map-wrap"></div>
+    </article>
+</div>
+<div class="descText">
     <article>
         <?=$this->text;?>
     </article>
 </div>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=ru"></script>
 <script>
+    var map;
+    var openedWindow = false;
+    function setMap()
+    {
+        var main = $('.salonItem').first();
+        var mapOptions = {
+            center: new google.maps.LatLng(main.data('lat'), main.data('lng')),
+            zoom:13,
+            mapTypeId:google.maps.MapTypeId.ROADMAP,
+            scrollwheel:false
+        };
+        var map = new google.maps.Map(document.getElementById("map-wrap"),
+            mapOptions)
+
+        $('.salonItem').each(function(index){
+
+            var name = $(this).find('h3').html();
+
+            var marker = new google.maps.Marker({
+                map:map,
+                position: new google.maps.LatLng($(this).data('lat'), $(this).data('lng'))
+            });
+
+            var infowindow = new google.maps.InfoWindow(
+                {
+                    content: '<b><a href="'+$(this).data('url')+'">'+name+'</a></b>'
+                });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                if (openedWindow)
+                    openedWindow.close();
+                openedWindow = infowindow;
+                infowindow.open(map, marker);
+                map.setCenter(marker.getPosition());
+            });
+
+        });
+
+        return false;
+    }
+
     $(document).ready(function(){
+        setMap();
         $(window).scroll(function() {
 
             var currentPosition = $(window).scrollTop() + $(window).height();

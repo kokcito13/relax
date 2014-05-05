@@ -93,6 +93,9 @@ function getAjaxPage()
             if (data.success) {
                 $('#list_block').append(data.html);
                 page = data.page;
+                setTimeout(function(){
+                    setMap();
+                },100);
             } else {
                 console.log(data.error);
             }
@@ -101,9 +104,9 @@ function getAjaxPage()
 }
 $(function(){
     $('.salonPhone a').unbind();
-    $('.salonPhone a').click(function(){
+    $('.salonPhone a').click(function(event){
         event.preventDefault();
-        
+
         $('.salonPhone span').html($('.salonPhone span').data('salon-phone'));
         $('.salonPhone span').after('<span style="font-size: 11px;">'+TEXT_AFTER_PHONE+'</span>');
         $('.salonPhone a').remove();

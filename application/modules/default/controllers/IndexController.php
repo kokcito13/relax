@@ -50,6 +50,6 @@ class IndexController extends Zend_Controller_Action
 
         $this->view->headText = isset($this->view->contentPage['head'])?$this->view->contentPage['head']->getFieldText():'';
 
-        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, false, 1, 1, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
+        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.call_price', "DESC", true, true, false, 1, 1, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
     }
 }
