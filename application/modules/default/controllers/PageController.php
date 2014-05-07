@@ -40,8 +40,8 @@ class PageController extends Zend_Controller_Action
 
     public function sitemapAction()
     {
-        $salons = Application_Model_Kernel_Salon::getList(false, false, true, true, false, 1, false, false, false)->data;
-        $cities = Application_Model_Kernel_City::getList();
+//        $salons = Application_Model_Kernel_Salon::getList(false, false, true, true, false, 1, false, false, false)->data;
+//        $cities = Application_Model_Kernel_City::getList();
 
         $this->view->idPage = (int)$this->_getParam('idPage');
         $this->view->page = Application_Model_Kernel_Page_ContentPage::getByPageId($this->view->idPage);
@@ -51,8 +51,10 @@ class PageController extends Zend_Controller_Action
         $this->view->keywords = $this->view->contentPage['keywords']->getFieldText();
         $this->view->description = $this->view->contentPage['description']->getFieldText();
 
-        $this->view->cities = $cities;
-        $this->view->salons = $salons;
+        $this->view->text = $this->view->contentPage['content']->getFieldText();
+
+//        $this->view->cities = $cities;
+//        $this->view->salons = $salons;
     }
 
     public function sitemapxmlAction()
