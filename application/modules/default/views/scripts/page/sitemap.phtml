@@ -28,9 +28,6 @@
             <li>
                 <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-akciy');?>"><?=Kernel_Block::getText('Акции салона', $this->blocks);?> - <?=$salonContent['name']->getFieldText()?></a>
             </li>
-            <li>
-                <a href="<?=Kernel_City::getUrlForLink($salon->getCity())?><?=$this->url(array('url_key'=>$salon->getUrlKey()), 'default-salon-about');?>"><?=Kernel_Block::getText('О салоне', $this->blocks);?> - <?=$salonContent['name']->getFieldText()?></a>
-            </li>
         </ul>
         <br/>
     <? endforeach; ?>
