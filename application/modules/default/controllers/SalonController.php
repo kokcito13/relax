@@ -193,7 +193,7 @@ class SalonController extends Zend_Controller_Action
         $this->view->keywords = $keywords;
         $this->view->description = $description;
 
-        $this->view->headText = isset($this->view->areaContent['head'])?$this->view->contentPage['head']->getFieldText():'';
+        $this->view->headText = isset($this->view->areaContent['head'])?$this->view->areaContent['head']->getFieldText():'';
     }
 
     public function akciyAction()
