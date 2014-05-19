@@ -214,9 +214,9 @@ class Application_Model_Kernel_Comment
     public function getCommentTypeText()
     {
         $arr = array(
-            0 => 'Плохо',
-            1 => 'Хорошо',
-            2 => 'Отлично'
+            0 => 'отрицательный',
+            1 => 'нейтральный',
+            2 => 'положительный'
         );
 
         return $arr[$this->commentType];

@@ -34,7 +34,7 @@
     <div class="salonContent">
         <div class="full-width commentsContent">
             <h2>Отзывы (<?=count($this->comments)?>)</h2>
-            <a id="add-comment" href="#addCommentForm">Добавить комментарий</a>
+            <a id="add-comment" href="#addCommentForm">Добавить отзыв</a>
             <div class="commentsList">
                 <?php foreach ($this->comments as $comment): ?>
                 <div class="commentItem">
@@ -47,8 +47,8 @@
                         <?php $adminText = trim($comment->getCommentAdminText());?>
                         <? if (!empty($adminText)): ?>
                             <div class="commentReply">
-                                <strong>Администратор</strong>
-                                <time>02 сентября 2013 в 13:33</time>
+<!--                                <strong>Администратор</strong>-->
+<!--                                <time>02 сентября 2013 в 13:33</time>-->
                                 <p>— <?=$adminText?></p>
                             </div>
                         <? endif; ?>
@@ -68,27 +68,27 @@
 </div>
 <div id="addCommentForm" style="display:none;">
     <form action="" id="form_add_comment">
-        <h3>Добавление комментария</h3>
+        <h3>Добавление отзыва</h3>
         <p>Имя:</p>
         <input type="text" name="first_name" id="first_name" size="" value="" />
-        <p>Оценка:</p>
+        <p>Тип отзыва:</p>
         <div class="selectBox">
             <a href="#">– без оценки –</a>
             <div class="select-option-box">
                 <input id="id1" type="radio" size="" value="2" name="rating" />
-                <label for="id1">отлично</label>
+                <label for="id1">положительный</label>
                 <input id="id2" type="radio" size="" value="1" name="rating" />
-                <label for="id2">хорошо</label>
+                <label for="id2">нейтральный</label>
                 <input id="id3" type="radio" size="" value="0" name="rating" />
-                <label for="id3">плохо</label>
+                <label for="id3">отрицательный</label>
             </div>
         </div>
-        <p>Комментарий:</p>
+        <p>Текст отзыва:</p>
         <textarea name="text" id="text" cols="30" rows="10"></textarea>
 <!--        <p>Сколько будет 8 – 7 =</p>-->
 <!--        <input type="text" name="" size="" value="" />-->
         <div class="submitBox">
-            <input type="submit" name="submit" size="" value="Добавить комментарий" onclick="return submitForm();" />
+            <input type="submit" name="submit" size="" value="Добавить отзыв" onclick="return submitForm();" />
         </div>
         <input type="hidden" name="last_name" id="last_name" value=""/>
     </form>

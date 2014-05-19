@@ -22,7 +22,7 @@ class Zend_View_Helper_ShowSalonHeader {
             } elseif ($comment->getCommentType() == 1) {
                 $view->countNormalComments++;
             } elseif ($comment->getCommentType() == 2) {
-                $view->countBadComments++;
+                $view->countGoodComments++;
             }
         }
 

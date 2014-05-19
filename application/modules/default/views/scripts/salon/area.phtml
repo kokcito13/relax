@@ -64,7 +64,9 @@
 
             var infowindow = new google.maps.InfoWindow(
                 {
-                    content: '<b><a href="'+$(this).data('url')+'">'+name+'</a></b>'
+                    content: '<div style="padding: 15px;">'+
+                        '<img src="'+$(this).data('img')+'" width="80" height="80">'+
+                        '<br/><b><a style="color:blue;" href="'+$(this).data('url')+'">'+name+'</a></b></div>'
                 });
 
             google.maps.event.addListener(marker, 'click', function () {

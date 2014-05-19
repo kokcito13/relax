@@ -163,7 +163,7 @@ class SalonController extends Zend_Controller_Action
         $cityContent = $city->getContent()->getFields();
 
         $where = 'salons.area_id = '.$this->view->area->getId().' AND salons.city_id = '.$city->getId();
-        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.id', "DESC", true, true, $word, 1, $this->view->page, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
+        $this->view->salons = Application_Model_Kernel_Salon::getList('salons.call_price', "DESC", true, true, $word, 1, $this->view->page, Application_Model_Kernel_Salon::ITEM_ON_PAGE, false, true, $where);
 
         $title = trim($this->view->areaContent['title']->getFieldText());
         $keywords = trim($this->view->areaContent['keywords']->getFieldText());

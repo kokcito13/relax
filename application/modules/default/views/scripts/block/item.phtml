@@ -5,6 +5,7 @@
      data-lat="<?=$this->salon->getLat();?>"
      data-lng="<?=$this->salon->getLng();?>"
      data-url="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>"
+     data-img="<?=$this->salon->getPhoto1()->getPath('120', true);?>"
     >
     <div class="newSalonLabel"></div>
     <div class="salonInfo">
