@@ -1,5 +1,5 @@
 <?php foreach($this->areas as $area): ?>
-    <? if ($this->currentCity->getId() != $area->getCityId()) continue; ?>
+    <? if ($this->currentCity->getId() != $area->getCityId() || $area->getStatus() == 0) continue; ?>
     <?php $content = $area->getContent()->getFields();?>
     <input class="area_inp area_input_city_<?=$area->getCityId();?>" data-id="<?=$area->getId()?>" data-idarea="<?=$this->currentArea->getId()?>" data-url="<?=$area->getUrl();?>" onclick="changeArea($('.city_<?=$area->getCityId();?>'), '<?=$area->getUrl();?>')" id="<?=$area->getUrl();?>" type="radio" value="<?=$area->getUrl();?>" name="area"
         <? if ($this->currentArea->getId() == $area->getId()): ?>

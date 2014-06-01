@@ -17,7 +17,8 @@
         <? if (Kernel_City::findCityFromUrl()): ?>
             <a class="location" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-map');?>"><?=$areaContent['contentName']->getFieldText();?></a>
         <? else : ?>
-            <a class="location" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?>"><?=$areaContent['contentName']->getFieldText();?></a>
+            <? $cityContent = $this->salon->getCity()->getContent()->getFields(); ?>
+            <a class="location" href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?>"><?=$cityContent['contentName']->getFieldText();?></a>
         <? endif; ?>
         <div class="commentValueBox">
             <span class="commentIcon"></span> – <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->url(array('url_key'=>$this->salon->getUrlKey()), 'default-salon-review');?>"><?=count($this->salon->getComments())?> <?=Kernel_Block::getText('отзывов', $this->blocks);?></a>

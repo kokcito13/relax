@@ -1,4 +1,5 @@
 <?php foreach($this->cities as $city): ?>
+    <?php if ($city->getStatus() == 0) continue; ?>
     <?php $content = $city->getContent()->getFields();?>
     <input class="city_<?=$city->getId();?>" onclick="changeCity($(this), true);" id="<?=$city->getUrl();?>" data-url="<?=$city->getUrl();?>" type="radio" size="" value="<?=$city->getId();?>" name="city" />
     <label class="city_inp" for="<?=$city->getUrl();?>"><?=$content['contentName']->getFieldText();?></label>

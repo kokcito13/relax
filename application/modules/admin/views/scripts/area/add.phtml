@@ -5,6 +5,15 @@
             <td width="193" class="first">URL:</td>
             <td><input name="url" type="text" class="field" value="<?=(isset($_POST['url'])) ? htmlspecialchars( $_POST['url']) : ''?>" /></td>
         </tr>
+        <tr class="">
+            <td width="193" class="first">Status</td>
+            <td>
+                <select name="status">
+                    <option value="1" <? if (isset($_POST['status']) && $_POST['status'] == 1): ?>selected="selected" <? endif; ?>>Show</option>
+                    <option value="0" <? if (isset($_POST['status']) && $_POST['status'] == 0): ?>selected="selected" <? endif; ?>>Hide</option>
+                </select>
+            </td>
+        </tr>
     </table>
     <div id="tabs">
         <?php if (sizeof($this->langs) > 1): ?>

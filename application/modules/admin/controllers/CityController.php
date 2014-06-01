@@ -48,7 +48,7 @@ class Admin_CityController extends Zend_Controller_Action
                 }
                 $contentManager = new Application_Model_Kernel_Content_Manager(null, $content);
 
-                $this->view->category = new Application_Model_Kernel_City(null, null, null);
+                $this->view->category = new Application_Model_Kernel_City(null, null, null, $data->status);
                 $this->view->category->setContentManager($contentManager);
                 $this->view->category->setUrl($data->url);
                 $this->view->category->validate();
@@ -79,6 +79,7 @@ class Admin_CityController extends Zend_Controller_Action
                 Application_Model_Kernel_Content_Fields::setFieldsForModel($data->content, $getContent, $this->view->category);
 
                 $this->view->category->setUrl($data->url);
+                $this->view->category->setStatus($data->status);
                 $this->view->category->validate();
                 $this->view->category->save();
                 $this->_redirect($this->view->url(array (), 'admin-city-index'));
@@ -90,6 +91,7 @@ class Admin_CityController extends Zend_Controller_Action
         } else {
             $_POST['content'] = $this->view->category->getContentManager()->getContents();
             $_POST['url']     = $this->view->category->getUrl();
+            $_POST['status']     = $this->view->category->getStatus();
             foreach ($this->view->langs as $lang) {
                 if (isset($_POST['content'][$lang->getId()]))
                     foreach ($_POST['content'][$lang->getId()] as $value)

@@ -6,6 +6,7 @@ class Application_Model_Kernel_Area
     protected $_idContentPack;
     protected $city_id;
     protected $url;
+    protected $status;
 
     /**
      * @var Application_Model_Kernel_Content_Manager
@@ -26,12 +27,13 @@ class Application_Model_Kernel_Area
     const TYPE_ERROR_ID_NOT_FOUND              = 'Id not found';
 
 
-    public function __construct($id, $idContentPack, $city_id, $url)
+    public function __construct($id, $idContentPack, $city_id, $url, $status = 1)
     {
         $this->id             = $id;
         $this->_idContentPack = $idContentPack;
         $this->city_id        = $city_id;
         $this->url        = $url;
+        $this->status        = $status;
     }
 
     public function getId()
@@ -52,6 +54,18 @@ class Application_Model_Kernel_Area
     public function setUrl($url)
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }
@@ -140,7 +154,7 @@ class Application_Model_Kernel_Area
 
     public static function getSelf($data)
     {
-        return new self($data->id, $data->idContentPack, $data->city_id, $data->url);
+        return new self($data->id, $data->idContentPack, $data->city_id, $data->url, $data->status);
     }
 
     public static function getList($city_id = false)
@@ -165,7 +179,8 @@ class Application_Model_Kernel_Area
         $data = array (
             'idContentPack' => $this->_idContentPack,
             'city_id'           => $this->city_id,
-            'url'           => $this->url
+            'url'           => $this->url,
+            'status' => $this->status
         );
         $db   = Zend_Registry::get('db');
         if (is_null($this->id)) {
