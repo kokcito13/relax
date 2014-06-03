@@ -274,7 +274,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .commentReply time,
 .commentAuthor time {display: block;line-height: 22px; color: #909090;font-size: 12px;font-style: italic;font-family: arial;}
 .commentText {display: table-cell;}
-.commentText p {line-height: 18px; color: #909090;font-size: 13px;font-family: arial;}
+.commentText p {line-height: 18px; color: #FFD;font-size: 13px;font-family: arial;}
 .commentText > p {padding: 0 12px;}
 
 .commentReply {padding: 12px;margin: 16px 0 -8px 0; background: #444d58;}

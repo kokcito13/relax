@@ -613,4 +613,20 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
 
         return $this->girls;
     }
+
+    public function setSessionPhone()
+    {
+        $session = new Zend_Session_Namespace("phone");
+        if (!isset($session->phones) || !$session->phones) {
+            $session->phones = array();
+        }
+        $session->phones[$this->getId()] = $this->getId();
+    }
+
+    public function chackeOpenPhone()
+    {
+        $session = new Zend_Session_Namespace("phone");
+
+        return isset($session->phones)&&isset($session->phones[$this->getId()]);
+    }
 }

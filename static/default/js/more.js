@@ -104,11 +104,19 @@ function getAjaxPage()
 }
 $(function(){
     $('.salonPhone a').unbind();
-    $('.salonPhone a').click(function(event){
+    $('.salonPhone a.show').click(function(event){
         event.preventDefault();
 
         $('.salonPhone span').html($('.salonPhone span').data('salon-phone'));
         $('.salonPhone span').after('<span style="font-size: 11px;">'+TEXT_AFTER_PHONE+'</span>');
-        $('.salonPhone a').remove();
+        $('.salonPhone a.show').remove();
+
+        $.getJSON( URL_SAVE_PHONE,
+            {
+                salon_id: $(this).data('id')
+            }
+        ).done(function( data ) {
+
+            });
     });
 });

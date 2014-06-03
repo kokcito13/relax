@@ -45,19 +45,6 @@ class Application_Model_Kernel_User {
     const ERROR_INVALID_EMAIL = 'Неправильный формат e-mail';
     const ERROR_INVALID_PASSWORD = 'Неправильный формат пароля';
 
-    /**
-     * Конструктор
-     * 
-     * @name __construct
-     * @access public
-     * @param integer $id
-     * @param integer $roleId
-     * @param integer $status
-     * @param string $login
-     * @param string $email
-     * @param string $fullName
-     * @return void
-     */
     public function __construct($id, $roleId, $status, $login, $email, $fullName) {
         $this->id = $id;
         $this->roleId = $roleId;
@@ -67,15 +54,6 @@ class Application_Model_Kernel_User {
         $this->fullName = $fullName;
     }
 
-    /**
-     * Возвращает объект пользователя по идентификатору
-     * 
-     * @name getById
-     * @access public
-     * @static
-     * @param integer $id идентификатор пользователя
-     * @return Application_Model_Kernel_User
-     */
     public static function getById($id) {
         $db = Zend_Registry::get('db');
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
@@ -155,14 +133,6 @@ class Application_Model_Kernel_User {
         return ($result = $db->fetchRow($select)) ? true : false;
     }
 
-    /**
-     * Сохраняет пользователя
-     * 
-     * @name checkLogin
-     * @access public
-     * @param string $login
-     * @return boolean
-     */
     public function save($password = null) {
         $e = new Application_Model_Kernel_Exception();
         $this->login = trim($this->login);
@@ -195,12 +165,8 @@ class Application_Model_Kernel_User {
         }
     }
     
-    
     public function delete() {
         $db = Zend_Registry::get('db');
         $db->delete('users', "id = {$this->id}");
     }
-
 }
-
-?>

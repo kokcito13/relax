@@ -121,4 +121,26 @@ class AjaxController extends Zend_Controller_Action
 
         return false;
     }
+
+    public function saveSessionPhoneAction()
+    {
+        $response = array();
+        if ($this->getRequest()->isGet()) {
+            $data = $_GET;
+            $salonId = (int)$data['salon_id'];
+
+            $salon = Application_Model_Kernel_Salon::getById($salonId);
+            if ($salon) {
+                $salon->setSessionPhone();
+            }
+
+            $response['success'] = true;
+        } else {
+            $response['error']['Not POST'] = 'Запрос не постовый';
+        }
+
+        echo json_encode($response);
+
+        return false;
+    }
 }
