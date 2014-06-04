@@ -47,7 +47,7 @@ fieldset {margin:0;padding:0;border:none;}
 /* * * Master template styles * * */
 html {height:100%;}
 body, table, input, textarea, select, li, button, p, blockquote, ol, dl, form, pre, th, td, a {
-font-family: Arial, sans-serif;font-size: 13px;color:#909090;}
+font-family: Arial, sans-serif;font-size: 13px;color:#FFD;}
 body {position:relative;min-height:100%;_height:100%; min-width: 960px;background: url(../images/bg-top.png) repeat-x top center #2b323a;}
 .clear {clear: both;}
 
@@ -117,13 +117,13 @@ header {padding: 10px 0 0 0;}
 .salonLogo img:hover {opacity: 0.8;}
 .salonInfo h3 {min-height: 26px;line-height: 17px; padding: 0 24px;color: #00b9ee;font-size: 16px;font-weight: bold;font-family: arial;text-transform: uppercase;}
 .salonLogo:hover h3 {text-decoration: underline;}
-.salonInfo em {line-height: 14px;color: #828282;font-size: 12px;font-family: arial;}
+.salonInfo em {line-height: 14px;color: #FFD;font-size: 12px;font-family: arial;}
 
-.location {display: inline-block;position: relative;line-height: 16px;margin-bottom: 6px; padding: 0 0 0 16px;color: #828282;font-size: 13px;font-family: arial;text-decoration: none;}
+.location {display: inline-block;position: relative;line-height: 16px;margin-bottom: 6px; padding: 0 0 0 16px;color: #FFD;font-size: 13px;font-family: arial;text-decoration: none;}
 .location:before {position: absolute;left: 0;top: -1px;width: 9px;height: 18px;background: url(../images/sprite.png) no-repeat -40px -10px;content: "";}
 .location:hover {text-decoration: underline;}
 
-.commentValueBox {color: #828282;font-size: 13px;font-family: arial;margin-bottom: 12px;}
+.commentValueBox {color: #FFD;font-size: 13px;font-family: arial;margin-bottom: 12px;}
 .commentValueBox a {text-decoration: none;line-height: 16px;}
 .commentValueBox a:hover {text-decoration: underline;}
 .commentIcon {display: inline-block;position: relative;top: 3px; width: 15px;height: 14px;margin-right: 4px; background: url(../images/sprite.png) no-repeat -40px -30px;}
@@ -171,12 +171,12 @@ article h3 {line-height: 22px!important;margin: 0 0 16px 0!important; color: #ff
 article h4 {line-height: 20px;margin: 0 0 16px 0; color: #fff;font-size: 16px;font-weight: bold;font-family: arial;}
 
 article table {width: 100%;margin: 40px 0;}
-article table td {padding: 10px 14px;line-height: 16px; color: #909090;font-size: 13px;font-family: arial;}
+article table td {padding: 10px 14px;line-height: 16px; color: #FFD;font-size: 13px;font-family: arial;}
 article table td:nth-child(2) {text-align: center;vertical-align: middle;}
 article table td.price {width: 150px;text-align: left;vertical-align: top;}
 article table tr:nth-child(odd) td {background:#444d58; }
 article table td strong {color: #fff;font-size: 14px;}
-article table td em {display: block;margin-top: 2px; color: #909090;font-size: 12px;font-family: arial;}
+article table td em {display: block;margin-top: 2px; color: #FFD;font-size: 12px;font-family: arial;}
 
 article ul {list-style: none;margin-bottom: 16px;}
 article ul li {position: relative; margin: 0 0 10px 16px;line-height: 20px;}
@@ -272,7 +272,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .commentReply strong,
 .commentAuthor strong {display: inline-block;line-height: 18px; color: #fff;font-size: 15px;font-weight: bold;font-family: arial;}
 .commentReply time,
-.commentAuthor time {display: block;line-height: 22px; color: #909090;font-size: 12px;font-style: italic;font-family: arial;}
+.commentAuthor time {display: block;line-height: 22px; color: #FFD;font-size: 12px;font-style: italic;font-family: arial;}
 .commentText {display: table-cell;}
 .commentText p {line-height: 18px; color: #FFD;font-size: 13px;font-family: arial;}
 .commentText > p {padding: 0 12px;}
