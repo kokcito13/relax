@@ -1,5 +1,4 @@
 <?php 
-//phpinfo();exit();
 
 define('SITE_NAME','rel.l');
 
@@ -13,7 +12,7 @@ defined('APPLICATION_ENV')
     || define('APPLICATION_ENV',
               (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV')
                                          : 'production'));
-define('LIBRARY_PATH',realpath(PUBLIC_PATH . '/../library'));
+define('LIBRARY_PATH',realpath(PUBLIC_PATH . '/library'));
 define('PLUGIN_PATH',realpath(APPLICATION_PATH . '/plugins'));
 //var_dump(LIBRARY_PATH);exit();
 
