@@ -209,6 +209,38 @@ $(window).load(function() {
 			mousewheel: false
 		});
 
+		$('#carousel-4').carouFredSel({
+			circular: false,
+		    infinite: false,
+			auto: false,
+			prev	: {	
+				button	: "#prev-model-4",
+				key		: "left"
+			},
+			next	: { 
+				button	: "#next-model-4",
+				key		: "right"
+			},
+			swipe: true,
+			mousewheel: false
+		});
+
+		$('#carousel-5').carouFredSel({
+			circular: false,
+		    infinite: false,
+			auto: false,
+			prev	: {	
+				button	: "#prev-model-5",
+				key		: "left"
+			},
+			next	: { 
+				button	: "#next-model-5",
+				key		: "right"
+			},
+			swipe: true,
+			mousewheel: false
+		});
+
 	} 
 
 	if ($(window).width() > 479 && $(window).width() < 768){
@@ -261,6 +293,42 @@ $(window).load(function() {
 			},
 			next	: { 
 				button	: "#next-model-3",
+				key		: "right"
+			},
+			swipe: true,
+			mousewheel: false
+		});
+
+		$('#carousel-4').carouFredSel({
+			items: 1,
+			width: 480,
+			circular: false,
+		    infinite: false,
+			auto: false,
+			prev	: {	
+				button	: "#prev-model-4",
+				key		: "left"
+			},
+			next	: { 
+				button	: "#next-model-4",
+				key		: "right"
+			},
+			swipe: true,
+			mousewheel: false
+		});
+
+		$('#carousel-5').carouFredSel({
+			items: 1,
+			width: 480,
+			circular: false,
+		    infinite: false,
+			auto: false,
+			prev	: {	
+				button	: "#prev-model-5",
+				key		: "left"
+			},
+			next	: { 
+				button	: "#next-model-5",
 				key		: "right"
 			},
 			swipe: true,
@@ -322,6 +390,46 @@ $(window).load(function() {
 			},
 			next	: { 
 				button	: "#next-model-3",
+				key		: "right"
+			},
+			swipe: true,
+			mousewheel: false
+		}).children().each(function() {
+		$(this).css('marginTop', ( 320 - $(this).outerHeight() ) / 2 );
+	});
+
+		$('#carousel-4').carouFredSel({
+			items: 1,
+			width: 320,
+			circular: false,
+		    infinite: false,
+			auto: false,
+			prev	: {
+				button	: "#prev-model-4",
+				key		: "left"
+			},
+			next	: {
+				button	: "#next-model-4",
+				key		: "right"
+			},
+			swipe: true,
+			mousewheel: false
+		}).children().each(function() {
+		$(this).css('marginTop', ( 320 - $(this).outerHeight() ) / 2 );
+	});
+
+		$('#carousel-5').carouFredSel({
+			items: 1,
+			width: 320,
+			circular: false,
+		    infinite: false,
+			auto: false,
+			prev	: {
+				button	: "#prev-model-5",
+				key		: "left"
+			},
+			next	: {
+				button	: "#next-model-5",
 				key		: "right"
 			},
 			swipe: true,
