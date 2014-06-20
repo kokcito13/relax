@@ -15,7 +15,10 @@ class Application_Model_Kernel_SiteSetings
     protected $robots = '';
     protected $sitemap = '';
 
-    public function __construct($id, $idPhoto1, $idPhoto2, $url1, $url2, $robots = '', $sitemap = '')
+    protected $head = '';
+    protected $body = '';
+
+    public function __construct($id, $idPhoto1, $idPhoto2, $url1, $url2, $robots = '', $sitemap = '', $head = '', $body = '')
     {
         $this->id = $id;
         $this->idPhoto1 = $idPhoto1;
@@ -25,6 +28,9 @@ class Application_Model_Kernel_SiteSetings
 
         $this->robots = $robots;
         $this->sitemap = $sitemap;
+
+        $this->head = $head;
+        $this->body = $body;
     }
 
     public function getIdPhoto1()
@@ -106,6 +112,30 @@ class Application_Model_Kernel_SiteSetings
         return $this;
     }
 
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    public function setBody($text)
+    {
+        $this->body = $text;
+
+        return $this;
+    }
+
+    public function getHead()
+    {
+        return $this->head;
+    }
+
+    public function setHead($text)
+    {
+        $this->head = $text;
+
+        return $this;
+    }
+
     public function validate()
     {
 //        if ($this->getName() === '') {
@@ -129,7 +159,9 @@ class Application_Model_Kernel_SiteSetings
             'url1' => $this->url1,
             'url2' => $this->url2,
             'robots' => $this->robots,
-            'sitemap' => $this->sitemap
+            'sitemap' => $this->sitemap,
+            'head' => $this->head,
+            'body' => $this->body
         );
         $db = Zend_Registry::get('db');
         $db->update('site_setings', $data, 'id = ' . $this->getId());
@@ -142,7 +174,7 @@ class Application_Model_Kernel_SiteSetings
         $select->where('site_setings.id = 1');
         $select->limit(1);
         if (($block = $db->fetchRow($select)) !== false) {
-            return new self($block->id, $block->idPhoto1, $block->idPhoto2, $block->url1, $block->url2, $block->robots, $block->sitemap);
+            return new self($block->id, $block->idPhoto1, $block->idPhoto2, $block->url1, $block->url2, $block->robots, $block->sitemap, $block->head, $block->body);
         }
         else {
             throw new Exception('Table NOT FOUND');

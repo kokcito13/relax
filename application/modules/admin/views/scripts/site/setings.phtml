@@ -100,6 +100,18 @@ else
             </td>
         </tr>
         <tr class="">
+            <td width="193" class="first">Head for analitics:</td>
+            <td>
+                <textarea rows='10' cols='40' name="head"><?php echo $this->info->getHead();?></textarea>
+            </td>
+        </tr>
+        <tr class="grey">
+            <td width="193" class="first">Body for metrics:</td>
+            <td>
+                <textarea rows='10' cols='40' name="body"><?php echo $this->info->getBody();?></textarea>
+            </td>
+        </tr>
+        <tr class="">
             <td colspan="2">
                 <div class="m10 centerButton">
                     <input id="idPhoto1" type="hidden" name="idPhoto1" value="<?=$this->idPhoto1;?>" />

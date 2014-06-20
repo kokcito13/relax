@@ -42,6 +42,9 @@ class Admin_SiteController extends Zend_Controller_Action
                 $this->view->info->setRobots($data->robots);
                 $this->view->info->setSitemap($data->sitemap);
 
+                $this->view->info->setHead($data->head);
+                $this->view->info->setBody($data->body);
+
                 $this->view->info->save();
 
                 $this->_redirect($this->view->url(array(), 'admin-main-page'));
