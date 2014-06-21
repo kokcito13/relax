@@ -16,13 +16,10 @@
     <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
     <![endif]-->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="/static/default/css/style.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="/static/default/css/adaptive.css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="/static/default/css/fancybox.css" media="screen"/>
+
 
     <script type="text/javascript" src="/static/default/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/static/default/js/script.js"></script>
-    <?=$this->headScript()?>
+
     <script>
         var inProgress = false;
         var page = 2;
@@ -64,6 +61,11 @@
                                                            'siteSetings' => $this->siteSetings
 
                                                      )) ?>
+    <link rel="stylesheet" type="text/css" href="/static/default/css/style.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/static/default/css/adaptive.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="/static/default/css/fancybox.css" media="screen"/>
+    <script type="text/javascript" src="/static/default/js/script.js"></script>
+    <?=$this->headScript()?>
     <script type="text/javascript" src="/static/default/js/more.js"></script>
     <script>
         $(function(){

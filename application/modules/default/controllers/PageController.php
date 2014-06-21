@@ -16,9 +16,7 @@ class PageController extends Zend_Controller_Action
         $this->view->keywords = $this->view->contentPage['keywords']->getFieldText();
         $this->view->description = $this->view->contentPage['description']->getFieldText();
 
-        $this->view->headText = isset($this->view->contentPage['head'])?$this->view->contentPage['head']->getFieldText():'';
-
-        $this->view->menu = $this->view->page->getRoute()->getUrl();
+        $this->view->text = $this->view->contentPage['content']->getFieldText();
     }
 
     public function popularAction()

@@ -24,6 +24,11 @@
                                                         'siteSetings' => $this->siteSetings
                                                   )) ?>
 </div>
+<div class="clear"></div>
+<div id="more_shows" style="width: 100%; height: 50px; border:2px solid blue;">
+    <a href="#" onclick="return getAjaxPage();">Показать еще</a>
+</div>
+<div class="clear"></div>
 <?=$this->ShowSubscribe();?>
 <div class="descText">
     <article">
@@ -82,13 +87,10 @@
 
     $(document).ready(function(){
         setMap();
-        $(window).scroll(function() {
-
-            var currentPosition = $(window).scrollTop() + $(window).height();
-            var positionToGet = $(document).height() - (600 + $('.descText > article').height());
-            if( currentPosition >= positionToGet ) {
-                getAjaxPage();
-            }
-        });
     });
+//    function getMores() {
+//        getAjaxPage();
+//
+//        return false;
+//    }
 </script>

@@ -77,8 +77,11 @@ function goToPage(ele)
 
 function getAjaxPage()
 {
-    if (page == 0 || inProgress)
+    $('#more_shows').hide();
+    if (page == 0 || inProgress) {
         return false;
+    }
+
 
     inProgress = true;
 
@@ -90,17 +93,20 @@ function getAjaxPage()
             page: page
         }
     ).done(function( data ) {
-            if (data.success) {
+            if (data.success && data.html.length > 0) {
                 $('#list_block').append(data.html);
                 page = data.page;
                 setTimeout(function(){
                     setMap();
                 },100);
+                $('#more_shows').show();
             } else {
                 console.log(data.error);
             }
             inProgress = false;
         });
+
+    return false;
 }
 $(function(){
     $('.salonPhone a').unbind();
