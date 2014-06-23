@@ -15,7 +15,8 @@
         <div class="clear"></div>
 
         <div class="clear"></div>
-        <? /* <div class="searchBox">
+        <? if (isset($this->menu) && $this->menu == 'main'): ?>
+            <div class="searchBox">
             <?
                 $lang = '';
                 if ($this->currentLang->getId() != 1) {
@@ -48,6 +49,7 @@
                 <div class="clear"></div>
                 <div class="clear"></div>
             </form>
-        </div> */ ?>
+        </div>
+        <? endif; ?>
     </div>
 </header>
