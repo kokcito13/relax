@@ -131,4 +131,22 @@ class Admin_MassController extends Zend_Controller_Action
         $this->view->breadcrumbs->add('Редактировать', '');
         $this->view->headTitle()->append('Редактировать');
     }
+
+
+    public function deleteAction()
+    {
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout()->disableLayout();
+        $this->view->mass = Application_Model_Kernel_Mass::getById((int)$this->_getParam('id'));
+        if ($this->view->mass) {
+            try {
+                $this->view->mass->delete();
+            } catch (Application_Model_Kernel_Exception $e) {
+                $this->view->ShowMessage($e->getMessages());
+            } catch (Exception $e) {
+                $this->view->ShowMessage($e->getMessage());
+            }
+        }
+        $this->_redirect($this->view->url(array('page' => 1), 'admin-mass-index'));
+    }
 }

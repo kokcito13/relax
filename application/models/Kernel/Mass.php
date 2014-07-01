@@ -267,7 +267,7 @@ class Application_Model_Kernel_Mass extends Application_Model_Kernel_Page
     public function delete()
     {
         $db = Zend_Registry::get('db');
-        $db->delete('salons', self::TABLE_NAME . ".idPage = {$this->_idPage}");
+        $db->delete(self::TABLE_NAME, self::TABLE_NAME . ".idPage = {$this->_idPage}");
         $this->deletePage();
     }
 

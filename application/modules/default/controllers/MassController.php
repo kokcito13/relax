@@ -34,8 +34,8 @@ class MassController extends Zend_Controller_Action
 
         $this->view->masses = Application_Model_Kernel_Mass::getList(false, false, true, true, false, false, $this->view->page, 15, false, true, false);
 
-        $this->view->title = '';
-        $this->view->keywords = '';
-        $this->view->description = '';
+        $this->view->title = 'Все виды эротического массажа от каталога салонов viprelax.';
+        $this->view->keywords = 'виды, эротического, массажа';
+        $this->view->description = 'Описания видов и элементов эротического массажа от салонов нашего каталога.';
     }
 }

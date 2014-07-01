@@ -1,26 +1,14 @@
 <?=$this->partial('blocks/menus/top.phtml');?>
-<script type="text/javascript" src="/static/admin/js/jquery.tablednd_0_5.js"></script>
 <script>
-function chengeStatusProject(id){
-    $.ajax({
-        type: "POST",
-        url: '/admin/product/status',
-        data: {
-            "idProduct":id
-        },
-        success: function(result) {
-//            alert(result);
+    function confirmDelete()
+    {
+        if (!confirm('Уверены что хотите удалить?')) {
+            return false;
         }
-    });
-}
-</script>
-<style>
-    .activeLink{
-        border: 1px darkcyan dashed;
-        padding: 3px;
-        font-weight: bold;
+
+        return true;
     }
-</style>
+</script>
 <table class="zebra" >
     <thead> 
         <tr> 
@@ -58,7 +46,7 @@ if (count($this->masses->data)): ?>
                     <a href="<?=$item->getRoute()->getUrl()?>" target="_black" title="Просмотр"><img src="/static/admin/images/eye.png" alt="" width="16" height="16"></a>&nbsp;&nbsp;
                 </td>
                 <td style="text-align: left; padding-left: 10px;">
-                    <a href="<?=$this->url(array('id'=>$item->getId()),'admin-mass-delete')?>" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt="" width="9" height="8" /></a>
+                    <a href="<?=$this->url(array('id'=>$item->getId()),'admin-mass-delete')?>" onclick="return confirmDelete();" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt="" width="9" height="8" /></a>
                 </td>
 		  </tr>
 	<?php endforeach; ?>
