@@ -146,24 +146,24 @@ class Application_Model_Kernel_Content_Language
      */
     public static function getById($contentId)
     {
-//		$cachemanager = Zend_Registry::get('cachemanager');
-//		$cache = $cachemanager->getCache('langs');
-//		if (($lang = $cache->load($contentId)) !== false) {
-//			return $lang;
-//		} else {
-        $db     = Zend_Registry::get('db');
-        $select = $db->select->from('content');
-        $select->where('content.idContent = ?', intval($contentId));
-        if (($result = $db->fetchRow($select)) !== false) {
-            $lang = new self($result->idContent, $result->idLang, $result->idContentPack);
-            $lang->setFieldsArray(Application_Model_Kernel_Content_Fields::getFieldsByIdContent($result->idContent));
+		$cachemanager = Zend_Registry::get('cachemanager');
+		$cache = $cachemanager->getCache('langs');
+		if (($lang = $cache->load($contentId)) !== false) {
+			return $lang;
+		} else {
+            $db     = Zend_Registry::get('db');
+            $select = $db->select->from('content');
+            $select->where('content.idContent = ?', intval($contentId));
+            if (($result = $db->fetchRow($select)) !== false) {
+                $lang = new self($result->idContent, $result->idLang, $result->idContentPack);
+                $lang->setFieldsArray(Application_Model_Kernel_Content_Fields::getFieldsByIdContent($result->idContent));
 
-//				$cache->save($lang);
-            return $lang;
-        } else {
-            throw new Exception(self::ERROR_ID_CONTENT_NOT_EXISTS);
-        }
-//		}
+                    $cache->save($lang);
+                return $lang;
+            } else {
+                throw new Exception(self::ERROR_ID_CONTENT_NOT_EXISTS);
+            }
+		}
     }
 
     public static function get($idContentPack, $idLang)

@@ -1,4 +1,4 @@
-<? if (isset($_GET['DBG'])): ?>
+<? if (isset($_GET['DBG']) || in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', 'fe80::1', '::1'))): ?>
 <html>
 	<head>
 		<title>Application error</title>

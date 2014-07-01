@@ -1,0 +1,68 @@
+<?=$this->partial('blocks/menus/top.phtml');?>
+<script type="text/javascript" src="/static/admin/js/jquery.tablednd_0_5.js"></script>
+<script>
+function chengeStatusProject(id){
+    $.ajax({
+        type: "POST",
+        url: '/admin/product/status',
+        data: {
+            "idProduct":id
+        },
+        success: function(result) {
+//            alert(result);
+        }
+    });
+}
+</script>
+<style>
+    .activeLink{
+        border: 1px darkcyan dashed;
+        padding: 3px;
+        font-weight: bold;
+    }
+</style>
+<table class="zebra" >
+    <thead> 
+        <tr> 
+            <td style="width: 5%;"></td> 
+            <td>
+            </td>
+            <td></td> 
+            <td>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+<?php 
+if (count($this->masses->data)): ?>
+	<?php $class = ''; ?>
+	<tbody>
+	<? $i = 0; ?>
+	<? foreach ($this->masses->data as $item):
+		$i++; ?>
+		  <? ($class === 'grey') ? $class = '' : $class='grey'; ?>
+		  <tr class="<?=$class; ?> id_<?=$item->getId()?>" rel="<?=$item->getIdPage()?>">
+                <td style="text-align: right;"> 
+                    <a href="<?=$this->url(array('id'=>$item->getId()), 'admin-mass-edit');?>" class="edit" style="float: left; display:block; margin-right: 10px;" title="Редактировать"><img src="/static/admin/images/edit.png" alt="Edit" width="16" height="16" /></a>
+				</td>
+				<td style="padding-left:10px;">
+                    <?=Application_Model_Kernel_Content_Fields::getFieldByIdContentAndNameField($item->getContent()->getId(), 'name')->getFieldText()?>
+                </td>
+                <?php $StatusTitle = (!$item->getStatus()) ? 'Показать' : 'Скрыть'; ?>
+                <td style="text-align: left; padding-left: 10px;">
+                </td>
+                <td style="text-align: left; padding-left: 10px;">
+                </td>
+                <td style="text-align: right;">
+                    <a href="<?=$item->getRoute()->getUrl()?>" target="_black" title="Просмотр"><img src="/static/admin/images/eye.png" alt="" width="16" height="16"></a>&nbsp;&nbsp;
+                </td>
+                <td style="text-align: left; padding-left: 10px;">
+                    <a href="<?=$this->url(array('id'=>$item->getId()),'admin-mass-delete')?>" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt="" width="9" height="8" /></a>
+                </td>
+		  </tr>
+	<?php endforeach; ?>
+	</tbody>
+<?php endif; ?>
+  </table> 
+<?=$this->paginationControl($this->masses->paginator, 'Sliding', 'blocks/paginator.phtml')?>

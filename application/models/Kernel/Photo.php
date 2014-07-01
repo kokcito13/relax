@@ -59,7 +59,7 @@ class Application_Model_Kernel_Photo
             "idPhoto"       => $this->_idPhoto,
             "photoPath"     => $this->_photoPath,
             "photoAlt"      => $this->_photoAlt,
-            "photoPosition" => $this->_photoPosition
+            "photoPosition" => (int)$this->_photoPosition
         );
         if (is_null($this->_idPhoto)) {
             $this->increasePosition();

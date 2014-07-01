@@ -1,0 +1,43 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<style>
+    .mass_list_title {
+        color: #fff;
+        font-size: 14px;
+        text-decoration: underline;
+    }
+    .descText h1 {
+        color: #fff;
+        font-size: 18px;
+        margin: 0 15px;;
+    }
+    .descText article {
+        display: block;
+        width: 100%;
+        height: 100px;
+        margin-bottom: 5px;
+    }
+</style>
+<div class="singleSalonBox">
+    <div class="salonContent">
+        <?=$this->ShowSubscribe();?>
+        <div class="descText" style="margin-top: 10px; padding: 20px;">
+            <h1>Виды массажа</h1>
+            <? foreach ($this->masses->data as $mass): ?>
+                <? $massContent = $mass->getContent()->getFields(); ?>
+                <article>
+                    <div style="float: left; width: 80%">
+                        <a href="<?=$mass->getRoute()->getUrl();?>" class="mass_list_title"><?=$massContent['name']->getFieldText();?></a>
+                        <p><?=$massContent['desc']->getFieldText();?></p>
+                    </div>
+                    <div style="float:right; padding: 5px; border: 1px solid #fff;">
+                        <img src="<?=$mass->getPhoto1()->getPath('90:90');?>"  width="90" height="90"/>
+                    </div>
+                </article>
+                <hr/>
+            <? endforeach;?>
+        </div>
+        <div class="clear"></div>
+        <?=$this->ShowSubscribe();?>
+    </div>
+</div>

@@ -129,7 +129,6 @@ class Application_Model_Kernel_Block
 
     public static function getList($content = false, $page = false, $countOnPage = false, $limit = false)
     {
-        $return = new stdClass();
         $db     = Zend_Registry::get('db');
         $select = $db->select()->from('blocks');
         if ($content) {
@@ -146,6 +145,7 @@ class Application_Model_Kernel_Block
 
             return $return;
         } else {
+            $return = new stdClass();
             if ($page !== false) {
                 $paginator = Zend_Paginator::factory($select);
                 $paginator->setItemCountPerPage($countOnPage);

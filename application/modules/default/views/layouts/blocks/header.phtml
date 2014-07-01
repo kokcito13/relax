@@ -1,15 +1,21 @@
 <header>
     <div class="wrapper">
         <a class="logo" href="<?=Kernel_City::getUrlForLink(false)?>"><img src="/static/default/images/logo.png" width="321" height="77"></a>
-        <div class="top-info" style="float: left; padding-left: 100px">
+        <div class="top-info" style="">
             <? /*<a href="<?=$this->siteSetings->getUrl1();?>">
                 <img src="<?=$this->siteSetings->getPhoto1()->getPath('591:60')?>" alt="">
             </a>*/ ?>
-            <div style="width: 350px; margin-top: -10px; margin-left: 60px;">
+            <div style="width: auto; margin-top: -10px; margin-left: 60px;">
                 <script type="text/javascript" src="//yandex.st/share/share.js"
                         charset="utf-8"></script>
                 <div class="yashare-auto-init" data-yashareL10n="ru"
                      data-yashareQuickServices="yaru,vkontakte,facebook,twitter,gplus" data-yashareTheme="counter"></div>
+            </div>
+            <br/>
+            <div>
+                <span><a href="<?=$this->url(array(),'public-page-37')?>">О проекте</a></span>
+                <span><a href="<?=$this->url(array(),'public-page-38')?>">Для салонов</a></span>
+                <span><a href="<?=$this->url(array(),'default-type-massage')?>">Виды масажа</a></span>
             </div>
         </div>
         <div class="clear"></div>

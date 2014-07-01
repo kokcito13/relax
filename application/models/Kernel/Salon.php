@@ -270,14 +270,11 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
 
     public static function getList($order, $orderType, $content, $route, $searchName, $status, $page, $onPage, $limit, $group = true, $wher = false, $area = false, $nextorder = false)
     {
+
         $return = new stdClass();
         $db = Zend_Registry::get('db');
         $select = $db->select()->from('salons');
         $select->join('pages', 'pages.idPage = salons.idPage');
-//        $select->join('categorie_product', 'salons.id = categorie_product.id');
-//        $select->joinLeft('comments', '( salons.id = comments.idOwner AND comments.commentType = 1 )', array('countComm' => 'COUNT(comments.idOwner)'));
-
-        //ORDER BY countComm DESC
 
         if ($route) {
             $select->join('routing', 'pages.idRoute = routing.idRoute');
@@ -316,32 +313,39 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
             $select->group('salons.id');
         if ($limit !== false)
             $select->limit($limit);
-        if ($page !== false) {
-            $paginator = Zend_Paginator::factory($select);
-            $paginator->setItemCountPerPage($onPage);
-            $paginator->setPageRange(5);
-            $paginator->setCurrentPageNumber($page);
-            $return->paginator = $paginator;
-        }
-        else {
-            $return->paginator = $db->fetchAll($select);
-        }
-        $return->data = array();
-        $i = 0;
-        foreach ($return->paginator as $projectData) {
-            $return->data[$i] = self::getSelf($projectData);
-            if ($route) {
-                $url = new Application_Model_Kernel_Routing_Url($projectData->url);
-                $defaultParams = new Application_Model_Kernel_Routing_DefaultParams($projectData->defaultParams);
-                $route = new Application_Model_Kernel_Routing($projectData->idRoute, $projectData->type, $projectData->name, $projectData->module, $projectData->controller, $projectData->action, $url, $defaultParams, $projectData->routeStatus);
-                $return->data[$i]->setRoute($route);
+
+        $cachemanager = Zend_Registry::get('cachemanager');
+        $cache = $cachemanager->getCache('salons');
+        if (($return = $cache->load(md5($select->assemble())."_".(int)$onPage."_".(int)$page)) !== false) {
+            return $return;
+        } else {
+            if ($page !== false) {
+                $paginator = Zend_Paginator::factory($select);
+                $paginator->setItemCountPerPage($onPage);
+                $paginator->setPageRange(5);
+                $paginator->setCurrentPageNumber($page);
+                $return->paginator = $paginator;
+            } else {
+                $return->paginator = $db->fetchAll($select);
             }
-            if ($content) {
-                $contentLang = new Application_Model_Kernel_Content_Language($projectData->idContent, $projectData->idLanguage, $projectData->idContentPack);
-                $contentLang->setFieldsArray(Application_Model_Kernel_Content_Fields::getFieldsByIdContent($projectData->idContent));
-                $return->data[$i]->setContent($contentLang);
+            $return->data = array();
+            $i = 0;
+            foreach ($return->paginator as $projectData) {
+                $return->data[$i] = self::getSelf($projectData);
+                if ($route) {
+                    $url = new Application_Model_Kernel_Routing_Url($projectData->url);
+                    $defaultParams = new Application_Model_Kernel_Routing_DefaultParams($projectData->defaultParams);
+                    $route = new Application_Model_Kernel_Routing($projectData->idRoute, $projectData->type, $projectData->name, $projectData->module, $projectData->controller, $projectData->action, $url, $defaultParams, $projectData->routeStatus);
+                    $return->data[$i]->setRoute($route);
+                }
+                if ($content) {
+                    $contentLang = new Application_Model_Kernel_Content_Language($projectData->idContent, $projectData->idLanguage, $projectData->idContentPack);
+                    $contentLang->setFieldsArray(Application_Model_Kernel_Content_Fields::getFieldsByIdContent($projectData->idContent));
+                    $return->data[$i]->setContent($contentLang);
+                }
+                $i++;
             }
-            $i++;
+            $cache->save($return);
         }
 
         return $return;

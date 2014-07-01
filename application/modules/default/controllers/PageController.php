@@ -4,6 +4,7 @@ class PageController extends Zend_Controller_Action
 
     public function preDispatch()
     {
+        $this->view->menu = 'main';
     }
 
     public function showAction()

@@ -1,0 +1,26 @@
+<? $this->headScript()->captureStart() ?>
+<? $this->headScript()->captureEnd() ?>
+<style>
+    .descText img {
+        max-width: 350px;
+        float: right;
+        margin: 0 15px;
+        padding: 5px;
+        border: 1px solid #fff;
+    }
+</style>
+<div class="singleSalonBox">
+    <div class="salonContent">
+        <?=$this->ShowSubscribe();?>
+        <div class="descText" style="margin-top: 10px; padding: 20px;">
+            <article>
+                <h1><?=$this->contentPage['name']->getFieldText();?></h1>
+                <img src="<?=$this->mass->getPhoto1()->getPath('350', true)?>"/>
+                <?=$this->contentPage['content']->getFieldText();?>
+                <p></p>
+            </article>
+        </div>
+        <div class="clear"></div>
+        <?=$this->ShowSubscribe();?>
+    </div>
+</div>
