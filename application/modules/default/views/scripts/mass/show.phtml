@@ -14,6 +14,9 @@
         <?=$this->ShowSubscribe();?>
         <div class="descText" style="margin-top: 10px; padding: 20px;">
             <article>
+                <span style="margin-bottom: 10px; display: block;">
+                    <a style="color:#a7a6a6" href="<?=$this->url(array(),'default-type-massage')?>"><< Все виды массажа</a>
+                </span>
                 <h1><?=$this->contentPage['name']->getFieldText();?></h1>
                 <img src="<?=$this->mass->getPhoto1()->getPath('350', true)?>"/>
                 <?=$this->contentPage['content']->getFieldText();?>

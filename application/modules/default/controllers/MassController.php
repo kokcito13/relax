@@ -31,7 +31,6 @@ class MassController extends Zend_Controller_Action
 
     public function listAction()
     {
-
         $this->view->masses = Application_Model_Kernel_Mass::getList(false, false, true, true, false, false, $this->view->page, 15, false, true, false);
 
         $this->view->title = 'Все виды эротического массажа от каталога салонов viprelax.';
