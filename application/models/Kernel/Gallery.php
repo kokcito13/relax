@@ -116,12 +116,21 @@ class Application_Model_Kernel_Gallery {
 		$select->join('photos', 'galleryPhotos.idPhoto = photos.idPhoto');
 		$select->where('idGallery = ? ', intval($idGallery));
 		$select->order('photos.photoPosition DESC');
-		$photos = array();
-		if (false !== ($result = $db->fetchAll($select))) {
-			foreach ($result as $photo) {
-				$photos[] = new Application_Model_Kernel_Photo($photo->idPhoto, $photo->photoPath, $photo->photoAlt, $photo->photoPosition);
-			}
-		}
+//        $cachemanager = Zend_Registry::get('cachemanager');
+//        $cache = $cachemanager->getCache('gallery');
+//        $return = $cache->load(md5($select->assemble()));
+//        if ($return !== false && is_array($return)) {
+//            return $return;
+//        } else {
+            $photos = array();
+            if (false !== ($result = $db->fetchAll($select))) {
+                foreach ($result as $photo) {
+                    $photos[] = new Application_Model_Kernel_Photo($photo->idPhoto, $photo->photoPath, $photo->photoAlt, $photo->photoPosition);
+                }
+            }
+//            $cache->save($return);
+//        }
+
 		return $photos;
 	}
 

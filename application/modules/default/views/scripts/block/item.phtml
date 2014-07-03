@@ -34,7 +34,9 @@
             <? $contentGirl = $girl->getContent()->getFields();?>
             <? $photo = $girl->getGallery()->getFirstPhoto(); ?>
             <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>#girl_<?=$girl->getId()?>" class="salonModelItem">
-                <img src="<?=$photo->getPath('240:240');?>" alt="Массажистка <?=$contentGirl['contentName']->getFieldText();?>">
+                <img alt="Массажистка <?=$contentGirl['contentName']->getFieldText();?>"
+                     class="lazy" data-original="<?=$photo->getPath('240:240');?>" width="240" height="240"
+                    >
                 <h4><?=$contentGirl['contentName']->getFieldText();?></h4>
             </a>
         <? endforeach; ?>

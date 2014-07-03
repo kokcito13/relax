@@ -1,6 +1,7 @@
 <?php foreach ($this->salons->data as $k=>$salon): ?>
     <?php echo $this->partial('block/item.phtml', array (
-                                                        'salon' => $salon
+                                                        'salon' => $salon,
+                                                        'blocks' => $this->blocks
                                                   )) ?>
     <? if ($k == 1): ?>
         <div class="content-info">

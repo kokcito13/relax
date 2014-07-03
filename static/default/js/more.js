@@ -81,8 +81,6 @@ function getAjaxPage()
     if (page == 0 || inProgress) {
         return false;
     }
-
-
     inProgress = true;
 
     $.getJSON( URL_PAGINATION,
@@ -103,6 +101,7 @@ function getAjaxPage()
             } else {
                 console.log(data.error);
             }
+            $("img.lazy").lazyload();
             inProgress = false;
         });
 

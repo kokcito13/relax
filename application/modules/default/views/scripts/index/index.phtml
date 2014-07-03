@@ -21,7 +21,8 @@
 <div id="list_block">
     <?php echo $this->partial('block/list.phtml', array (
                                                         'salons' => $this->salons,
-                                                        'siteSetings' => $this->siteSetings
+                                                        'siteSetings' => $this->siteSetings,
+                                                        'blocks' => $this->blocks
                                                   )) ?>
 </div>
 <div class="clear"></div>
@@ -88,11 +89,6 @@
     $(document).ready(function(){
         setMap();
     });
-//    function getMores() {
-//        getAjaxPage();
-//
-//        return false;
-//    }
 </script>
 <style>
     #more_shows a {

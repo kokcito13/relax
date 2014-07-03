@@ -100,8 +100,7 @@ class Application_Model_Kernel_Comment
 
     public static function getList($salon_id, $status = false, $limit = false, $where = false)
     {
-        $db     = Zend_Registry::get('db');
-        $return = array ();
+        $db = Zend_Registry::get('db');
         $select = $db->select()->from('comments');
         $select->where('comments.idOwner = ?', $salon_id);
         if ($status) {
@@ -113,11 +112,21 @@ class Application_Model_Kernel_Comment
         $select->order('comments.idComment ASC');
         if ($limit !== false)
             $select->limit($limit);
-        $i       = 0;
-        $results = $db->fetchAll($select);
-        foreach ($results as $result) {
-            $return[$result->idComment] = self::getSelf($result);
-            $i++;
+
+        $cachemanager = Zend_Registry::get('cachemanager');
+        $cache = $cachemanager->getCache('comments');
+        $return = $cache->load(md5($select->assemble()));
+        if ($return !== false && is_array($return)) {
+            return $return;
+        } else {
+            $return = array();
+            $i = 0;
+            $results = $db->fetchAll($select);
+            foreach ($results as $result) {
+                $return[$result->idComment] = self::getSelf($result);
+                $i++;
+            }
+            $cache->save($return);
         }
 
         return $return;

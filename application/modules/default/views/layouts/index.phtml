@@ -19,7 +19,6 @@
 
 
     <script type="text/javascript" src="/static/default/js/jquery-1.9.1.min.js"></script>
-
     <script>
         var inProgress = false;
         var page = 2;
@@ -66,7 +65,8 @@
     <link rel="stylesheet" type="text/css" href="/static/default/css/fancybox.css" media="screen"/>
     <script type="text/javascript" src="/static/default/js/script.js"></script>
     <?=$this->headScript()?>
-    <script type="text/javascript" src="/static/default/js/more.js?v=1"></script>
+    <script type="text/javascript" src="/static/default/js/more.js"></script>
+    <script src="/static/default/js/jquery.lazyload.min.js" type="text/javascript"></script>
     <script>
         $(function(){
             changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'), false);
@@ -76,6 +76,11 @@
 
                 return false;
             });
+            setTimeout(function(){
+                $("img.lazy").lazyload({
+                    effect : "fadeIn"
+                });
+            }, 500)
         });
     </script>
     <?=$this->siteSetings->getBody();?>
