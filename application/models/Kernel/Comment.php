@@ -109,7 +109,7 @@ class Application_Model_Kernel_Comment
         if ($where !== false) {
             $select->where($where);
         }
-        $select->order('comments.idComment ASC');
+        $select->order('comments.commentDate DESC');
         if ($limit !== false)
             $select->limit($limit);
 

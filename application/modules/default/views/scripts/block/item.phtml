@@ -10,7 +10,9 @@
     <div class="newSalonLabel"></div>
     <div class="salonInfo">
         <a href="<?=Kernel_City::getUrlForLink($this->salon->getCity())?><?=$this->salon->getRoute()->getUrl();?>" class="salonLogo">
-            <img src="<?=$this->salon->getPhoto1()->getPath('120', true);?>" alt="Салон эротического массажа <?=$content['name']->getFieldText();?>" width="80" height="80">
+            <img alt="Салон эротического массажа <?=$content['name']->getFieldText();?>"
+                 class="lazy" data-original="<?=$this->salon->getPhoto1()->getPath('120', true);?>"
+                 width="80" height="80">
             <h3><?=$content['name']->getFieldText();?></h3>
         </a>
         <div class="clear"></div>
