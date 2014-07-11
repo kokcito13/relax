@@ -19,17 +19,17 @@
         <td></td>
     </tr>
     </thead>
-    <?php if (count($this->areas)): ?>
+    <?php if (count($this->regions)): ?>
         <?php $class = ''; ?>
         <tbody>
         <? $i = 0; ?>
-        <? foreach ($this->areas as $item): ?>
+        <? foreach ($this->regions as $item): ?>
             <? $content = $item->getContent()->getFields(); ?>
             <? $i++; ?>
             <? ($class === 'grey') ? $class = '' : $class = 'grey'; ?>
             <tr id="<?= $item->getId() ?>" class="<?= $class; ?> id_<?= $item->getId() ?>">
                 <td>
-                    <a href="<?= $this->url(array ('id' => $item->getId(), 'city_id'=>$this->city_id), 'admin-area-edit'); ?>" class="edit"
+                    <a href="<?= $this->url(array ('id' => $item->getId(), 'area_id'=>$this->area_id), 'admin-region-edit'); ?>" class="edit"
                        title="Редактировать">
                         <img src="/static/admin/images/edit.png" alt="Edit" width="16" height="16"/>
                     </a>
@@ -39,12 +39,11 @@
                 </td>
                 <td style="text-align: right;"></td>
                 <td style="text-align: left;">
-                    <a href="<?= $this->url(array ('area_id' => $item->getId()), 'admin-region-index'); ?>" class="edit"
-                       title="микрорайоны">микрорайоны</a>
                 </td>
                 <td style="text-align: left;">
-                    <a href="<?= $this->url(array ('id' => $item->getId(), 'city_id'=>$this->city_id), 'admin-area-delete'); ?>" onclick="return confirmDelete();" class="delete" title="Удалить"><img src="/static/admin/images/icon_delete.gif" alt=""
-                                                                    width="9" height="8" /></a>
+                    <a href="<?= $this->url(array ('id' => $item->getId(), 'area_id'=>$this->area_id), 'admin-region-delete'); ?>" onclick="return confirmDelete();" class="delete" title="Удалить">
+                        <img src="/static/admin/images/icon_delete.gif" alt="" width="9" height="8" />
+                    </a>
                 </td>
             </tr>
         <?php endforeach; ?>
