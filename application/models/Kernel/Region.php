@@ -90,7 +90,7 @@ class Application_Model_Kernel_Region
             throw new Exception(self::TYPE_ERROR_ID_NOT_FOUND);
     }
 
-    public function getByUrl($url)
+    public static function getByUrl($url)
     {
         $db     = Zend_Registry::get('db');
         $select = $db->select()->from(self::TABLE_NAME);

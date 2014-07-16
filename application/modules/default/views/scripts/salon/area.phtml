@@ -12,12 +12,24 @@
     <span>
         <a href="http://<? echo SITE_NAME ?>"><?=Kernel_Block::getText('Салоны эротического массажа', $this->blocks);?></a>
     </span>
+    <? if ($this->region == false): ?>
     <span>
         <a href="<?=Kernel_City::getUrlForLink($city)?>"><?=$cityConten['contentName']->getFieldText();?></a>
     </span>
     <span>
         <span><?=$this->areaContent['contentName']->getFieldText();?></span>
     </span>
+    <? else: ?>
+        <span>
+            <a href="<?=Kernel_City::getUrlForLink($city)?>"><?=$cityConten['contentName']->getFieldText();?></a>
+        </span>
+        <span>
+            <a href="<?=Kernel_City::getUrlForLink($city)?>/<?=$this->area->getUrl();?>"><?=$this->areaContent['contentName']->getFieldText();?></a>
+        </span>
+        <span>
+            <span><?=$this->regionContent['contentName']->getFieldText();?></span>
+        </span>
+    <? endif ?>
 </div>
 <div id="list_block">
     <?php echo $this->partial('block/list.phtml', array (
