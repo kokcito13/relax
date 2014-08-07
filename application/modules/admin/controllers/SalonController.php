@@ -85,7 +85,8 @@ class Admin_SalonController extends Zend_Controller_Action
                 $this->view->salon->setLat($data->lat);
                 $this->view->salon->setLng($data->lng);
                 $this->view->salon->setCityId($data->city_id);
-                $this->view->salon->setAreaId($data->area_id[$data->city_id]);
+                if (isset($data->area_id[$data->city_id]))
+                    $this->view->salon->setAreaId($data->area_id[$data->city_id]);
                 $this->view->salon->setCallPrice($data->call_price);
 
                 $this->view->salon->setPath($data);

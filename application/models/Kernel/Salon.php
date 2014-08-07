@@ -144,7 +144,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
                 $db->update('salons', $data, 'id = ' . intval($this->id));
             }
             $db->commit();
-//            $this->clearCache();
+            $this->clearCache();
         } catch (Exception $e) {
             $db->rollBack();
             Application_Model_Kernel_ErrorLog::addLogRow(Application_Model_Kernel_ErrorLog::ID_SAVE_ERROR, $e->getMessage(), ';product.php');
@@ -154,17 +154,15 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
 
     private function clearCache()
     {
-        if (!is_null($this->getidProject())) {
-            $cachemanager = Zend_Registry::get('cachemanager');
-            $cache = $cachemanager->getCache('product');
-            if (!is_null($cache)) {
-                $cache->remove($this->getid());
-            }
+        $cachemanager = Zend_Registry::get('cachemanager');
+        $cache = $cachemanager->getCache('salons');
+        foreach ($cache->getIds () as $k=>$v) {
+            $cache->remove($v);
         }
     }
 
     public function validate($data = false)
-    {
+    {$this->clearCache();
         $e = new Application_Model_Kernel_Exception();
         $this->getRoute()->validate($e);
         $this->validatePageData($e);
@@ -270,8 +268,6 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
 
     public static function getList($order, $orderType, $content, $route, $searchName, $status, $page, $onPage, $limit, $group = true, $wher = false, $area = false, $nextorder = false)
     {
-
-        $return = new stdClass();
         $db = Zend_Registry::get('db');
         $select = $db->select()->from('salons');
         $select->join('pages', 'pages.idPage = salons.idPage');
@@ -319,6 +315,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         if (($return = $cache->load(md5($select->assemble())."_".(int)$onPage."_".(int)$page)) !== false) {
             return $return;
         } else {
+            $return = new stdClass();
             if ($page !== false) {
                 $paginator = Zend_Paginator::factory($select);
                 $paginator->setItemCountPerPage($onPage);

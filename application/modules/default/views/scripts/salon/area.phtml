@@ -12,13 +12,13 @@
     <span>
         <a href="http://<? echo SITE_NAME ?>"><?=Kernel_Block::getText('Салоны эротического массажа', $this->blocks);?></a>
     </span>
-    <? if ($this->region == false): ?>
-    <span>
-        <a href="<?=Kernel_City::getUrlForLink($city)?>"><?=$cityConten['contentName']->getFieldText();?></a>
-    </span>
-    <span>
-        <span><?=$this->areaContent['contentName']->getFieldText();?></span>
-    </span>
+    <? if (!isset($this->regionContent)): ?>
+        <span>
+            <a href="<?=Kernel_City::getUrlForLink($city)?>"><?=$cityConten['contentName']->getFieldText();?></a>
+        </span>
+        <span>
+            <span><?=$this->areaContent['contentName']->getFieldText();?></span>
+        </span>
     <? else: ?>
         <span>
             <a href="<?=Kernel_City::getUrlForLink($city)?>"><?=$cityConten['contentName']->getFieldText();?></a>

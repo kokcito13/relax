@@ -18,6 +18,12 @@ class MassController extends Zend_Controller_Action
     {
         $this->view->idPage = (int)$this->_getParam('idPage');
         $this->view->mass = Application_Model_Kernel_Mass::getByIdPage($this->view->idPage);
+        if (Kernel_City::findCityFromUrl()) {
+            $url = 'http://'.SITE_NAME.$this->view->mass->getRoute()->getUrl();
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: ".$url);
+            exit();
+        }
         $this->view->contentPage = $this->view->mass->getContent()->getFields();
 
         $title = $this->view->contentPage['title']->getFieldText();
@@ -31,6 +37,12 @@ class MassController extends Zend_Controller_Action
 
     public function listAction()
     {
+        if (Kernel_City::findCityFromUrl()) {
+            $url = 'http://'.SITE_NAME.'/massages/';
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: ".$url);
+            exit();
+        }
         $this->view->masses = Application_Model_Kernel_Mass::getList(false, false, true, true, false, false, $this->view->page, 15, false, true, false);
 
         $this->view->title = 'Все виды эротического массажа от каталога салонов viprelax.';
