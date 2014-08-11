@@ -43,7 +43,19 @@ class MassController extends Zend_Controller_Action
             header("Location: ".$url);
             exit();
         }
+        $this->view->page = (int)$this->_getParam('page');
         $this->view->masses = Application_Model_Kernel_Mass::getList(false, false, true, true, false, false, $this->view->page, 15, false, true, false);
+
+        if ($this->view->page == 1) {
+            $this->view->headText = "<link rel='next' href='/massages/page".($this->view->page+1).".html' />";
+        } else {
+            if ($this->view->page == 2)
+                $this->view->headText = "<link rel='prev' href='/massages/' />";
+            else
+                $this->view->headText = "<link rel='prev' href='/massages/page".($this->view->page-1).".html' />";
+            $this->view->headText .=  "<link rel='next' href='/massages/page".($this->view->page+1).".html' />
+                                    <link rel='canonical' href='/massages/' />";
+        }
 
         $this->view->title = 'Все виды эротического массажа от каталога салонов viprelax.';
         $this->view->keywords = 'виды, эротического, массажа';

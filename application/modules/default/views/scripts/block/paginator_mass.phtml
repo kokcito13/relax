@@ -1,0 +1,36 @@
+<?php if ( $this->pageCount > 1 ): ?>
+    <div class="pagination">
+        <ul>
+            <?php if (isset($this->previous)): ?>
+                <li class="prev">
+<!--                    <a href="--><?//= $this->url(array(),'default-type-massage'.$this->previous) ?><!--"></a>-->
+                    <? if($this->previous != 1): ?>
+                        <a href="<?= $this->url(array(),'default-type-massage'.$this->previous) ?>"
+                            >></a>
+                    <? else: ?>
+                        <a href="<?= $this->url(array(),'default-type-massage') ?>"
+                            ></a>
+                    <? endif; ?>
+                </li>
+            <?php endif; ?>
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <li>
+                        <? if($page != 1): ?>
+                            <a href="<?= $this->url(array(),'default-type-massage'.$page) ?>"
+                               ><?= $page; ?></a>
+                        <? else: ?>
+                            <a href="<?= $this->url(array(),'default-type-massage') ?>"
+                                ><?= $page; ?></a>
+                        <? endif; ?>
+                    </li>
+                <?php else: ?>
+                    <li class="current"><?= $page; ?></li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <?php if (isset($this->next)): ?>
+                <li class="next"><a href="<?= $this->url(array(),'default-type-massage'.$this->next) ?>"></a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+<?php endif; ?>

@@ -31,6 +31,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $front  = Zend_Controller_Front::getInstance();
         $router = $front->getRouter();
+//        $routeRegex = new Zend_Controller_Router_Route_Regex(
+//            '/massages/page(?:/(\d+))?.html',
+//            array(
+//                'controller' => 'archive',
+//                'action'     => 'show',
+//                'module'     => 'default',
+//            ),
+//            array(
+//                'page' => '[\w\-]+'
+//            )
+//        );
+//        $router->addRoute('', $routeRegex);
         //$cachemanager = Zend_Registry::get('cachemanager');
         //$cache = $cachemanager->getCache('routes');
         //if ($list = $cache->load('ROUTES'))

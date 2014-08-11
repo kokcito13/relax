@@ -36,6 +36,7 @@
                 </article>
                 <hr/>
             <? endforeach;?>
+            <?=$this->paginationControl($this->masses->paginator, 'Sliding', 'block/paginator_mass.phtml'); ?>
         </div>
         <div class="clear"></div>
         <?=$this->ShowSubscribe();?>

@@ -15,7 +15,7 @@
     <!--[if lt IE 8]>
     <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
 
 
     <script type="text/javascript" src="/static/default/js/jquery-1.9.1.min.js"></script>
@@ -72,9 +72,10 @@
             changeCity($('#<?=$this->currentCity?$this->currentCity->getUrl():0?>'), false);
             setCurrentCityAndArea();
             $('body').on('click','.pagination a', function(){
-                getAjaxPage($(this).data('page'))
+//                getAjaxMass($(this).data('page'))
+//                getAjaxPage($(this).data('page'))
 
-                return false;
+//                return false;
             });
             setTimeout(function(){
                 $("img.lazy").lazyload({
