@@ -35,6 +35,19 @@ class AjaxController extends Zend_Controller_Action
                                                                 $data->type, Application_Model_Kernel_Comment::STATUS_CREATE, '', time());
                 $comment->save();
 
+
+                $view = new Zend_View(array('basePath'=>APPLICATION_PATH.'/modules/default/views'));
+                $view->comment = $comment;
+
+                $html = $view->render('block/_mail_comment.phtml');
+
+                $mail = new Zend_Mail('UTF-8');
+                $mail->setBodyHtml($html);
+                $mail->setFrom('info@my-relax.net', 'Новый отзыв на '.$_SERVER['SERVER_NAME']);
+                $mail->addTo('pavlova08@gmail.com', 'Новый отзыв на '.$_SERVER['SERVER_NAME']);
+                $mail->setSubject('Новый отзыв на '.$_SERVER['SERVER_NAME']);
+                $mail->send();
+
                 $response['success'] = true;
             }
         } else {

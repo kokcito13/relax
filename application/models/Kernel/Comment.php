@@ -20,6 +20,8 @@ class Application_Model_Kernel_Comment
     const STATUS_CREATE = 0;
     const STATUS_SHOW   = 1;
 
+    private $owner = null;
+
     public function __construct($idComment, $idOwner, $parentIdComment,
                                 $commentNick, $commentEmail, $commentText,
                                 $commentDate, $commentIp, $commentType,
@@ -157,11 +159,21 @@ class Application_Model_Kernel_Comment
             } else {
                 $db->update('comments', $data, 'idComment = ' . (int)$this->idComment);
             }
+            $this->clearCache();
             $db->commit();
         } catch (Exception $e) {
             $db->rollBack();
             Application_Model_Kernel_ErrorLog::addLogRow(Application_Model_Kernel_ErrorLog::ID_SAVE_ERROR, $e->getMessage(), ';comments.php');
             throw new Exception($e->getMessage());
+        }
+    }
+
+    private function clearCache()
+    {
+        $cachemanager = Zend_Registry::get('cachemanager');
+        $cache = $cachemanager->getCache('comments');
+        foreach ($cache->getIds () as $k=>$v) {
+            $cache->remove($v);
         }
     }
 
@@ -264,5 +276,19 @@ class Application_Model_Kernel_Comment
         $this->commentText = trim($t);
 
         return $this;
+    }
+
+    public function getOwner()
+    {
+        if (is_null($this->owner)) {
+            $this->owner = Application_Model_Kernel_Salon::getById($this->idOwner);
+        }
+
+        return $this->owner;
+    }
+
+    public function getDateFormat($f)
+    {
+        return date($f, $this->getCommentDate());
     }
 }

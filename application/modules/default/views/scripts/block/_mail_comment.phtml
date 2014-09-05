@@ -1,0 +1,22 @@
+<? $ownerContent = $this->comment->getOwner()->getContent();?>
+<html>
+    <body>
+        <table>
+            <tr>
+                <td>
+                    <a href="<?=Kernel_City::getUrlForLink($this->comment->getOwner()->getCity())?><?=$this->comment->getOwner()->getRoute()->getUrl();?>">
+                    <?=Application_Model_Kernel_Content_Fields::getFieldByIdContentAndNameField($ownerContent->getId(), 'name')->getFieldText()?>
+                    </a>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><?=$this->comment->getDateFormat('d.m.Y H:i')?></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="2"><?=$this->comment->getCommentText();?></td>
+            </tr>
+        </table>
+    </body>
+</html>
