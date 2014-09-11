@@ -224,7 +224,8 @@ class Application_Model_Kernel_Comment
     public function delete()
     {
         $db = Zend_Registry::get('db');
-        $db->delete('comments', "comments.idComment = {$this->idComment}");
+        $db->delete('comments', "comments.idComment = ".(int)$this->idComment);
+        $this->clearCache();
     }
 
     public function getCommentType()
