@@ -103,7 +103,13 @@ else
                             <textarea  rows='10' class='content' cols='40' name="content[<?=$lang->getId()?>][desc]" tabindex='2' ><?=(isset($_POST['content'][$lang->getId()]['desc'])) ? $_POST['content'][$lang->getId()]['desc'] : ''?></textarea>
                         </td>
                     </tr>
-					<tr class="">
+                    <tr class="">
+                        <td width="193" class="first">Первый параграф:</td>
+                        <td>
+                            <textarea rows='10' class='content' cols='40' name="content[<?=$lang->getId()?>][paragraf]" tabindex='2' ><?=(isset($_POST['content'][$lang->getId()]['paragraf'])) ? $_POST['content'][$lang->getId()]['paragraf'] : ''?></textarea>
+                        </td>
+                    </tr>
+					<tr class="grey">
 						<td width="193" class="first">Основной текст:</td>
 						<td>
 							<textarea  id="textareas_<?=$lang->getIsoName()?>" rows='10' class='content' cols='40' name="content[<?=$lang->getId()?>][content]" tabindex='2' ><?=(isset($_POST['content'][$lang->getId()]['content'])) ? $_POST['content'][$lang->getId()]['content'] : ''?></textarea>

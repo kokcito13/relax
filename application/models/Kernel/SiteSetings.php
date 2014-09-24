@@ -17,8 +17,9 @@ class Application_Model_Kernel_SiteSetings
 
     protected $head = '';
     protected $body = '';
+    protected $mass_links = '';
 
-    public function __construct($id, $idPhoto1, $idPhoto2, $url1, $url2, $robots = '', $sitemap = '', $head = '', $body = '')
+    public function __construct($id, $idPhoto1, $idPhoto2, $url1, $url2, $robots = '', $sitemap = '', $head = '', $body = '', $mass_links = '')
     {
         $this->id = $id;
         $this->idPhoto1 = $idPhoto1;
@@ -31,6 +32,19 @@ class Application_Model_Kernel_SiteSetings
 
         $this->head = $head;
         $this->body = $body;
+        $this->mass_links = $mass_links;
+    }
+
+    public function setMassLinks($text)
+    {
+        $this->mass_links = $text;
+
+        return $this;
+    }
+
+    public function getMassLinks()
+    {
+        return $this->mass_links;
     }
 
     public function getIdPhoto1()
@@ -161,7 +175,8 @@ class Application_Model_Kernel_SiteSetings
             'robots' => $this->robots,
             'sitemap' => $this->sitemap,
             'head' => $this->head,
-            'body' => $this->body
+            'body' => $this->body,
+            'mass_links' => $this->mass_links
         );
         $db = Zend_Registry::get('db');
         $db->update('site_setings', $data, 'id = ' . $this->getId());
@@ -174,7 +189,10 @@ class Application_Model_Kernel_SiteSetings
         $select->where('site_setings.id = 1');
         $select->limit(1);
         if (($block = $db->fetchRow($select)) !== false) {
-            return new self($block->id, $block->idPhoto1, $block->idPhoto2, $block->url1, $block->url2, $block->robots, $block->sitemap, $block->head, $block->body);
+            return new self($block->id, $block->idPhoto1, $block->idPhoto2,
+                $block->url1, $block->url2, $block->robots,
+                $block->sitemap, $block->head, $block->body,
+                $block->mass_links);
         }
         else {
             throw new Exception('Table NOT FOUND');

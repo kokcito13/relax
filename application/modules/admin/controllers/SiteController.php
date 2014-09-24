@@ -44,6 +44,7 @@ class Admin_SiteController extends Zend_Controller_Action
 
                 $this->view->info->setHead($data->head);
                 $this->view->info->setBody($data->body);
+                $this->view->info->setMassLinks($data->mass_links);
 
                 $this->view->info->save();
 

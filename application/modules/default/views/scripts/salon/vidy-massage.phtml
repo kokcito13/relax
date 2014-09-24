@@ -18,7 +18,7 @@
                             <td>
                                 <strong><?=$content['name']->getFieldtext();?></strong> – <?=$content['content']->getFieldtext();?>.
                             </td>
-                            <td><strong><?=$massage->getPrice();?> грн.</strong></td>
+                            <td><strong><?=$massage->getPrice();?> <? if (Kernel_City::findCityFromUrl()->getId() == 5 || Kernel_City::findCityFromUrl()->getId() == 6):?>руб<? else: ?>грн<? endif ?>.</strong></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
