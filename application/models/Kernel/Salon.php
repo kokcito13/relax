@@ -353,7 +353,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $db = Zend_Registry::get('db');
         $this->_pageStatus = self::STATUS_SHOW;
         $this->savePageData();
-//        $this->clearCache();
+        $this->clearCache();
     }
 
     public function hide()
@@ -361,7 +361,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $db = Zend_Registry::get('db');
         $this->_pageStatus = self::STATUS_HIDE;
         $this->savePageData();
-//        $this->clearCache();
+        $this->clearCache();
     }
 
     public function delete()
@@ -369,6 +369,7 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $db = Zend_Registry::get('db');
         $db->delete('salons', "salons.idPage = {$this->_idPage}");
         $this->deletePage();
+        $this->clearCache();
     }
 
     public static function changePosition($idPage, $position)
