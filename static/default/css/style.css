@@ -321,3 +321,40 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .map-wrap {height: 500px;padding-bottom: 20px;}
 
 .loaderBox {background: url(../images/loading.GIF) no-repeat center center #2b323a;content: "";height: 100%;left: 0;position: absolute;top: 0;width: 100%;z-index: 99;}
+
+.salonSite {
+    position: absolute;
+    right: 11px;
+    top: 11px;
+    min-width: 204px;
+    padding: 20px 20px 16px;
+    /*padding-left: 60px;*/
+    background: #F65D20;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*.salonSite:before {position: absolute;left: 17px;top: 12px;width: 31px;height: 42px;background: url(../images/sprite.png) no-repeat 0 -80px;content: "";}*/
+.salonSite span {
+    display: block;
+    margin-bottom: 4px;
+    color: #000;
+    font-size: 26px;
+    font-family: arial;
+    text-transform: uppercase;
+}
+
+.salonSite a {
+    display: inline-block;
+    margin-top: 4px;
+    /*border-bottom: 1px dotted #fff;*/
+    color: #000;
+    font-size: 16px;
+    font-family: arial;
+    text-decoration: underline;
+}
+
+.salonSite a:hover {
+    border-bottom: 0;
+    padding-bottom: 1px;
+}

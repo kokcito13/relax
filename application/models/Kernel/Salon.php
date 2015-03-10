@@ -25,6 +25,9 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
     private $call_price = 0;
     private $url_key;
 
+    private $site;
+    private $viewContact = 0;
+
     const ITEM_ON_PAGE = 8;
 
     private $comments = array();
@@ -37,7 +40,9 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $idPhoto1, $idPhoto2, $idPhoto3, $idPhoto4,
         $idPage, $idRoute, $idContentPack,
         $pageEditDate, $pageStatus, $position,
-        $phone, $lat, $lng, $city_id, $area_id, $call_price, $url_key = ''
+        $phone, $lat, $lng,
+        $city_id, $area_id, $call_price,
+        $url_key = '', $site = '', $viewContact = 0
     )
     {
         parent::__construct($idPage, $idRoute, $idContentPack, $pageEditDate, $pageStatus, self::TYPE_SALON, $position);
@@ -55,6 +60,8 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $this->area_id = $area_id;
         $this->call_price = $call_price;
         $this->url_key = $url_key;
+        $this->site = $site;
+        $this->viewContact = $viewContact;
     }
 
     public function getId()
@@ -134,7 +141,9 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
                 'city_id' => $this->city_id,
                 'area_id' => $this->area_id,
                 'call_price' => $this->call_price,
-                'url_key' => $this->url_key
+                'url_key' => $this->url_key,
+                'site' => $this->site,
+                'view_contact' => $this->viewContact,
             );
             if ($insert) {
                 $db->insert('salons', $data);
@@ -189,7 +198,8 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
                         $data->idPage, $data->idRoute, $data->idContentPack,
                         $data->pageEditDate, $data->pageStatus, $data->position,
                         $data->phone, $data->lat, $data->lng, $data->city_id,
-                        $data->area_id, $data->call_price, $data->url_key
+                        $data->area_id, $data->call_price, $data->url_key,
+                        $data->site, $data->view_contact
                         );
     }
 
@@ -350,7 +360,6 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
 
     public function show()
     {
-        $db = Zend_Registry::get('db');
         $this->_pageStatus = self::STATUS_SHOW;
         $this->savePageData();
         $this->clearCache();
@@ -358,7 +367,6 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
 
     public function hide()
     {
-        $db = Zend_Registry::get('db');
         $this->_pageStatus = self::STATUS_HIDE;
         $this->savePageData();
         $this->clearCache();
@@ -374,11 +382,8 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
 
     public static function changePosition($idPage, $position)
     {
-
         $db = Zend_Registry::get('db');
         $db->update('salons', array("projectPosition" => $position), 'idPage = ' . (int)$idPage);
-
-        return true;
     }
 
     public function getIdPhoto1()
@@ -630,5 +635,29 @@ class Application_Model_Kernel_Salon extends Application_Model_Kernel_Page
         $session = new Zend_Session_Namespace("phone");
 
         return isset($session->phones)&&isset($session->phones[$this->getId()]);
+    }
+
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    public function setSite($site)
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    public function getViewContact()
+    {
+        return $this->viewContact;
+    }
+
+    public function setViewContact($view)
+    {
+        $this->viewContact = $view;
+
+        return $this;
     }
 }

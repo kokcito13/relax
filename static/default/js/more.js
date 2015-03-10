@@ -141,7 +141,7 @@ function getAjaxMass(page)
 //    return false;
 }
 
-$(function(){
+$(document).ready(function(){
     $('.salonPhone a').unbind();
     $('.salonPhone a.show').click(function(event){
         event.preventDefault();
@@ -157,5 +157,17 @@ $(function(){
         ).done(function( data ) {
 
             });
+    });
+
+    $('.salonSite, .salonSite a').click(function(e){
+        e.preventDefault();
+
+        var url = $('.salonSite a.show').data('url');
+        var site = $('.salonSite a.show').attr('href');
+
+        ga('send', 'event', 'out_paid', 'click', url);
+        yaCounter24223378.reachGoal('out_paid');
+
+        window.open(site, '_blank');
     });
 });

@@ -81,6 +81,8 @@ class Admin_SalonController extends Zend_Controller_Action
                 $this->view->salon->setContentManager($contentManager);
                 $this->view->salon->setRoute($route);
                 
+                $this->view->salon->setViewContact($data->view_contact);
+                $this->view->salon->setSite($data->site);
                 $this->view->salon->setPhone($data->phone);
                 $this->view->salon->setLat($data->lat);
                 $this->view->salon->setLng($data->lng);
@@ -144,6 +146,8 @@ class Admin_SalonController extends Zend_Controller_Action
                 $this->view->photo4 = Application_Model_Kernel_Photo::getById($this->view->idPhoto4);
                 $this->view->salon->setIdPhoto4($this->view->idPhoto4);
 
+                $this->view->salon->setViewContact($data->view_contact);
+                $this->view->salon->setSite($data->site);
                 $this->view->salon->setPhone($data->phone);
                 $this->view->salon->setLat($data->lat);
                 $this->view->salon->setLng($data->lng);
@@ -169,6 +173,8 @@ class Admin_SalonController extends Zend_Controller_Action
             $_POST['url'] = mb_substr(Application_Model_Kernel_Routing::getById($this->view->salon->getIdRoute())->getUrl(), 1);
             $_POST['url'] = mb_substr($_POST['url'], 0, -5);
 
+            $_POST['view_contact'] = $this->view->salon->getViewContact();
+            $_POST['site'] = $this->view->salon->getSite();
             $_POST['phone'] = $this->view->salon->getPhone();
             $_POST['lat'] = $this->view->salon->getLat();
             $_POST['lng'] = $this->view->salon->getLng();

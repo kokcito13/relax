@@ -179,9 +179,14 @@ else
             </td>
         </tr>
         <tr class="grey">
-            <td width="193" class="first">Телефон:</td>
+            <td width="193" class="first">
+                Тел. - <input type="radio" value="0" name="view_contact" <? if (!isset($_POST['view_contact'])||(isset($_POST['view_contact'])&&$_POST['view_contact']==0)) : ?>checked<? endif ?>/>
+                <br/>
+                Сайт - <input type="radio" value="1" name="view_contact" <? if (isset($_POST['view_contact'])&&$_POST['view_contact']==1) : ?>checked<? endif ?>/>
+            </td>
             <td>
-                <input name="phone" style="width:255px" type="text" class="field" value="<?= (isset($_POST['phone'])) ? $_POST['phone'] : '' ?>" />
+                <b>Телефон: </b> <input name="phone" style="width:255px" type="text" class="field" value="<?= (isset($_POST['phone'])) ? $_POST['phone'] : '' ?>" />
+                <b>Домен: </b> www. <input name="site" style="width:255px" type="text" class="field" value="<?= (isset($_POST['site'])) ? $_POST['site'] : '' ?>" />
             </td>
         </tr>
         <tr class="grey">
