@@ -38,8 +38,7 @@
             <a
                 data-url="<?=$this->salon->getRoute()->getUrl();?>"
                 class="show"
-                href="http://<?=$this->salon->getSite()?>"
-                target="_blank"
+                data-href="http://<?=$this->salon->getSite()?>"
                 ><?=Kernel_Block::getText('перейти на сайт салона', $this->blocks);?></a>
         </div>
     <? endif ?>

@@ -163,11 +163,13 @@ $(document).ready(function(){
         e.preventDefault();
 
         var url = $('.salonSite a.show').data('url');
-        var site = $('.salonSite a.show').attr('href');
+        var site = $('.salonSite a.show').data('href');
 
         ga('send', 'event', 'out_paid', 'click', url);
         yaCounter24223378.reachGoal('out_paid');
 
         window.open(site, '_blank');
+
+        return false;
     });
 });
